@@ -1,0 +1,176 @@
+%% Based on a TeXnicCenter-Template by Tino Weinkauf.
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% HEADER
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,oneside,11pt]{report}
+
+%% Language %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage[english]{babel}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+%\usepackage[ansinew]{inputenc}
+\usepackage{mathptmx} 
+
+
+%% Packages for Graphics & Figures %%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{graphicx} %%For loading graphic files
+\graphicspath{{./graphics/}}
+\usepackage{placeins} %Used for Float Barriers
+
+
+%% Math Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amsfonts}
+\usepackage{amssymb}%
+
+
+%% Line Spacing %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usepackage{setspace}
+\onehalfspacing       %% 1.5-spacing
+%Paragraph Spacing
+\setlength{\parindent}{0mm}
+\setlength{\parskip}{1em}
+
+
+
+%% Other Packages %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\usepackage{geometry} %Page margins
+\geometry{
+left=30mm,
+right=30mm,
+top=60mm,
+bottom=30mm
+} %Title page margins
+%Create Hyperlinks 
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks,
+    citecolor=black,
+    filecolor=black,
+    linkcolor=black,
+    urlcolor=black
+}
+\usepackage{multirow} % Multirow tables
+\usepackage[toc]{appendix}
+
+%Fancy Headers
+\usepackage{fancyhdr,ragged2e}
+\fancyhead{}
+%\lhead{\parbox[t]{0.6\textwidth}{\RaggedRight\rightmark\strut}}
+%\rhead{\parbox[t]{0.6\textwidth}{\RaggedLeft\leftmark\strut}}
+%\setlength{\headheight}{5\baselineskip}
+%\lhead{\parbox[t]{0.7\textwidth}{\RaggedRight\rightmark\strut}}
+\rhead{\parbox[t]{0.7\textwidth}{\fontsize{9}{12} \selectfont \RaggedLeft\leftmark\strut}}
+\renewcommand{\headrulewidth}{1pt}
+\pagestyle{fancy} %%Fancy headings
+
+%Renew the equation reference command and define a figure ref command
+\renewcommand{\eqref}[1]{Eq. (\ref{#1})} 
+\newcommand{\figref}[1]{Fig. \ref{#1}}
+\newcommand{\tabref}[1]{Table \ref{#1}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% DOCUMENT
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\pagestyle{empty} %No headings for the first pages.
+
+
+%% Title Page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{titlepage}
+\input{TitlePage}
+\end{titlepage}
+
+\newgeometry{
+left=30mm,
+right=30mm,
+top=30mm,
+bottom=30mm
+} %Body margins
+
+%%Front Matter 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\pagenumbering{roman}
+
+\input{FrontMatter/Abstract}
+\input{FrontMatter/Acknowledgements}
+\input{FrontMatter/COVIDStatement}
+\input{FrontMatter/Contributions}
+
+
+%% Table of Contents %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parskip}{0mm} %Distance between listed sections
+\tableofcontents %Table of contents
+\cleardoublepage %The first chapter should start on an odd page.
+
+
+
+%% Document Body %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\setlength{\parskip}{1em} %Reinstate paragraph spacing
+\pagestyle{fancy} %Now display headings
+\pagenumbering{arabic} %Body page numbers
+\setlength{\parskip}{1em}
+
+\input{Chapters/Introduction}
+\input{Chapters/Background}
+\input{Chapters/Modelling}
+\input{Chapters/Control}
+\input{Chapters/Estimation}
+\input{Chapters/PathFollowing}
+\input{Chapters/Implementation}
+\input{Chapters/Conclusion}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% BIBLIOGRAPHY AND OTHER LISTS
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% A small distance to the other stuff in the table of contents (toc)
+\addtocontents{toc}{\protect\vspace*{\baselineskip}}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%        BIBLIOGRAPHY        %%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\addcontentsline{toc}{chapter}{Bibliography}%'Bibliography' into toc
+%\nocite{*} %Even non-cited BibTeX-Entries will be shown.
+\bibliographystyle{ieeetran}
+\bibliography{References}
+
+
+
+
+
+
+%% The List of Figures
+\clearpage
+\addcontentsline{toc}{chapter}{List of Figures}
+\listoffigures
+
+%% The List of Tables
+\clearpage
+\addcontentsline{toc}{chapter}{List of Tables}
+\listoftables
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% APPENDICES
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{appendices}
+\input{Appendices/A}
+\input{Appendices/B}
+\end{appendices}
+
+
+
+\end{document}
+

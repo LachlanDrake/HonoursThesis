@@ -1,0 +1,80 @@
+\babel@toc {english}{}
+\contentsline {chapter}{Abstract}{i}{chapter*.1}%
+\contentsline {chapter}{Acknowledgements}{ii}{chapter*.2}%
+\contentsline {chapter}{COVID Impact Statement}{iii}{chapter*.3}%
+\contentsline {chapter}{Contributions}{iv}{chapter*.4}%
+\contentsline {chapter}{\numberline {1}Introduction}{1}{chapter.1}%
+\contentsline {section}{\numberline {1.1}Project Motivation}{1}{section.1.1}%
+\contentsline {section}{\numberline {1.2}Thesis Outline}{2}{section.1.2}%
+\contentsline {chapter}{\numberline {2}Background}{3}{chapter.2}%
+\contentsline {section}{\numberline {2.1}Modelling Multi-Rotor Vehicles}{3}{section.2.1}%
+\contentsline {subsection}{\numberline {2.1.1}Modelling Approaches}{3}{subsection.2.1.1}%
+\contentsline {subsection}{\numberline {2.1.2}Newton-Euler Equations}{4}{subsection.2.1.2}%
+\contentsline {subsection}{\numberline {2.1.3}Reference Frames and Co-ordinate Systems}{4}{subsection.2.1.3}%
+\contentsline {section}{\numberline {2.2}Control Techniques}{5}{section.2.2}%
+\contentsline {subsection}{\numberline {2.2.1}Proportional Integral Derivative (PID) Control}{5}{subsection.2.2.1}%
+\contentsline {subsection}{\numberline {2.2.2}Backstepping Control}{6}{subsection.2.2.2}%
+\contentsline {subsubsection}{Lyapunov Stability}{6}{section*.6}%
+\contentsline {section}{\numberline {2.3}State Estimation}{7}{section.2.3}%
+\contentsline {subsection}{\numberline {2.3.1}Extended Kalman Filter}{7}{subsection.2.3.1}%
+\contentsline {subsection}{\numberline {2.3.2}Magnetometer}{7}{subsection.2.3.2}%
+\contentsline {subsection}{\numberline {2.3.3}Barometer}{8}{subsection.2.3.3}%
+\contentsline {section}{\numberline {2.4}Path-following}{8}{section.2.4}%
+\contentsline {section}{\numberline {2.5}Chapter Summary}{8}{section.2.5}%
+\contentsline {chapter}{\numberline {3}Modelling of Multi-Rotor Aircraft}{9}{chapter.3}%
+\contentsline {section}{\numberline {3.1}General Multi-Rotor Model}{9}{section.3.1}%
+\contentsline {subsection}{\numberline {3.1.1}Reference Frames}{9}{subsection.3.1.1}%
+\contentsline {subsection}{\numberline {3.1.2}Model Dynamics}{11}{subsection.3.1.2}%
+\contentsline {subsection}{\numberline {3.1.3}Additional Translational Motion Equations}{13}{subsection.3.1.3}%
+\contentsline {section}{\numberline {3.2}Hexacopter Model}{14}{section.3.2}%
+\contentsline {section}{\numberline {3.3}Simulation}{16}{section.3.3}%
+\contentsline {section}{\numberline {3.4}Chapter Summary}{17}{section.3.4}%
+\contentsline {chapter}{\numberline {4}Control of Multi-Rotor Aircraft}{18}{chapter.4}%
+\contentsline {section}{\numberline {4.1}Pseudo-inverse of Motor Speed Matrix}{18}{section.4.1}%
+\contentsline {section}{\numberline {4.2}PID Control}{19}{section.4.2}%
+\contentsline {subsection}{\numberline {4.2.1}Simplified Model}{19}{subsection.4.2.1}%
+\contentsline {subsection}{\numberline {4.2.2}Attitude Control}{20}{subsection.4.2.2}%
+\contentsline {subsection}{\numberline {4.2.3}Altitude Control}{20}{subsection.4.2.3}%
+\contentsline {subsection}{\numberline {4.2.4}Position Control}{21}{subsection.4.2.4}%
+\contentsline {subsection}{\numberline {4.2.5}Complete Control System}{21}{subsection.4.2.5}%
+\contentsline {subsection}{\numberline {4.2.6}Preliminary Results}{22}{subsection.4.2.6}%
+\contentsline {section}{\numberline {4.3}Backstepping Control}{24}{section.4.3}%
+\contentsline {subsection}{\numberline {4.3.1}Simplified State Space Model}{24}{subsection.4.3.1}%
+\contentsline {subsection}{\numberline {4.3.2}Attitude Control}{25}{subsection.4.3.2}%
+\contentsline {subsection}{\numberline {4.3.3}Position Control}{27}{subsection.4.3.3}%
+\contentsline {subsection}{\numberline {4.3.4}Preliminary Results}{28}{subsection.4.3.4}%
+\contentsline {section}{\numberline {4.4}Backstepping with Integral Action}{28}{section.4.4}%
+\contentsline {subsection}{\numberline {4.4.1}Preliminary Results}{29}{subsection.4.4.1}%
+\contentsline {section}{\numberline {4.5}Actuator Saturation}{29}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Chapter Summary}{30}{section.4.6}%
+\contentsline {chapter}{\numberline {5}State Estimation and Sensor Fusion}{31}{chapter.5}%
+\contentsline {section}{\numberline {5.1}State Estimation with GPS}{31}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Sensor Models}{31}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}State Transition Functions}{32}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Filter Algorithm}{33}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}State Estimation without GPS}{33}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Sensor Models}{33}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}State Transition Function}{33}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Filter Algorithm}{34}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Chapter Summary}{34}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Path-Following}{35}{chapter.6}%
+\contentsline {section}{\numberline {6.1}}{35}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Chapter Summary}{35}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Implementation and Results}{36}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Simulation}{36}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Hardware}{36}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}The Cube Autopilot}{36}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}ArduPilot Software}{36}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Companion Computer}{37}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Flight Testing}{37}{subsection.7.2.4}%
+\contentsline {section}{\numberline {7.3}Chapter Summary}{38}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Conclusion and Extensions}{39}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Conclusion}{39}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Future Extensions}{39}{section.8.2}%
+\vspace *{\baselineskip }
+\contentsline {chapter}{Bibliography}{40}{section.8.2}%
+\contentsline {chapter}{List of Figures}{43}{chapter*.7}%
+\contentsline {chapter}{List of Tables}{44}{chapter*.8}%
+\contentsline {chapter}{Appendices}{A-1}{section*.10}%
+\contentsline {chapter}{\numberline {A}Simulink Models}{A-1}{appendix.1.A}%
+\contentsline {chapter}{\numberline {B}Software Algorithms}{B-1}{appendix.1.B}%

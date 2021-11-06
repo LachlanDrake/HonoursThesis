@@ -1,0 +1,472 @@
+
+\chapter{Control of Multi-Rotor Aircraft}
+
+\textit{Now that a sufficiently accurate mathematical model of the hexacopter has been developed, the control problem is able to be approached. Within this chapter two control systems will be developed with the aim of controlling the aircraft position and attitude. Simulations will then be performed in Simulink to verify the effectiveness of each control system. For the purposes of these simulations it will be assumed that the vehicle's position and attitude (x, y, z, $\phi$, $\theta$, $\psi$) can be accurately measured at any given time.} 
+
+\section{Pseudo-inverse of Motor Speed Matrix}
+The control systems in this chapter will be based upon the effective inputs of the plant i.e. $\tau_{\phi}$, $\tau_{\theta}$, $\tau_{\psi}$, $F_{T}$. Therefore, it will be necessary to implement an inverse of the matrix in Equation \ref{eqn:propSpeeds1} in order to obtain the desired input motor speeds. This matrix is not square and is therefore not invertible. However, for a matrix A with linearly independent rows, the Penrose-Moore pseudo-inverse ($A^{+}$) is able to be computed such  that: 
+\[A^{+}= A^{T}(AA^{T})^{-1}\]
+In this case, this is a right inverse which will satisfy \(AA^{+}=I\) where I is an identity matrix. The pseudo-inverse matrix is shown in Equation \ref{eqn:propSpeeds2} and will be used to reverse the relationship between the effective inputs and the propeller speeds.
+\begin{equation}\label{eqn:propSpeeds2}
+\begin{bmatrix}
+\Omega^{2}_{1}\\
+\Omega^{2}_{2}\\
+\Omega^{2}_{3}\\
+\Omega^{2}_{4}\\
+\Omega^{2}_{5}\\
+\Omega^{2}_{6}\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\frac{1}{6C_{T}d} & \frac{\sqrt{3}}{(6C_{T}d)} &  \frac{1}{6K_{psi}} & \frac{1}{6C_{T}}\\
+-\frac{1}{3C_{T}d} & 0 & -\frac{1}{6K_{psi}} & \frac{1}{6C_{T}}\\
+-\frac{1}{6C_{T}d} & -\frac{\sqrt{3}}{(6C_{T}d)} & \frac{1}{6K_{psi}} & \frac{1}{6C_{T}}\\
+ \frac{1}{6C_{T}d} & -\frac{\sqrt{3}}{(6C_{T}d)} & -\frac{1}{6K_{psi}} & \frac{1}{6C_{T}}\\
+ \frac{1}{3C_{T}d} & 0 & \frac{1}{6K_{psi}} & \frac{1}{6C_{T}}\\
+ \frac{1}{6C_{T}d} &  \frac{\sqrt{3}}{(6C_{T}d)} & -\frac{1}{6K_{psi}} & \frac{1}{6C_{T}}
+\end{bmatrix}
+\begin{bmatrix}
+\tau_{\phi}\\
+\tau_{\theta}\\
+\tau_{\psi}\\
+F_{T}\\
+\end{bmatrix}
+\end{equation}
+
+\section{PID Control}
+Initially, a control strategy for the hexacopter will be developed based upon Proportional Integral Derivative (PID) control. The basic concept of PID control is outlined in Section \ref{section:PIDBackground}. This controller will be designed with the aim of stabilising the vehicle around a hovering point and this allows the model to be simplified.
+\subsection{Simplified Model}\label{section:SimpleModel}
+For the purposes of this controller, the vehicle will assumed to be hovering, which implies the roll and pitch angles ($\phi$ $\theta$) will only have small variations from the origin. These assumptions will be used in developing the controller, however the controller will be verified by simulation on the full nonlinear model. Likewise, we will assume the yaw angle ($\psi$) is held close to the origin. This allows the small angle approximation to be applied to the model defined in Section \ref{section:ModelDynamics}. Applying this assumption to Equation \ref{eqn:state1} gives Equation \ref{eqn:simpleState1}.
+
+\begin{equation}\label{eqn:simpleState1}
+\begin{split}
+\begin{bmatrix}
+\dot{\phi}\\ \dot{\theta} \\ \dot{\psi}
+\end{bmatrix} 
+&=
+\begin{bmatrix}
+1 & 0 & 0\\
+0 & 1 & 0\\
+0 & 0 & 1
+\end{bmatrix}
+\begin{bmatrix}
+p\\q\\r
+\end{bmatrix} \\
+\begin{bmatrix}
+\dot{\phi}\\ \dot{\theta} \\ \dot{\psi}
+\end{bmatrix} 
+&=
+\begin{bmatrix}
+p\\q\\r
+\end{bmatrix}
+\end{split}
+\end{equation} 
+
+
+
+
+Likewise, it will be assumed that the moments of inertia around each axis are approximately equal ($I_{xx}\approx I_{yy}\approx I_{zz}$). Using this assumption and the relationship in Equation \ref{eqn:simpleState1}, Equation \ref{eqn:state3} can be simplified to give Equation \ref{eqn:simpleState3}. This allows the rotational systems to be decoupled and therefore more easily controlled using the PID technique.
+\begin{equation}\label{eqn:simpleState3}
+\begin{bmatrix}
+\ddot{\phi}\\\ddot{\theta}\\\ddot{\psi}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{1}{I_{xx}}\tau_{\phi}\\
+\frac{1}{I_{yy}}\tau_{\theta}\\
+\frac{1}{I_{zz}}\tau_{\psi}
+\end{bmatrix}
+\end{equation}
+
+
+Further, by applying the small angle approximation to \eqref{eqn:additionalState2}, the translational motion is able to be linearised. This is shown in Equation \eqref{eqn:simpleTranslational}.
+\begin{equation}\label{eqn:simpleTranslational}
+\begin{bmatrix}
+\ddot{x}\\\ddot{y}\\\ddot{z}
+\end{bmatrix}
+=
+\begin{bmatrix}
+-\theta\frac{F_{T}}{m}\\
+\phi\frac{F_{T}}{m}\\
+\frac{F_{T}}{m}-g
+\end{bmatrix}
+\end{equation}
+
+Under these assumptions, each Euler angle is directly controllable by the corresponding torque input,  vertical translational motion is controllable by the total thrust and horizontal translational motion is controllable by the roll and pitch angles. Additionally, from Equations \ref{eqn:simpleState3} and \ref{eqn:simpleTranslational}, it is apparent that there are double integrators in the plant dynamics\cite{Herzog2016}. Therefore, the integral term usually present in PID controllers will be unnecessary, i.e. the controllers designed in this section will use a PD structure.
+
+\FloatBarrier
+\subsection{Attitude Control}
+In order to control the orientation of the vehicle, a PD control system is used for each angle. The torque around each axis is used to control the corresponding angles. The PD control laws for each torque input are defined in Equation \ref{eqn:torquePD}.
+
+\begin{equation}\label{eqn:torquePD}
+\begin{bmatrix}
+\tau_{\phi}\\\tau_{\theta}\\\tau_{\psi}
+\end{bmatrix}
+=
+\begin{bmatrix}
+K_{P_{\phi}}(\phi_{d}-\phi)+K_{D_{\phi}}(\dot{\phi_{d}}-\dot{\phi})\\
+K_{P_{\theta}}(\theta_{d}-\theta)+K_{D_{\theta}}(\dot{\theta_{d}}-\dot{\theta})\\
+K_{P_{\psi}}(\psi_{d}-\psi)+K_{D_{\psi}}(\dot{\psi_{d}}-\dot{\psi})
+\end{bmatrix}
+\end{equation}
+Where K coefficients represent non-negative constants and $\phi_{d}$, $\theta_{d}$ and $\psi_{d}$ represent the desired attitude of the vehicle.
+
+
+\FloatBarrier
+\subsection{Altitude Control}
+From \eqref{eqn:additionalState2}, the relationship between the total thrust and acceleration in the z direction is given by: $F_T= \frac{m}{cos(\theta)cos(\phi)}(\ddot{z}+g)$. Using this, the control law for z can be defined as shown in \eqref{eqn:altitudePID}.
+\begin{equation}\label{eqn:altitudePID}
+F_{T}=\frac{m}{cos(\theta)cos(\phi)}[K_{P_{z}}(z_{d}-z)+K_{D_{z}}(\dot{z}_{d}-\dot{z})+g]
+\end{equation}
+Where K coefficients represent non-negative constants and $z_{d}$ represents the desired altitude.
+ 
+\FloatBarrier
+\subsection{Position Control}
+Finally, the x and y position must be controlled to prevent the vehicle from drifting from its setpoint in the presence of disturbances, e.g wind gusts. This system should also allow the vehicle to travel to a specified coordinate within the Earth frame. Since the lateral and longitudinal motion of the vehicle cannot be directly controlled, the position is controlled by adjusting the desired values of the roll and pitch angles ($\phi_{d}$, $\theta_{d}$).
+The relationship between x,y, $\phi$ and $\theta$ is linearised in Equation \ref{eqn:simpleTranslational}. Further, since the vehicle is assumed to be hovering, the thrust force must counter the vehicle's weight i.e. $F_{T}\approx mg \Rightarrow \frac{F_{T}}{m}\approx g$. 
+
+\[\phi=\frac{1}{g}\ddot{y}\]
+\[\theta=-\frac{1}{g}\ddot{x}\]
+
+Using this linearised relationship, two PD controllers (scaled by $\pm\frac{1}{g}$) can be designed to take the position error as an input and will output the desired roll and pitch angles. These control laws are represented in Equation \ref{eqn:positionPD}
+\begin{equation}\label{eqn:positionPD}
+\begin{bmatrix}
+\phi_{d}\\\theta_{d}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\frac{1}{g}[K_{P_{y}}(y_{d}-y)+K_{D_{y}}(\dot{y_{d}}-\dot{y})]\\
+-\frac{1}{g}[K_{P_{x}}(x_{d}-x)+K_{D_{x}}(\dot{x_{d}}-\dot{x})]
+\end{bmatrix}
+\end{equation}
+Where K coefficients represent non-negative constants, $x_{d}$ and $y_{d}$ represent the desired horizontal position in the Earth frame. This controller is added in an outer loop with its outputs being supplied to the attitude controller. 
+
+\FloatBarrier
+\subsection{Complete Control System}
+By combining all of the previously described controllers, the vehicle is able to be controlled around the desired operating point. The overall block diagram is shown in \figref{fig:PID_Hexacopter}. 
+\begin{figure}[htb]
+	\includegraphics[width=\columnwidth]{PID_Hexacopter.PNG}%
+	\caption{Complete PID control system block diagram}%
+	\label{fig:PID_Hexacopter}%
+\end{figure}
+
+The gains of each controller were tuned independently using the Simulink Design Optimization Package. The Response Optimizer app within this package uses gradient descent to tune the controller gains in order to achieve the specified performance of step response. The gains achieved using this method are given in Table \ref{table:PID_Gains}.
+\begin{table}[htb]\label{table:PID_Gains}
+\begin{center}
+\begin{tabular}{||c|c|c||} 
+ \hline
+ Controller & Gain & Value\\ [0.5ex] 
+ \hline\hline
+ \multirow{2}{7em}{Roll Angle}& K\textsubscript{P,$\phi$} & 2.688 \\ 
+ \cline{2-3}
+  &K\textsubscript{D,$\phi$} & 2.385 \\
+ \hline
+  \multirow{2}{7em}{Pitch Angle}& K\textsubscript{P,$\theta$} & 2.688 \\
+ \cline{2-3}
+  &K\textsubscript{D,$\theta$} & 2.385 \\
+ \hline
+ \multirow{2}{7em}{Yaw Angle}& K\textsubscript{P,$\psi$} & 0.759 \\
+ \cline{2-3}
+ &K\textsubscript{D,$\psi$} & 0.664 \\
+ \hline
+ \multirow{2}{7em}{x Position}& K\textsubscript{P,$x$} & 3.322 \\
+ \cline{2-3}
+ &K\textsubscript{D,$x$} & 2.020 \\
+ \hline
+ \multirow{2}{7em}{y Position}& K\textsubscript{P,$y$} & 1.471 \\
+ \cline{2-3}
+ &K\textsubscript{D,$y$} & 1.681 \\
+ \hline
+ \multirow{2}{7em}{z Position}& K\textsubscript{P,$z$} & 218.4 \\
+ \cline{2-3}
+ &K\textsubscript{D,$z$} & 162.5 \\
+ \hline
+\end{tabular}
+\caption{Model simulation parameters}
+\end{center}
+\end{table}
+
+\FloatBarrier
+
+\subsection{Preliminary Results}
+The PD control system was implemented in Simulink and its ability to stabilise the Euler angles from significant initial conditions was tested. The system simultaneously stabilises the position and counteracts any deviations from the origin, as seen in \figref{fig:PID_Stabilise}.
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=70mm]{/PID_Results/Stabilise_Angles}
+	\includegraphics[width=70mm]{/PID_Results/Stabilise_Position}%
+	\end{center}
+	\caption{PD system stabilisation from significant initial angles}%
+	\label{fig:PID_Stabilise}%
+\end{figure}
+
+The system tracking capabilities were also tested with step reference inputs. The step responses for roll angle, x position and altitude can be seen in \figref{fig:PID_Results}. The step response of the other angles ($\theta$, $\psi$) are very similar to the roll angle response and the y position response is similar to that of the x position, therefore these responses are not shown for brevity.
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=75mm]{/PID_Results/PhiTracking_Steps2}\\
+	\includegraphics[width=75mm]{/PID_Results/xTracking_Steps2}%
+	\includegraphics[width=75mm]{/PID_Results/zTracking_Steps2}%
+	\end{center}
+	\caption{PD system step responses}%
+	\label{fig:PID_Results}%
+\end{figure}
+The control system was also shown to be reasonably effective in tracking a sinusoidal position command, as shown in \figref{fig:PID_Sine}.
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=80mm]{/PID_Results/xTracking_Sine2.jpg}%
+	\end{center}
+	\caption{PID Position tracking}%
+	\label{fig:PID_Sine}%
+\end{figure}
+
+The results show that this system is effective in stabilising the aircraft around a hovering point in the absence of major disturbances. It is also able to respond to relatively small positional step commands. However, this control method is limited since it neglects the nonlinearities of the physical system. For example, it is ineffective with a non-zero yaw angle due to approximations made in the simplification of the model. The system is also prone to saturation when subject to large step commands.
+
+\FloatBarrier
+\section{Backstepping Control}
+In order to improve upon the performance of the previous controller, the recursive Lyapunov-based control method known as backstepping will be applied to the multi-rotor system. The mathematical background of this method is discussed in Section \ref{section:BacksteppingBackground}.
+\subsection{Simplified State Space Model}
+The states used by the backstepping controller will be each of the positions in the Earth frame as well as their respective velocities. In order to simplify notation, the states will be referred to as $x_{i}$ and are defined as:
+\begin{equation}\label{eqn:stateDef}
+x=
+\begin{bmatrix}
+x_{1}\\
+x_{2}\\
+x_{3}\\
+x_{4}\\
+x_{5}\\
+x_{6}\\
+x_{7}\\
+x_{8}\\
+x_{9}\\
+x_{10}\\
+x_{11}\\
+x_{12}
+\end{bmatrix}
+=
+\begin{bmatrix}
+\phi\\
+\dot{\phi}\\
+\theta\\
+\dot{\theta}\\
+\psi\\
+\dot{\psi}\\
+x\\
+\dot{x}\\
+y\\
+\dot{y}\\
+z\\
+\dot{z}
+\end{bmatrix}
+\end{equation}
+
+As seen in Section \ref{{section:SimpleModel}}, the state space model which was presented in Section \ref{section:ModelDynamics}, is able to be greatly simplified by making a number of assumptions. For the purposes of this controller, the small angle approximation will be used in order to simplify the relationship between the torques and the Euler angles. That is, the relationship in Equation \ref{eqn:simpleState1} will be assumed true. Applying this to Equation \ref{eqn:state3} gives the following:
+
+\begin{equation}
+\begin{bmatrix}
+\dot{x}_{2}\\
+\dot{x}_{4}\\
+\dot{x}_{6}
+\end{bmatrix}
+=
+\begin{bmatrix}
+a_{1}x_{4}x_{6}+b_{1}\tau_{\phi}\\
+a_{2}x_{2}x_{6}+b_{2}\tau_{\theta}\\
+a_{3}x_{2}x_{4}+b_{3}\tau_{\psi}
+\end{bmatrix}
+\end{equation}
+with $a_{1}=\frac{I_{yy}-I_{zz}}{I_{xx}}$, $a_{2}=\frac{I_{zz}-I_{xx}}{I_{yy}}$, $a_{3}=\frac{I_{xx}-I_{yy}}{I_{zz}}$, $b_{1}=\frac{1}{I_{xx}}$, $b_{2}=\frac{1}{I_{yy}}$, $b_{3}=\frac{1}{I_{zz}}$. Now, the simplified state space model may be expressed:
+
+\begin{equation}\label{eqn:simpleStateModel}
+\begin{bmatrix}
+\dot{x}_{1}\\
+\dot{x}_{2}\\
+\dot{x}_{3}\\
+\dot{x}_{4}\\
+\dot{x}_{5}\\
+\dot{x}_{6}\\
+\dot{x}_{7}\\
+\dot{x}_{8}\\
+\dot{x}_{9}\\
+\dot{x}_{10}\\
+\dot{x}_{11}\\
+\dot{x}_{12}
+\end{bmatrix}
+=
+\begin{bmatrix}
+x_{2}\\
+a_{1}x_{4}x_{6}+b_{1}\tau_{\phi}\\
+x_{4}\\
+a_{2}x_{2}x_{4}+b_{2}\tau_{\theta}\\
+x_{6}\\
+a_{3}x_{2}x_{4}+b_{3}\tau_{\psi}\\
+x_{8}\\
+[cos(x_{1})sin(x_{3})cos(x_{5})+sin(x_{1})sin(x_{5})]\frac{F_{T}}{m}\\
+x_{10}\\
+[cos(x_{1})sin(x_{3})sin(x_{5})-sin(x_{1})cos(x_{5})]\frac{F_{T}}{m}\\
+x_{12}\\
+[cos(x_{1})cos(x_{3})]\frac{F_{T}}{m}-g
+\end{bmatrix}
+\end{equation}
+
+\subsection{Attitude Control}
+Consider the tracking error of the roll angle, i.e. the first state:
+\[z_{1}= x_{1d}-x_{1}\]
+
+Choose a candidate Lyapunov function such that it is positive definite:
+\[V(z_{1})=\frac{1}{2}z_{1}^{2}\]
+Taking its derivative gives:
+
+\[\dot{V}(z_{1})=z_{1}\dot{z}_{1}\]
+
+A control Lyapunov function must have a negative definite derivative, therefore \(\dot{z_{1}}\) is chosen to be \(-K_{1}z_{1}\) with constant gain \(K_{1}>0\). This gives the following result:
+\[\dot{V}(z_{1})=-K_{1}z_{1}^{2}\]
+Now, take the derivative of \(z_{1}\) and substitute our chosen value.
+\begin{equation*}
+\begin{split}
+\dot{z_{1}}&=\dot{x}_{1d}-\dot{x}_{1}\\
+-K_{1}z_{1}&=\dot{x}_{1d}-x_{2}\\
+\end{split}
+\end{equation*}
+Now, choose a virtual control \(x_{2d}\) to satisfy this relationship:
+\[x_{2d}=\dot{x}_{1d}+K_{1}z_{1}\]
+Now consider the tracking error of the second state:
+\begin{equation*}
+\begin{split}
+z_{2}&=x_{2d}-x_{2}\\
+&=\dot{x}_{1d}+K_{1}z_{1}-x_{2}
+\end{split}
+\end{equation*}
+Now choose a second candidate Lyapunov function:
+\[V(z_{1},z_{2})=\frac{1}{2}(z_{1}^2+z_{2}^2)\]
+Then take its derivative:
+\begin{equation*}
+\begin{split}
+\dot{V}(z_{1},z_{2})&=\dot{V}(z_{1})+z_{2}\dot{z}_{2}\\
+&=-K_{1}z_{1}^{2}+z_{2}\dot{z}_{2}
+\end{split}
+\end{equation*}
+Now to ensure \(\dot{V}(z_{1},z_{2})\) is negative definite, choose \(\dot{z}_{2}=-K_{2}z_{2}\) with constant \(K_{2}>0\). This gives the following result:
+\begin{equation*}
+\begin{split}
+\dot{z}_{2}&=\ddot{x}_{1d}+K_{1}\dot{z}_{1}-\dot{x}_{2}\\
+-K_{2}z_{2}&=\ddot{x}_{1d}+K_{1}(\dot{x}_{1d}-x_{2})-a_{1}x_{4}x_{6}-b_{1}\tau_{\phi}
+\end{split}
+\end{equation*}
+Using this result, it is possible to choose a control value for the input \(\tau_{\phi}\) which will stabilise the roll angle:
+\begin{equation*}
+\tau_{\phi}=\frac{1}{b_{1}}(\ddot{x}_{1d}+K_{1}(\dot{x}_{1d}-x_{2})-a_{1}x_{4}x_{6}+K_{2}z_{2})
+\end{equation*}
+The same steps can be followed to stabilise both the pitch and yaw angles with control inputs \(\tau_{\theta}\) and \(\tau_{\psi}\) respectively. These control laws are given in \eqref{eqn:BackstepAngleLaws}.
+
+\begin{equation}\label{eqn:BackstepAngleLaws}
+\begin{split}
+\tau_{\theta}&=\frac{1}{b_{2}}\left(\ddot{x}_{3d}+K_{3}(\dot{x}_{3d}-x_{4})-a_{2}x_{2}x_{6}+K_{4}z_{4}\right)\\
+\tau_{\psi}&=\frac{1}{b_{3}}\left(\ddot{x}_{5d}+K_{5}(\dot{x}_{5d}-x_{6})-a_{3}x_{2}x_{4}+K_{6}z_{6}\right)
+\end{split}
+\end{equation}
+
+angle results, stabilisation...
+
+\subsection{Position Control}
+The control laws developed in the previous section successfully allow stabilisation and tracking of the vehicle's attitude, however, the objective of this control system is to allow the vehicle to track a trajectory in 3D space. First consider the tracking error of the position in the Earth frame x direction:
+\[z_{7}=x_{7d}-x{7}\]
+Following the same logic presented in the development of the attitude controllers, the candidate Lyapunov function is chosen as $V(z_{7})=\frac{1}{2}z_{7}^{2}$. Thus, a virtual control for $x_{8}$ is chosen to satisfy $\dot{z}_{7}=-K_{7}z_{7}$:
+\[x_{8d}=\dot{x}_{7d}+K_{7}z_{7}\]
+
+Now, consider the tracking error of the translational velocity, $z_{8}$, and its derivative:
+
+\[
+\begin{split}
+z_{8}&=x_{8d}-x_{8}\\
+z_{8}&=\dot{x}_{7d}+K_{7}z_{7}-x_{8}\\
+\dot{z}_{8}&=\ddot{x}_{7d}+K_{7}\dot{z}_{7}-\dot{x}_{8}\\
+&=\ddot{x}_{7d}+K_{7}\dot{z}_{7}-[cos(x_{1})sin(x_{3})cos(x_{5})+sin(x_{1})sin(x_{5})]\frac{F_{T}}{m}
+\end{split}
+\]
+
+In order to ensure $\dot{z}_{8}=-K_{8}z_{8}$, a virtual control must be chosen. If it is assumed that the vehicle is in hovering flight and the Euler angles are stabilised around 0\textdegree, then the most logical choice of variable for a virtual control is the pitch angle ($x_{3}$). Thus, the virtual control $x_{3d}$ in Equation \ref{eqn:XPosContLaw} will be supplied as a desired value for the attitude controller developed in the previous section. 
+\begin{equation}\label{eqn:XPosContLaw}
+x_{3d}=sin^{-1}\left(\frac{\frac{m}{F_{T}}[K_{8}z_{8}+\ddot{x}_{7d}+K_{7}\dot{z}_{7}]-sin(x_{1})sin(x_{5})}{cos(x_{1})cos(x_{5})}\right)
+\end{equation}
+
+The y position control law, shown in \eqref{eqn:YPosContLaw}, is developed in the same way, with the roll angle ($x_{1}$) acting as the virtual control. 
+\begin{equation}\label{eqn:YPosContLaw}
+x_{1d}=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[K_{10}z_{10}+\ddot{x}_{9d}+K_{9}\dot{z}_{9}]+cos(x_{1})sin(x_{3})sin(x_{5})}{cos(x_{5})}\right)
+\end{equation}
+ 
+The z position control law in \eqref{eqn:ZPosContLaw} is developed following the same method, with $F_{T}$ as the control input.
+\begin{equation}\label{eqn:ZPosContLaw}
+F_{T}=\frac{m(\ddot{x}_{11d}+K_{11}\dot{z}_{11}+K_{12}z_{12})}{cos(x_{1})cos(x_{3})}
+\end{equation}
+
+\subsection{Preliminary Results}
+ Show what happens when parameters vary...
+
+\section{Backstepping with Integral Action}\label{section:IntBack}
+As an extension, to reduce the effects of uncertainties in model parameters it is desirable to include integral action within the controller. An integral term may thus be added within the negative definite function which is chosen as the time derivative of the candidate Lyapunov function. This method has been shown to be effective at reducing the effects of uncertainties and increasing the robustness of the controller in both simulation\cite{Jasim2015} and hardware\cite{Bouabdallah2006} implementation.
+
+Again, consider the roll angle tracking error as the first translated state:
+\[e_{1}=x_{1d}-x_{1}\]
+Choose a candidate Lyapunov function such that it is positive definite:
+\[V(e_{1})=\frac{1}{2}e_{1}^{2}\]
+Taking its derivative gives:
+\begin{equation}
+\begin{split}
+\dot{V}(e_{1})&=e_{1}\dot{e}_{1}\\
+\dot{V}(e_{1})&=e_{1}(\dot{x}_{1d}-x_{2})
+\end{split}
+\end{equation}
+Now $\dot{V}(e_{1})$ is chosen equal to a negative definite function which includes an integral term.
+\begin{equation}
+\begin{split}
+\dot{V}(e_{1})&=-C_{1}e_{1}^{2}-e_{1}\beta_{1}\int^{t}_{0} e_{1}(\alpha) d\alpha\\
+e_{1}(\dot{x}_{1d}-x_{2})&=-C_{1}e_{1}^{2}-e_{1}\beta_{1}\int^{t}_{0} e_{1}(\alpha) d\alpha\\
+\end{split}
+\end{equation}
+where $C_{1}$ and $\beta_{1}$ are non-negative constants.
+
+A virtual control for roll angle rate ($x_{2}$) is chosen to satisfy this relationship:
+\[x_{2d}=\dot{x}_{1d}+C_{1}e_{1}+\beta_{1}\int^{t}_{0} e_{1}(\alpha) d\alpha\]
+
+A control law which stabilises the tracking error $e_{2}=x_{2d}-x_{2}$ can now be derived in terms of the roll torque, using the same method as in the previous section:
+\begin{equation}
+\tau_{\phi}=\frac{1}{b_{1}} \left( \ddot{x}_{1d}+C_{1}\dot{e}_{1}+\beta_{1}e_{1}+\beta_{2}\int^{t}_{0} e_{2}(\alpha) d\alpha -a_{1}x_{4}x_{6}+C_{2}e_{2}\right)
+\end{equation}
+
+Following the same method, control laws for both yaw and pitch angles are given as:
+\begin{equation}\label{eqn:IntBackstepAngleLaws}
+\begin{split}
+\tau_{\theta}&=\frac{1}{b_{2}}\left(\ddot{x}_{3d}+C_{3}\dot{e}_{3}+\beta_{3}e_{3}+\beta_{4}\int^{t}_{0} e_{4}(\alpha) d\alpha -a_{2}x_{2}x_{6}+C_{4}e_{4}\right)\\
+\tau_{\psi}&=\frac{1}{b_{3}}\left(\ddot{x}_{5d}+C_{5}\dot{e}_{5}+\beta_{5}e_{5}+\beta_{6}\int^{t}_{0} e_{6}(\alpha) d\alpha -a_{3}x_{2}x_{4}+C_{6}e_{6}\right)
+\end{split}
+\end{equation}
+
+Similarly to the previous section, virtual controls for the pitch and roll angles can be chosen to stabilise horizontal position tracking errors. Also, a control law for the vertical position can be derived using the total thrust.
+
+
+\begin{equation}\label{eqn:IntBackPosContLaw}
+\begin{split}
+x_{3d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[C_{8}e_{8}+\beta_{8}\int^{t}_{0} e_{8}(\alpha) d\alpha + \ddot{x}_{7d}+C_{7}\dot{e}_{7}+\beta_{7}e_{7}]-sin(x_{1})sin(x_{5})}{cos(x_{1})cos(x_{5})}\right)\\
+x_{1d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[C_{10}e_{10}+\beta_{10}\int^{t}_{0} e_{10}(\alpha) d\alpha +\ddot{x}_{9d}+C_{9}\dot{e}_{9}+\beta_{9}e_{9}]+cos(x_{1})sin(x_{3})sin(x_{5})}{cos(x_{5})}\right)\\
+F_{T}&=\frac{m\left(\ddot{x}_{11d}+C_{11}\dot{e}_{11}+\beta_{11}e_{11}+C_{12}e_{12}+\beta_{12}\int^{t}_{0} e_{12}(\alpha) d\alpha \right)}{cos(x_{1})cos(x_{3})}
+\end{split}
+\end{equation}
+
+
+\subsection{Preliminary Results}
+Show effects of saturation...
+
+\section{Actuator Saturation}
+To prevent actuator saturation when large step commands are given, a sigmoidal function can be used to limit the effect of position error \cite{Cabecinhas2009}. For this purpose, the sigmoidal function is defined as:
+\[\sigma(x)=p_{max}\frac{x}{1+|x|}\]
+
+
+
+\section{Chapter Summary}
+In this chapter, three control systems were developed and tested in simulation. The PID control system was effective at stabilising the aircraft around a hovering point, but had limitations due to not considering the nonlinearities of the system. The backstepping control system improved upon this by accounting for the nonlinearities, however this controller still depended on accurate values of the model parameters. The final controller implemented backstepping control with integral action and was effective in adjusting to errors in the given model parameters, however it was prone to actuator saturation with large step commands. The final addition to the control system implemented a sigmoidal function in the position control laws to mitigate the effects of actuator saturation.
+
+
+
+\clearpage
+
+
+

@@ -1,0 +1,174 @@
+
+\chapter{State Estimation and Sensor Fusion}
+\textit{This chapter describes the algorithms used for estimating the aircraft state from the available sensor readings. It is common for state estimation algorithms to rely on GPS systems for position data, however there are many situations where GPS may either be unavailable or unreliable. This chapter explores a state estimation technique which utilises an optical flow sensor for relative position data. This is then compared with a GPS-enabled algorithm.}
+
+\section{State Estimation with GPS}
+In industry and commercial applications UAV position is commonly estimated with the use of a GPS sensor, along with additional sensors. This method has the advantage of providing accurate position data that not many other sensors can offer.
+
+\subsection{Sensor Models}
+GPS data is recorded as latitude and longitude positions. These can be converted into the Earth frame by using the Haversine formula, as described in Section \ref{section:RefFrames}. The GPS data will be modelled by the following:
+\begin{equation}
+\begin{split}
+\tilde{\lambda}&=\lambda+\mu_{\lambda}\\
+\tilde{\chi}&=\chi +\mu_{\chi}
+\end{split}
+\end{equation}
+where $\lambda$ and $\chi$ represent latitude and longitude respectively and the $\mu$ terms represent measurement noise
+
+A standard Inertial Measurement Unit (IMU) contains both a 3-axis accelerometer and a 3-axis gyroscope. These sensors are modelled by the following equations:
+\begin{equation}\label{eqn:IMU}
+\begin{split}
+\begin{bmatrix}
+\tilde{a}_{x}\\
+\tilde{a}_{y}\\
+\tilde{a}_{z}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+u\\
+v\\
+w
+\end{bmatrix}
++
+C^{b}_{n}
+\begin{bmatrix}
+0\\
+0\\
+g
+\end{bmatrix}
++
+\begin{bmatrix}
+\mu_{a_{x}}\\
+\mu_{a_{y}}\\
+\mu_{a_{z}}
+\end{bmatrix}\\
+\begin{bmatrix}
+\tilde{\omega}_{x}\\
+\tilde{\omega}_{y}\\
+\tilde{\omega}_{z}
+\end{bmatrix}
+&=
+\begin{bmatrix}
+p\\
+q\\
+r
+\end{bmatrix}
++
+\begin{bmatrix}
+\mu_{\omega_{x}}\\
+\mu_{\omega_{y}}\\
+\mu_{\omega_{z}}
+\end{bmatrix}
+\end{split}
+\end{equation}
+
+A magnetometer is another commonly used sensor in inertial navigation systems. The magnetometer measures the Earth's magnetic field in order to estimate vehicle orientation. The measurements can be modelled by the following:
+\begin{equation}\label{eqn:mag}
+\begin{bmatrix}
+\tilde{m}_{x,b}\\
+\tilde{m}_{y,b}\\
+\tilde{m}_{z,b}
+\end{bmatrix}
+=
+C^{b}_{n}
+\begin{bmatrix}
+m_{x}\\
+m_{y}\\
+m_{z}
+\end{bmatrix}
++
+\begin{bmatrix}
+\mu_{m_{x}}\\
+\mu_{m_{y}}\\
+\mu_{m_{z}}
+\end{bmatrix}
+\end{equation}
+Where $m_{x}$, $m_{y}$ and $m_{z}$ represent the magnetic field vector components at the vehicle's location, and $\tilde{m}_{x,b}$, $\tilde{m}_{y,b}$ and $\tilde{m}_{z,b}$ are the magnetometer measurements in the vehicle body frame. To perform orientation determination, a known magnetic field vector at the location of the vehicle is required. For the purposes of this project, it will be assumed that the vehicle is flying outdoors without significant magnetic interference nearby, i.e. the Earth's magnetic field is the only magnetic field detected.\\
+
+A barometer (or altimeter) is a sensor which measures air pressure and can be used to estimate relative altitude. The model for a barometric sensor is based upon the standard atmospheric model described in Section \ref{section:barometerBackground}. This sensor model is given in \eqref{eqn:barometer}.
+\begin{equation}\label{eqn:barometer}
+\tilde{P}=P_{0}exp\left[\frac{-g M (z+h_{0})}{R T_{0}}\right]+\mu_{P}
+\end{equation}
+
+where $\tilde{P}$ represents the measured pressure. In the model, z represents the height above the surface from which it launched, thus $h_{0}$ is added to account for the surface's altitude above sea level.
+
+\subsection{State Transition Functions}
+This algorithm utilises the model equations developed in Section \ref{section:MultiRotorModel}
+
+\subsection{Filter Algorithm}
+
+\section{State Estimation without GPS}
+There are many situations in which GPS signal may not be reliable. For example, GPS signal will generally be unreliable for indoor applications. Additionally, failure of the onboard GPS system could prove catastrophic if there is not another way of tracking position and velocity data.
+\subsection{Sensor Models}\label{section:GPSSensModels}
+One type of sensor which is relatively inexpensive and can be utilised for position tracking in GPS-limited environments, is the optical flow sensor (OFS). An OFS is essentially a simple camera which compares consecutive frames to establish the motion that has occurred between frames. The OFS outputs data relating to the flow of pixels between frames. The velocity in m/s can be estimated by combining this with knowledge of the scene depth, i.e. the distance from the surface. In most cases, an OFS will be accompanied by either a lidar or sonar sensor in order to estimate scene depth. For the purposes of this model, the z position of the aircraft represents its height above the ground, which implies the terrain within the flight path is flat. The optical flow sensor and its accompanying lidar sensor are modelled by the following equations\cite{Driessen2018}\cite{Ding2010}:
+
+
+\begin{equation}\label{eqn:OFS}
+\begin{split}
+\tilde{\rho}_{x}=-\left(\frac{u}{h}+q\right)\Delta t_{\rho}f+\mu_{\rho_{x}}\\
+\tilde{\rho}_{y}=-\left(\frac{v}{h}+p\right)\Delta t_{\rho}f+\mu_{\rho_{y}}\\
+\tilde{h}=\frac{z}{cos(\phi)cos(\theta)}+\mu_{h}
+\end{split}
+\end{equation}
+where $\Delta t_{\rho}$ is the time between consecutive frames, $f$ is the focal length in pixels, $h$ is the scene depth and $\mu$ variables represent Gaussian noise with zero mean.\\
+This algorithm also uses the IMU and magnetometer sensor models described in Section \ref{section:GPSSensModels}.
+
+
+
+
+
+
+\subsection{State Transition Function}
+The states estimated by this EKF are those which are used by the backstepping controller, as expressed in \eqref{eqn:stateDef}. Namely, the positions, velocities, Euler angles and angular rates all expressed with respect to the Earth frame. The accelerometer and gyroscope measurements are defined as inputs in order to reduce the complexity of the state transition functions\cite{Driessen2018}. Thus the inputs are $\textbf{\textit{u}}=
+\begin{bmatrix}
+\tilde{a}_{x}&\tilde{a}_{y}&\tilde{a}_{z}&\tilde{\omega}_{x}&\tilde{\omega}_{y}&\tilde{\omega}_{z}
+\end{bmatrix}^{T}
+$
+In order to simplify notation, the states may be grouped into the following 4 vectors: \textbf{\textit{$\Phi$}}$=\begin{bmatrix}\phi& \theta& \psi\end{bmatrix}^{T}$, \textbf{\textit{$\omega$}}$=\begin{bmatrix}\dot{\phi}& \dot{\theta}& \dot{\psi}\end{bmatrix}^{T}$, \textbf{\textit{p}}$=\begin{bmatrix}x& y& z\end{bmatrix}^{T}$ and \textbf{\textit{v}}$=\begin{bmatrix}\dot{x}& \dot{y}& \dot{z}\end{bmatrix}^{T}$. The state transition functions used for the prediction step of the EKF are defined in discrete time:
+\begin{equation}\label{eqn:OFS_EKFStateTrans}
+\begin{split}
+\textbf{\textit{p}}_{k+1}&=\textbf{\textit{p}}_{k}+\Delta t\textbf{\textit{v}}_{k} \\
+\textbf{\textit{v}}_{k+1}&=\textbf{\textit{v}}_{k}+\Delta t\left( C^{n}_{b}
+\begin{bmatrix}
+u_{1}\\
+u_{2}\\
+u_{3}
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+0\\
+g
+\end{bmatrix}
+\right)\\
+\textbf{\textit{$\Phi$}}_{k+1}&=\textbf{\textit{$\Phi$}}_{k}+\Delta t\textbf{\textit{$\omega$}}_{k}\\
+\textbf{\textit{$\omega$}}_{k+1}&=
+\begin{bmatrix}
+1& sin(\phi)tan(\theta)& cos(\phi)tan(\theta)\\
+0 &cos(\phi) &-sin(\phi)\\
+0 &sin(\phi)sec(\theta) &cos(\phi)sec(\theta)
+\end{bmatrix}
+\begin{bmatrix}
+u_{4}\\
+u_{5}\\
+u_{6}
+\end{bmatrix}
+\end{split}
+\end{equation}
+
+\subsection{Filter Algorithm}
+The algorithm used to fuse sensor data and estimate states is based upon an Extended Kalman Filter (EKF). The fundamentals of EKFs are discussed in Section \ref{section:EKFBackground}. There are two main steps to the EKF algorithm: predict and update.
+
+The predict step first uses the state transition functions given in Equation \ref{eqn:OFS_EKFStateTrans} ($\textbf{\textit{f}}(\textbf{\textit{x}}_{k},\textbf{\textit{u}}_{k})$) with the previous state estimate ($\hat{\textbf{\textit{x}}}_{k-1|k-1}$) and the current input (\textbf{\textit{u}}) values. Then the covariance matrix (\textbf{\textit{P}}) is predicted using the Jacobian of the state transition function ($F$).
+
+
+
+
+
+
+\section{Chapter Summary}
+This chapter developed two sensor fusion algorithms based on the Extended Kalman Filter. The first algorithm utilises GPS data to estimate position. The second estimator utilises an optical flow sensor and does not rely on GPS. This has the advantage of allowing UAV operation in areas which have limited GPS signal.
+
+\clearpage
+
+
