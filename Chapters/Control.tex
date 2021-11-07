@@ -182,7 +182,7 @@ The gains of each controller were tuned independently using the Simulink Design 
  &K\textsubscript{D,$z$} & 162.5 \\
  \hline
 \end{tabular}
-\caption{Model simulation parameters}
+\caption{PD controller gains}
 \end{center}
 \end{table}
 
@@ -395,12 +395,42 @@ x_{1d}=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[K_{10}z_{10}+\ddot{x}_{9d}+K_{9}\dot
  
 The z position control law in \eqref{eqn:ZPosContLaw} is developed following the same method, with $F_{T}$ as the control input.
 \begin{equation}\label{eqn:ZPosContLaw}
-F_{T}=\frac{m(\ddot{x}_{11d}+K_{11}\dot{z}_{11}+K_{12}z_{12})}{cos(x_{1})cos(x_{3})}
+F_{T}=\frac{m(\ddot{x}_{11d}+K_{11}\dot{z}_{11}+K_{12}z_{12}+g)}{cos(x_{1})cos(x_{3})}
 \end{equation}
 
 \subsection{Preliminary Results}
- Show what happens when parameters vary...
+ 
+The gains $K_{i}$ were tuned using the Simulink Design Optimization Package. This controller was able to stabilise the angles and positions from significant initial conditions. It was also able to travel between waypoints in 3D space. \figref{fig:Backstep_path} shows the hexacopter's path: taking off, travelling between waypoints and landing at a given location. However, this controller's response to large step inputs is unpredictable due to saturation effects. Also, note the slight steady state error in the z controller shown in \figref{fig:Backstep_posTrack}.
 
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=70mm]{/Backstepping_Results/AngleStabilise}
+	\includegraphics[width=70mm]{/Backstepping_Results/PositionStabilise}%
+	\end{center}
+	\caption{Backstepping system stabilisation from significant initial angles}%
+	\label{fig:Backstepping_Stabilise}%
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=70mm]{/Backstepping_Results/xTracking_Steps1.jpg}%
+	\includegraphics[width=70mm]{/Backstepping_Results/zTracking.jpg}%
+	\end{center}
+	\caption{Backstepping Position tracking}%
+	\label{fig:Backstep_posTrack}%
+\end{figure}
+
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=\columnwidth]{/Backstepping_Results/3D_Path_Waypoints2.jpg}%
+	\end{center}
+	\caption{Backstepping Position tracking}%
+	\label{fig:Backstep_path}%
+\end{figure}
+
+
+Show what happens when parameters vary...
+\FloatBarrier
 \section{Backstepping with Integral Action}\label{section:IntBack}
 As an extension, to reduce the effects of uncertainties in model parameters it is desirable to include integral action within the controller. An integral term may thus be added within the negative definite function which is chosen as the time derivative of the candidate Lyapunov function. This method has been shown to be effective at reducing the effects of uncertainties and increasing the robustness of the controller in both simulation\cite{Jasim2015} and hardware\cite{Bouabdallah2006} implementation.
 
@@ -447,7 +477,7 @@ Similarly to the previous section, virtual controls for the pitch and roll angle
 \begin{split}
 x_{3d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[C_{8}e_{8}+\beta_{8}\int^{t}_{0} e_{8}(\alpha) d\alpha + \ddot{x}_{7d}+C_{7}\dot{e}_{7}+\beta_{7}e_{7}]-sin(x_{1})sin(x_{5})}{cos(x_{1})cos(x_{5})}\right)\\
 x_{1d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[C_{10}e_{10}+\beta_{10}\int^{t}_{0} e_{10}(\alpha) d\alpha +\ddot{x}_{9d}+C_{9}\dot{e}_{9}+\beta_{9}e_{9}]+cos(x_{1})sin(x_{3})sin(x_{5})}{cos(x_{5})}\right)\\
-F_{T}&=\frac{m\left(\ddot{x}_{11d}+C_{11}\dot{e}_{11}+\beta_{11}e_{11}+C_{12}e_{12}+\beta_{12}\int^{t}_{0} e_{12}(\alpha) d\alpha \right)}{cos(x_{1})cos(x_{3})}
+F_{T}&=\frac{m\left(\ddot{x}_{11d}+C_{11}\dot{e}_{11}+\beta_{11}e_{11}+C_{12}e_{12}+\beta_{12}\int^{t}_{0} e_{12}(\alpha) d\alpha +g\right)}{cos(x_{1})cos(x_{3})}
 \end{split}
 \end{equation}
 
