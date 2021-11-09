@@ -416,7 +416,7 @@ The gains $K_{i}$ were tuned using the Simulink Design Optimization Package. Thi
 	\includegraphics[width=70mm]{/Backstepping_Results/xTracking_Steps1.jpg}%
 	\includegraphics[width=70mm]{/Backstepping_Results/zTracking.jpg}%
 	\end{center}
-	\caption{Backstepping Position tracking}%
+	\caption{Backstepping position tracking}%
 	\label{fig:Backstep_posTrack}%
 \end{figure}
 
@@ -424,7 +424,7 @@ The gains $K_{i}$ were tuned using the Simulink Design Optimization Package. Thi
 \begin{center}
 	\includegraphics[width=\columnwidth]{/Backstepping_Results/3D_Path_Waypoints2.jpg}%
 	\end{center}
-	\caption{Backstepping Position tracking}%
+	\caption{Backstepping 3D waypoint tracking}%
 	\label{fig:Backstep_path}%
 \end{figure}
 
@@ -432,62 +432,80 @@ The gains $K_{i}$ were tuned using the Simulink Design Optimization Package. Thi
 Show what happens when parameters vary...
 \FloatBarrier
 \section{Backstepping with Integral Action}\label{section:IntBack}
-As an extension, to reduce the effects of uncertainties in model parameters it is desirable to include integral action within the controller. An integral term may thus be added within the negative definite function which is chosen as the time derivative of the candidate Lyapunov function. This method has been shown to be effective at reducing the effects of uncertainties and increasing the robustness of the controller in both simulation\cite{Jasim2015} and hardware\cite{Bouabdallah2006} implementation.
+As an extension, to reduce the effects of uncertainties in model parameters it is desirable to include integral action within the controller. This method has been shown to be effective at reducing the effects of uncertainties and increasing the robustness of the controller in both simulation \cite{Jasim2015} and hardware \cite{Bouabdallah2006} implementation.
 
-Again, consider the roll angle tracking error as the first translated state:
-\[e_{1}=x_{1d}-x_{1}\]
-Choose a candidate Lyapunov function such that it is positive definite:
-\[V(e_{1})=\frac{1}{2}e_{1}^{2}\]
-Taking its derivative gives:
+This controller will use the angle controllers developed in the previous section, only the position controllers will be adjusted to include integral action. This controller will also be derived by considering the position vector rather than individual components.
+
+Consider the position and velocity error vectors: 
+\begin{equation*}
+\begin{split}
+e_{p}&=\begin{bmatrix}
+x_{d}-x & y_{d}-y& z_{d}-z
+\end{bmatrix}^{T}\\
+e_{v}&=\begin{bmatrix}
+v_{d,x}-\dot{x} & v_{d,y}-\dot{y}& v_{d,z}-\dot{z}
+\end{bmatrix}^{T}\\
+\end{split}
+\end{equation*}
+
+where $v_{d,x}$, $v_{d,x}$ and $v_{d,x}$ represent the desired translational velocities.
+
+Choose a candidate Lyapunov function including an integral term:
 \begin{equation}
-\begin{split}
-\dot{V}(e_{1})&=e_{1}\dot{e}_{1}\\
-\dot{V}(e_{1})&=e_{1}(\dot{x}_{1d}-x_{2})
-\end{split}
+V=\frac{1}{2}\left(e_{p}^{T}e_{p}+e_{v}^{T}e_{v}+\lambda\Gamma^{T}\Gamma\right)
 \end{equation}
-Now $\dot{V}(e_{1})$ is chosen equal to a negative definite function which includes an integral term.
+where $\Gamma=\int^{t}_{0} e_{1}(\gamma) d\gamma$ and $\lambda$ is a diagonal 3x3 matrix of non-negative constants.
+Taking the time derivative gives:
 \begin{equation}
-\begin{split}
-\dot{V}(e_{1})&=-C_{1}e_{1}^{2}-e_{1}\beta_{1}\int^{t}_{0} e_{1}(\alpha) d\alpha\\
-e_{1}(\dot{x}_{1d}-x_{2})&=-C_{1}e_{1}^{2}-e_{1}\beta_{1}\int^{t}_{0} e_{1}(\alpha) d\alpha\\
-\end{split}
-\end{equation}
-where $C_{1}$ and $\beta_{1}$ are non-negative constants.
-
-A virtual control for roll angle rate ($x_{2}$) is chosen to satisfy this relationship:
-\[x_{2d}=\dot{x}_{1d}+C_{1}e_{1}+\beta_{1}\int^{t}_{0} e_{1}(\alpha) d\alpha\]
-
-A control law which stabilises the tracking error $e_{2}=x_{2d}-x_{2}$ can now be derived in terms of the roll torque, using the same method as in the previous section:
-\begin{equation}
-\tau_{\phi}=\frac{1}{b_{1}} \left( \ddot{x}_{1d}+C_{1}\dot{e}_{1}+\beta_{1}e_{1}+\beta_{2}\int^{t}_{0} e_{2}(\alpha) d\alpha -a_{1}x_{4}x_{6}+C_{2}e_{2}\right)
+\dot{V}=e_{p}^{T}\dot{e}_{p}+e_{v}^{T}\dot{e}_{v}+\lambda\Gamma^{T}\dot{\Gamma}
 \end{equation}
 
-Following the same method, control laws for both yaw and pitch angles are given as:
-\begin{equation}\label{eqn:IntBackstepAngleLaws}
-\begin{split}
-\tau_{\theta}&=\frac{1}{b_{2}}\left(\ddot{x}_{3d}+C_{3}\dot{e}_{3}+\beta_{3}e_{3}+\beta_{4}\int^{t}_{0} e_{4}(\alpha) d\alpha -a_{2}x_{2}x_{6}+C_{4}e_{4}\right)\\
-\tau_{\psi}&=\frac{1}{b_{3}}\left(\ddot{x}_{5d}+C_{5}\dot{e}_{5}+\beta_{5}e_{5}+\beta_{6}\int^{t}_{0} e_{6}(\alpha) d\alpha -a_{3}x_{2}x_{4}+C_{6}e_{6}\right)
-\end{split}
-\end{equation}
-
-Similarly to the previous section, virtual controls for the pitch and roll angles can be chosen to stabilise horizontal position tracking errors. Also, a control law for the vertical position can be derived using the total thrust.
+Choose $v_{d}$ as a virtual control to ensure $\dot{V}<0$.
+\dot{e}_{p}=...
+\dot{e}_{v}=...
+\dot{\Gamma}=e_{p}
 
 
-\begin{equation}\label{eqn:IntBackPosContLaw}
-\begin{split}
-x_{3d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[C_{8}e_{8}+\beta_{8}\int^{t}_{0} e_{8}(\alpha) d\alpha + \ddot{x}_{7d}+C_{7}\dot{e}_{7}+\beta_{7}e_{7}]-sin(x_{1})sin(x_{5})}{cos(x_{1})cos(x_{5})}\right)\\
-x_{1d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[C_{10}e_{10}+\beta_{10}\int^{t}_{0} e_{10}(\alpha) d\alpha +\ddot{x}_{9d}+C_{9}\dot{e}_{9}+\beta_{9}e_{9}]+cos(x_{1})sin(x_{3})sin(x_{5})}{cos(x_{5})}\right)\\
-F_{T}&=\frac{m\left(\ddot{x}_{11d}+C_{11}\dot{e}_{11}+\beta_{11}e_{11}+C_{12}e_{12}+\beta_{12}\int^{t}_{0} e_{12}(\alpha) d\alpha +g\right)}{cos(x_{1})cos(x_{3})}
-\end{split}
-\end{equation}
 
 
+
+\FloatBarrier
 \subsection{Preliminary Results}
-Show effects of saturation...
+The position and altitude tracking results are shown in \figref{fig:IntBackPos}. The angle controllers are unchanged from the previous section, thus the angle stabilising result is omitted in this section.
 
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=70mm]{/Integral_Backstepping_Results/xTracking_Steps.jpg}%
+	\includegraphics[width=70mm]{/Integral_Backstepping_Results/zTracking_Steps.jpg}%
+	\end{center}
+	\caption{Integral Backstepping position tracking}%
+	\label{fig:IntBackPos}%
+\end{figure}
+
+A persisting limitation with this control method is its inability to stabilise when presented with a large step input. \figref{fig:IntBackSat} shows the system response to a ten metre step command in the x direction.
+
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=70mm]{/Integral_Backstepping_Results/x_Saturation.jpg}%
+	\end{center}
+	\caption{Backstepping response to a large step input}%
+	\label{fig:IntBackSat}%
+\end{figure}
+\FloatBarrier
 \section{Actuator Saturation}
 To prevent actuator saturation when large step commands are given, a sigmoidal function can be used to limit the effect of position error \cite{Cabecinhas2009}. For this purpose, the sigmoidal function is defined as:
 \[\sigma(x)=p_{max}\frac{x}{1+|x|}\]
+
+This sigmoidal function is used to limit the output of the x and y position controllers prior to the arcsine function. The parameter $p_{max}$ is chosen as 0.77 to limit the desired roll and pitch angles to $\pm50\deg$.
+This greatly improves the controllers response to large step inputs, as can be seen by comparing the ten metre step response in \figref{fig:SatStep} with \figref{fig:IntBackSat}.
+
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=\columnwidth]{/Saturation/xTracking_Step.jpg}%
+	\end{center}
+	\caption{Integral Backstepping position tracking with sigmoidal function}%
+	\label{fig:SatStep}%
+\end{figure}
 
 
 

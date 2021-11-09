@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.5.18)  7 NOV 2021 22:51
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.5.18)  10 NOV 2021 00:22
 entering extended mode
 **./HonoursThesis.tex
 (HonoursThesis.tex
@@ -1216,6 +1216,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [29 <./graphics///Backstepping_Results/3D_Path_Waypoints2.jpg>]
+<./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg, id=734, 2264.4
+6pt x 1313.90875pt>
+File: ./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg Graphic fi
+le (type jpg)
+<use ./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg>
+Package pdftex.def Info: ./graphics///Integral_Backstepping_Results/xTracking_S
+teps.jpg  used on input line 471.
+(pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
+<./graphics///Integral_Backstepping_Results/zTracking_Steps.jpg, id=735, 2264.4
+6pt x 1313.90875pt>
+File: ./graphics///Integral_Backstepping_Results/zTracking_Steps.jpg Graphic fi
+le (type jpg)
+<use ./graphics///Integral_Backstepping_Results/zTracking_Steps.jpg>
+Package pdftex.def Info: ./graphics///Integral_Backstepping_Results/zTracking_S
+teps.jpg  used on input line 472.
+(pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
+<./graphics///Integral_Backstepping_Results/x_Saturation.jpg, id=737, 2264.46pt
+ x 1313.90875pt>
+File: ./graphics///Integral_Backstepping_Results/x_Saturation.jpg Graphic file 
+(type jpg)
+<use ./graphics///Integral_Backstepping_Results/x_Saturation.jpg>
+Package pdftex.def Info: ./graphics///Integral_Backstepping_Results/x_Saturatio
+n.jpg  used on input line 482.
+(pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
+
 Underfull \hbox (badness 4686) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
  []
@@ -1228,7 +1253,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[30]
+[30 <./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg> <./graphic
+s///Integral_Backstepping_Results/zTracking_Steps.jpg> <./graphics///Integral_B
+ackstepping_Results/x_Saturation.jpg>]
+<./graphics///Saturation/xTracking_Step.jpg, id=749, 2264.46pt x 1313.90875pt>
+File: ./graphics///Saturation/xTracking_Step.jpg Graphic file (type jpg)
+<use ./graphics///Saturation/xTracking_Step.jpg>
+Package pdftex.def Info: ./graphics///Saturation/xTracking_Step.jpg  used on in
+put line 497.
+(pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
+
 Underfull \hbox (badness 4686) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
  []
@@ -1241,7 +1275,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[31]) (Chapters/Estimation.tex
+[31 <./graphics///Saturation/xTracking_Step.jpg>]) (Chapters/Estimation.tex
 Chapter 5.
 [32
 
@@ -1297,7 +1331,7 @@ Chapter 6.
 
 ]) (Chapters/Implementation.tex
 Chapter 7.
-<./graphics//Hexacopter_Hardware.jpg, id=787, 963.6pt x 722.7pt>
+<./graphics//Hexacopter_Hardware.jpg, id=795, 963.6pt x 722.7pt>
 File: ./graphics//Hexacopter_Hardware.jpg Graphic file (type jpg)
 <use ./graphics//Hexacopter_Hardware.jpg>
 Package pdftex.def Info: ./graphics//Hexacopter_Hardware.jpg  used on input lin
@@ -1379,7 +1413,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 15--16
  []
 
 
-Underfull \hbox (badness 10000) in paragraph at lines 16--18
+Underfull \hbox (badness 10000) in paragraph at lines 16--17
 
  []
 
@@ -1451,10 +1485,10 @@ Package rerunfilecheck Info: File `HonoursThesis.out' has not changed.
 (rerunfilecheck)             Checksum: 58FF90F989BEBFB6359073887E351E14;11763.
  ) 
 Here is how much of TeX's memory you used:
- 11719 strings out of 479334
- 174821 string characters out of 2857084
- 498166 words of memory out of 3000000
- 28626 multiletter control sequences out of 15000+200000
+ 11746 strings out of 479334
+ 176143 string characters out of 2857084
+ 498265 words of memory out of 3000000
+ 28647 multiletter control sequences out of 15000+200000
  500530 words of font info for 147 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,22n,74p,1855b,502s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1471,9 +1505,9 @@ ams/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Lachl/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Lachl/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Lachl/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on HonoursThesis.pdf (55 pages, 1772589 bytes).
+Output written on HonoursThesis.pdf (55 pages, 2178909 bytes).
 PDF statistics:
- 951 PDF objects out of 1000 (max. 8388607)
+ 962 PDF objects out of 1000 (max. 8388607)
  215 named destinations out of 1000 (max. 500000)
- 707 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 727 words of extra memory for PDF output out of 10000 (max. 10000000)
 

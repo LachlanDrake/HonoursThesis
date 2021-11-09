@@ -35,8 +35,8 @@ Class=LaTeXView
 Document=Chapters\Control.tex
 
 [Frame1_View0,0]
-TopLine=480
-Cursor=20904
+TopLine=536
+Cursor=23018
 
 [Frame2]
 Flags=0
@@ -54,7 +54,7 @@ Document=Chapters\Conclusion.tex
 
 [Frame2_View0,0]
 TopLine=0
-Cursor=612
+Cursor=685
 
 [SessionInfo]
 FrameCount=3
