@@ -44,37 +44,38 @@
 \contentsline {subsection}{\numberline {4.3.3}Position Control}{27}{subsection.4.3.3}%
 \contentsline {subsection}{\numberline {4.3.4}Preliminary Results}{28}{subsection.4.3.4}%
 \contentsline {section}{\numberline {4.4}Backstepping with Integral Action}{29}{section.4.4}%
-\contentsline {subsection}{\numberline {4.4.1}Preliminary Results}{30}{subsection.4.4.1}%
-\contentsline {section}{\numberline {4.5}Actuator Saturation}{30}{section.4.5}%
-\contentsline {section}{\numberline {4.6}Chapter Summary}{31}{section.4.6}%
-\contentsline {chapter}{\numberline {5}State Estimation and Sensor Fusion}{32}{chapter.5}%
-\contentsline {section}{\numberline {5.1}State Estimation with GPS}{32}{section.5.1}%
-\contentsline {subsection}{\numberline {5.1.1}Sensor Models}{32}{subsection.5.1.1}%
-\contentsline {subsection}{\numberline {5.1.2}State Transition Functions}{33}{subsection.5.1.2}%
-\contentsline {subsection}{\numberline {5.1.3}Filter Algorithm}{34}{subsection.5.1.3}%
-\contentsline {section}{\numberline {5.2}State Estimation without GPS}{34}{section.5.2}%
-\contentsline {subsection}{\numberline {5.2.1}Sensor Models}{34}{subsection.5.2.1}%
-\contentsline {subsection}{\numberline {5.2.2}State Transition Function}{34}{subsection.5.2.2}%
-\contentsline {subsection}{\numberline {5.2.3}Filter Algorithm}{35}{subsection.5.2.3}%
-\contentsline {section}{\numberline {5.3}Chapter Summary}{35}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Path-Following}{36}{chapter.6}%
-\contentsline {section}{\numberline {6.1}}{36}{section.6.1}%
-\contentsline {section}{\numberline {6.2}Chapter Summary}{36}{section.6.2}%
-\contentsline {chapter}{\numberline {7}Implementation and Results}{37}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Simulation}{37}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Hardware}{37}{section.7.2}%
-\contentsline {subsection}{\numberline {7.2.1}The Cube Autopilot}{37}{subsection.7.2.1}%
-\contentsline {subsection}{\numberline {7.2.2}ArduPilot Software}{37}{subsection.7.2.2}%
-\contentsline {subsection}{\numberline {7.2.3}Companion Computer}{38}{subsection.7.2.3}%
-\contentsline {subsection}{\numberline {7.2.4}Flight Testing}{38}{subsection.7.2.4}%
-\contentsline {section}{\numberline {7.3}Chapter Summary}{39}{section.7.3}%
-\contentsline {chapter}{\numberline {8}Conclusion and Extensions}{40}{chapter.8}%
-\contentsline {section}{\numberline {8.1}Conclusion}{40}{section.8.1}%
-\contentsline {section}{\numberline {8.2}Future Extensions}{40}{section.8.2}%
+\contentsline {subsection}{\numberline {4.4.1}Position Control}{29}{subsection.4.4.1}%
+\contentsline {subsection}{\numberline {4.4.2}Preliminary Results}{31}{subsection.4.4.2}%
+\contentsline {section}{\numberline {4.5}Actuator Saturation}{32}{section.4.5}%
+\contentsline {section}{\numberline {4.6}Chapter Summary}{33}{section.4.6}%
+\contentsline {chapter}{\numberline {5}State Estimation and Sensor Fusion}{34}{chapter.5}%
+\contentsline {section}{\numberline {5.1}State Estimation with GPS}{34}{section.5.1}%
+\contentsline {subsection}{\numberline {5.1.1}Sensor Models}{34}{subsection.5.1.1}%
+\contentsline {subsection}{\numberline {5.1.2}State Transition Functions}{35}{subsection.5.1.2}%
+\contentsline {subsection}{\numberline {5.1.3}Filter Algorithm}{36}{subsection.5.1.3}%
+\contentsline {section}{\numberline {5.2}State Estimation without GPS}{36}{section.5.2}%
+\contentsline {subsection}{\numberline {5.2.1}Sensor Models}{36}{subsection.5.2.1}%
+\contentsline {subsection}{\numberline {5.2.2}State Transition Function}{36}{subsection.5.2.2}%
+\contentsline {subsection}{\numberline {5.2.3}Filter Algorithm}{37}{subsection.5.2.3}%
+\contentsline {section}{\numberline {5.3}Chapter Summary}{37}{section.5.3}%
+\contentsline {chapter}{\numberline {6}Path-Following}{38}{chapter.6}%
+\contentsline {section}{\numberline {6.1}}{38}{section.6.1}%
+\contentsline {section}{\numberline {6.2}Chapter Summary}{38}{section.6.2}%
+\contentsline {chapter}{\numberline {7}Implementation and Results}{39}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Simulation}{39}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Hardware}{39}{section.7.2}%
+\contentsline {subsection}{\numberline {7.2.1}The Cube Autopilot}{39}{subsection.7.2.1}%
+\contentsline {subsection}{\numberline {7.2.2}ArduPilot Software}{39}{subsection.7.2.2}%
+\contentsline {subsection}{\numberline {7.2.3}Companion Computer}{40}{subsection.7.2.3}%
+\contentsline {subsection}{\numberline {7.2.4}Flight Testing}{40}{subsection.7.2.4}%
+\contentsline {section}{\numberline {7.3}Chapter Summary}{41}{section.7.3}%
+\contentsline {chapter}{\numberline {8}Conclusion and Extensions}{42}{chapter.8}%
+\contentsline {section}{\numberline {8.1}Conclusion}{42}{section.8.1}%
+\contentsline {section}{\numberline {8.2}Future Extensions}{42}{section.8.2}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{Bibliography}{41}{section.8.2}%
-\contentsline {chapter}{List of Figures}{44}{chapter*.7}%
-\contentsline {chapter}{List of Tables}{45}{chapter*.8}%
+\contentsline {chapter}{Bibliography}{44}{section.8.2}%
+\contentsline {chapter}{List of Figures}{47}{chapter*.7}%
+\contentsline {chapter}{List of Tables}{48}{chapter*.8}%
 \contentsline {chapter}{Appendices}{A-1}{section*.10}%
 \contentsline {chapter}{\numberline {A}Simulink Models}{A-1}{appendix.1.A}%
 \contentsline {chapter}{\numberline {B}Software Algorithms}{B-1}{appendix.1.B}%

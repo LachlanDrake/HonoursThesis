@@ -254,7 +254,7 @@ u\\v\\w
 It is important to note that although this model does not make any approximations, it does not necessarily consider every force the vehicle may be subject to. For example, the effects of wind, air friction and gyroscopic effects have not been considered in this model for simplicity. Also the dynamics of the motors and propellers have not yet been considered, only the torques and total force produced have been chosen as inputs.
 
 \FloatBarrier
-\subsection{Additional Translational Motion Equations}
+\subsection{Additional Translational Motion Equations}\label{section:AddTransMotion}
 Although the model defined in Section \ref{section:ModelDynamics} is a complete state space model for the system, the translational motion is able to be represented in another form which will be useful for controllers defined in the following chapter. 
 The only forces acting on the vehicle in the Earth frame are gravity in the negative z direction and the total thrust in the direction of the body frame z axis. This is expressed in \eqref{eqn:additionalState1}
 \begin{equation}\label{eqn:additionalState1}

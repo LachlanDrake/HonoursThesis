@@ -434,21 +434,24 @@ Show what happens when parameters vary...
 \section{Backstepping with Integral Action}\label{section:IntBack}
 As an extension, to reduce the effects of uncertainties in model parameters it is desirable to include integral action within the controller. This method has been shown to be effective at reducing the effects of uncertainties and increasing the robustness of the controller in both simulation \cite{Jasim2015} and hardware \cite{Bouabdallah2006} implementation.
 
+\subsection{Position Control}
+
+%% NEED TO MAKE MOST OF THESE SYMBOLS BOLD TO REPRESENT VECTORS/MATRICES
 This controller will use the angle controllers developed in the previous section, only the position controllers will be adjusted to include integral action. This controller will also be derived by considering the position vector rather than individual components.
 
 Consider the position and velocity error vectors: 
-\begin{equation*}
+\begin{equation}\label{eqn:ErrorVectors}
 \begin{split}
-e_{p}&=\begin{bmatrix}
-x_{d}-x & y_{d}-y& z_{d}-z
-\end{bmatrix}^{T}\\
-e_{v}&=\begin{bmatrix}
-v_{d,x}-\dot{x} & v_{d,y}-\dot{y}& v_{d,z}-\dot{z}
-\end{bmatrix}^{T}\\
+\mathbf{e}_{p}&=\mathbf{p}_{d}-\mathbf{p}=\begin{bmatrix}
+x_{d}-x \\ y_{d}-y\\ z_{d}-z
+\end{bmatrix}\\
+\mathbf{e}_{v}&=\mathbf{v}_d-\mathbf{\dot{p}}=\begin{bmatrix}
+v_{d,x}-\dot{x} \\ v_{d,y}-\dot{y} \\ v_{d,z}-\dot{z}
+\end{bmatrix}\\
 \end{split}
-\end{equation*}
+\end{equation}
 
-where $v_{d,x}$, $v_{d,x}$ and $v_{d,x}$ represent the desired translational velocities.
+where $v_{d,x}$, $v_{d,x}$ and $v_{d,x}$ are virtual controls representing the desired translational velocities.
 
 Choose a candidate Lyapunov function including an integral term:
 \begin{equation}
@@ -456,15 +459,72 @@ V=\frac{1}{2}\left(e_{p}^{T}e_{p}+e_{v}^{T}e_{v}+\lambda\Gamma^{T}\Gamma\right)
 \end{equation}
 where $\Gamma=\int^{t}_{0} e_{1}(\gamma) d\gamma$ and $\lambda$ is a diagonal 3x3 matrix of non-negative constants.
 Taking the time derivative gives:
-\begin{equation}
+\begin{equation}\label{eqn:IntBackCLFder1}
 \dot{V}=e_{p}^{T}\dot{e}_{p}+e_{v}^{T}\dot{e}_{v}+\lambda\Gamma^{T}\dot{\Gamma}
 \end{equation}
+Now choose $\dot{V}$ such that it is negative definite:
+\begin{equation}\label{eqn:IntBackCLFder2}
+\dot{V}=-ce_{p}^{T}e_{p}-\kappa e_{v}^{T}e_{v}
+\end{equation}
+where c and $\kappa$ represent diagonal 3x3 matrices of non-negative constants.
 
-Choose $v_{d}$ as a virtual control to ensure $\dot{V}<0$.
-\dot{e}_{p}=...
-\dot{e}_{v}=...
-\dot{\Gamma}=e_{p}
+Now consider the derivative terms:
+\begin{equation}\label{eqn:IntBackErrDer}
+\begin{split}
+\dot{e}_{p}&=\dot{p}_{d}-\dot{p}\\
+&=\dot{p}_{d}-v_{d}\\\\
+\dot{e}_{v}&=\dot{v}_{d}-\ddot{p}\\\\
+\dot{\Gamma}&=e_{p}
+\end{split}
+\end{equation}
 
+The virtual control $v_{d}$ is then chosen such that \eqref{eqn:IntBackCLFder1} satisfies \eqref{eqn:IntBackCLFder2}:
+
+\begin{equation*}
+v_{d}= \dot{p}_{d}+ce_{p}+\lambda\Gamma
+\end{equation*}
+Substituting into the expression for $e_{v}$ in \eqref{eqn:ErrorVectors} gives:
+
+\begin{equation}\label{eqn:e_p1}
+\begin{split}
+e_{v}&=\mathbf{\dot{p}}_{d}+ce_{p}+\lambda\Gamma - \mathbf{\dot{p}}\\
+e_{v}-ce_{p}-\lambda\Gamma&=\mathbf{\dot{p}}_{d}- \mathbf{\dot{p}}\\
+\dot{e_{p}}&=e_{v}-ce_{p}-\lambda\Gamma
+\end{split}
+\end{equation}
+ 
+
+Taking the time derivative of $e_{v}$ gives:
+\begin{equation}\label{eqn:dot_e_v1}
+\begin{split}
+\dot{e}_{v}&=\ddot{p}_{d}+c\dot{e}_{p}+\lambda e_{p} - \mathbf{\ddot{p}}\\
+\dot{e}_{v}&=\ddot{p}_{d}+c(e_{v}-ce_{p}-\lambda\Gamma)+\lambda e_{p} - \mathbf{\ddot{p}}\\
+\dot{e}_{v}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-c\lambda\Gamma+\lambda e_{p} - \mathbf{\ddot{p}}\\
+\end{split}
+\end{equation} 
+
+Note that an expression for the second derivative of translational position ($\mathbf{\ddot{p}}$) is given in Section \ref{section:AddTransMotion}, \eqref{eqn:additionalState2}. Also note that in order to satisfy \eqref{eqn:IntBackCLFder2}, $\dot{e}_{v}$ is chosen as:
+\begin{equation}\label{eqn:dot_e_v2}
+\dot{e}_{v}=-\kappa e_{v} - e_{p}
+\end{equation}
+Finally, equating \eqref{eqn:dot_e_v1} with \eqref{eqn:dot_e_v2} allows the control laws to be derived:
+\begin{equation}\label{eqn:dot_e_v3}
+\begin{split}
+-\kappa e_{v} - e_{p}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-c\lambda\Gamma+\lambda e_{p} - \mathbf{\ddot{p}}\\
+\mathbf{\ddot{p}}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-c\lambda\Gamma+\lambda e_{p} +\kappa e_{v} + e_{p}\\
+\mathbf{\ddot{p}}&=\ddot{p}_{d}+(1+\lambda-c^{2})e_{p}+(c+\kappa)e_{v}-c\lambda\Gamma
+\end{split}
+\end{equation}
+
+The control laws are then derived using $\theta_{d}$, $\phi_{d}$ and $F_{T}$ as the control inputs.
+
+ \begin{equation}\label{eqn:IntBackContLaws}
+\begin{split}
+\theta_{d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[\ddot{x}_{d}+(1+\lambda_{1}-c_{1}^{2})e_{x}+(c_{1}+\kappa_{1})e_{v,x}-c_{1}\lambda_{1}\Gamma_{1}]-sin(\phi)sin(\psi)}{cos(\phi)cos(\psi)}\right)\\
+\phi_{d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[\ddot{y}_{d}+(1+\lambda_{2}-c_{2}^{2})e_{y}+(c_{2}+\kappa_{2})e_{v,y}-c_{2}\lambda_{2}\Gamma_{2}]+cos(\phi)sin(\theta)sin(\psi)}{cos(\psi)}\right)\\
+F_{T}&=\frac{m(\ddot{z}_{d}(1+\lambda_{3}-c_{3}^{2})e_{z}+(c+\kappa_{3})e_{v,z}-c_{3}\lambda_{3}\Gamma_{3}+g)}{cos(\phi)cos(\theta)}
+\end{split}
+\end{equation}
 
 
 
@@ -508,9 +568,9 @@ This greatly improves the controllers response to large step inputs, as can be s
 \end{figure}
 
 
-
+\FloatBarrier
 \section{Chapter Summary}
-In this chapter, three control systems were developed and tested in simulation. The PID control system was effective at stabilising the aircraft around a hovering point, but had limitations due to not considering the nonlinearities of the system. The backstepping control system improved upon this by accounting for the nonlinearities, however this controller still depended on accurate values of the model parameters. The final controller implemented backstepping control with integral action and was effective in adjusting to errors in the given model parameters, however it was prone to actuator saturation with large step commands. The final addition to the control system implemented a sigmoidal function in the position control laws to mitigate the effects of actuator saturation.
+In this chapter, three control systems were developed and tested in simulation. The PID control system was effective at stabilising the aircraft around a hovering point, but had limitations due to not considering the nonlinearities of the system. The backstepping control system improved upon this by accounting for the nonlinearities, however this controller still depended on accurate values of the model parameters. The final controller implemented backstepping control with integral action and was effective in adjusting to errors in the given model parameters, however it was prone to actuator saturation with large step commands. The final addition to the control system implemented a sigmoidal function in the position control laws to mitigate the effects of actuator saturation. These control systems were all developed with the assumption that all of the  system states are available. The next section will address how the states are estimated using sensor data.
 
 
 
