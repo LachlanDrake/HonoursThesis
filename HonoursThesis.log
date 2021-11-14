@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.5.18)  14 NOV 2021 13:22
+This is pdfTeX, Version 3.141592653-2.6-1.40.22 (MiKTeX 21.2) (preloaded format=pdflatex 2021.5.18)  15 NOV 2021 00:46
 entering extended mode
 **./HonoursThesis.tex
 (HonoursThesis.tex
@@ -431,11 +431,7 @@ tex.def
 File: l3backend-pdftex.def 2021-02-18 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count285
 \l__pdf_internal_box=\box49
-) (HonoursThesis.aux
-
-LaTeX Warning: Label `fig:EKF_OFS_Results' multiply defined.
-
-)
+) (HonoursThesis.aux)
 \openout1 = `HonoursThesis.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 80.
@@ -544,7 +540,7 @@ LaTeX Info: Redefining \nameref on input line 80.
 ABD: EverySelectfont initializing macros
 LaTeX Info: Redefining \selectfont on input line 80.
  (TitlePage.tex
-<./graphics//UoN.png, id=314, 1174.3875pt x 881.2925pt>
+<./graphics//UoN.png, id=290, 1174.3875pt x 881.2925pt>
 File: ./graphics//UoN.png Graphic file (type png)
 <use ./graphics//UoN.png>
 Package pdftex.def Info: ./graphics//UoN.png  used on input line 26.
@@ -619,7 +615,7 @@ Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
 
 
 ]) (FrontMatter/COVIDStatement.tex
-LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 7
+LaTeX Font Info:    Trying to load font information for TS1+ptm on input line 8
 .
 
 (C:\Users\Lachl\AppData\Local\Programs\MiKTeX\tex/latex/psnfss\ts1ptm.fd
@@ -719,7 +715,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[2]) (Chapters/Background.tex
+[2]
+Underfull \hbox (badness 10000) has occurred while \output is active
+ []\T1/ptm/m/n/9 CHAPTER 1.  INTRODUCTION|
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[3]) (Chapters/Background.tex
 Chapter 2.
 
 Underfull \hbox (badness 10000) in paragraph at lines 7--8
@@ -731,7 +740,7 @@ Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-[3
+[4
 
 
 ]
@@ -752,27 +761,14 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[4]
-Underfull \hbox (badness 10000) has occurred while \output is active
- []\T1/ptm/m/n/9 CHAPTER 2.  BACKGROUND|
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
 [5]
-<./graphics//PIDControl.png, id=485, 694.595pt x 338.26375pt>
+<./graphics//PIDControl.png, id=451, 694.595pt x 338.26375pt>
 File: ./graphics//PIDControl.png Graphic file (type png)
 <use ./graphics//PIDControl.png>
-Package pdftex.def Info: ./graphics//PIDControl.png  used on input line 66.
+Package pdftex.def Info: ./graphics//PIDControl.png  used on input line 67.
 (pdftex.def)             Requested size: 426.79135pt x 207.85289pt.
 
-Underfull \hbox (badness 10000) in paragraph at lines 71--72
+Underfull \hbox (badness 10000) in paragraph at lines 72--73
 
  []
 
@@ -789,7 +785,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[6 <./graphics//PIDControl.png>]
+[6]
 Underfull \hbox (badness 10000) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 2.  BACKGROUND|
  []
@@ -802,7 +798,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[7]
+[7 <./graphics//PIDControl.png>]
 Underfull \hbox (badness 10000) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 2.  BACKGROUND|
  []
@@ -815,18 +811,31 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[8]) (Chapters/Modelling.tex
+[8]
+Underfull \hbox (badness 10000) has occurred while \output is active
+ []\T1/ptm/m/n/9 CHAPTER 2.  BACKGROUND|
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[9]) (Chapters/Modelling.tex
 Chapter 3.
 
 Underfull \hbox (badness 10000) in paragraph at lines 9--10
 
  []
 
-[9
+[10
 
 
 ]
-<./graphics//RefFrames.jpg, id=529, 764.8575pt x 331.2375pt>
+<./graphics//RefFrames.jpg, id=505, 764.8575pt x 331.2375pt>
 File: ./graphics//RefFrames.jpg Graphic file (type jpg)
 <use ./graphics//RefFrames.jpg>
 Package pdftex.def Info: ./graphics//RefFrames.jpg  used on input line 13.
@@ -844,7 +853,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[10 <./graphics//RefFrames.jpg>]
+[11 <./graphics//RefFrames.jpg>]
 Overfull \hbox (11.20537pt too wide) detected at line 83
 []
  []
@@ -867,7 +876,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[11]
+[12]
 Underfull \hbox (badness 2932) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 3.  MOD-ELLING OF MULTI-ROTOR AIRCRAFT|
  []
@@ -880,7 +889,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[12]
+[13]
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <10> not available
 (Font)              Font shape `OT1/ptm/b/n' tried instead on input line 232.
 LaTeX Font Info:    Font shape `OT1/ptm/bx/n' in size <7.4> not available
@@ -898,8 +907,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[13]
-<./graphics//HexacopterConfig.jpg, id=570, 489.83pt x 442.65375pt>
+[14]
+<./graphics//HexacopterConfig.jpg, id=546, 489.83pt x 442.65375pt>
 File: ./graphics//HexacopterConfig.jpg Graphic file (type jpg)
 <use ./graphics//HexacopterConfig.jpg>
 Package pdftex.def Info: ./graphics//HexacopterConfig.jpg  used on input line 3
@@ -923,7 +932,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[14]
+[15]
 Underfull \hbox (badness 2932) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 3.  MOD-ELLING OF MULTI-ROTOR AIRCRAFT|
  []
@@ -936,13 +945,13 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[15 <./graphics//HexacopterConfig.jpg>]
-<./graphics//ModelBlockDiagram.jpg, id=592, 1263.72125pt x 411.5375pt>
+[16 <./graphics//HexacopterConfig.jpg>]
+<./graphics//ModelBlockDiagram.jpg, id=568, 1263.72125pt x 411.5375pt>
 File: ./graphics//ModelBlockDiagram.jpg Graphic file (type jpg)
 <use ./graphics//ModelBlockDiagram.jpg>
 Package pdftex.def Info: ./graphics//ModelBlockDiagram.jpg  used on input line 
 354.
-(pdftex.def)             Requested size: 227.62204pt x 74.12378pt.
+(pdftex.def)             Requested size: 426.79135pt x 138.98524pt.
 
 Underfull \hbox (badness 2932) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 3.  MOD-ELLING OF MULTI-ROTOR AIRCRAFT|
@@ -956,7 +965,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[16 <./graphics//ModelBlockDiagram.jpg>]
+[17 <./graphics//ModelBlockDiagram.jpg>]
 Underfull \hbox (badness 2932) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 3.  MOD-ELLING OF MULTI-ROTOR AIRCRAFT|
  []
@@ -969,9 +978,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[17]) (Chapters/Control.tex
+[18]) (Chapters/Control.tex
 Chapter 4.
-[18
+[19
 
 
 ]
@@ -987,7 +996,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[19]
+[20]
 Underfull \hbox (badness 4686) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
  []
@@ -1000,8 +1009,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[20]
-<./graphics//PID_Hexacopter.PNG, id=653, 1118.1775pt x 395.4775pt>
+[21]
+<./graphics//PID_Hexacopter.PNG, id=629, 1118.1775pt x 395.4775pt>
 File: ./graphics//PID_Hexacopter.PNG Graphic file (type png)
 <use ./graphics//PID_Hexacopter.PNG>
 Package pdftex.def Info: ./graphics//PID_Hexacopter.PNG  used on input line 148
@@ -1022,43 +1031,43 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[21]
-<./graphics///PID_Results/Stabilise_Angles.jpg, id=662, 2264.46pt x 1313.90875p
+[22]
+<./graphics///PID_Results/Stabilise_Angles.jpg, id=638, 2264.46pt x 1313.90875p
 t>
 File: ./graphics///PID_Results/Stabilise_Angles.jpg Graphic file (type jpg)
 <use ./graphics///PID_Results/Stabilise_Angles.jpg>
 Package pdftex.def Info: ./graphics///PID_Results/Stabilise_Angles.jpg  used on
  input line 195.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///PID_Results/Stabilise_Position.jpg, id=663, 2264.46pt x 1313.9087
+<./graphics///PID_Results/Stabilise_Position.jpg, id=639, 2264.46pt x 1313.9087
 5pt>
 File: ./graphics///PID_Results/Stabilise_Position.jpg Graphic file (type jpg)
 <use ./graphics///PID_Results/Stabilise_Position.jpg>
 Package pdftex.def Info: ./graphics///PID_Results/Stabilise_Position.jpg  used 
 on input line 196.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///PID_Results/PhiTracking_Steps2.jpg, id=665, 2264.46pt x 1313.9087
+<./graphics///PID_Results/PhiTracking_Steps2.jpg, id=641, 2264.46pt x 1313.9087
 5pt>
 File: ./graphics///PID_Results/PhiTracking_Steps2.jpg Graphic file (type jpg)
 <use ./graphics///PID_Results/PhiTracking_Steps2.jpg>
 Package pdftex.def Info: ./graphics///PID_Results/PhiTracking_Steps2.jpg  used 
 on input line 205.
 (pdftex.def)             Requested size: 213.39566pt x 123.80014pt.
-<./graphics///PID_Results/xTracking_Steps2.jpg, id=666, 2264.46pt x 1313.90875p
+<./graphics///PID_Results/xTracking_Steps2.jpg, id=642, 2264.46pt x 1313.90875p
 t>
 File: ./graphics///PID_Results/xTracking_Steps2.jpg Graphic file (type jpg)
 <use ./graphics///PID_Results/xTracking_Steps2.jpg>
 Package pdftex.def Info: ./graphics///PID_Results/xTracking_Steps2.jpg  used on
  input line 206.
 (pdftex.def)             Requested size: 213.39566pt x 123.80014pt.
-<./graphics///PID_Results/zTracking_Steps2.jpg, id=667, 2264.46pt x 1313.90875p
+<./graphics///PID_Results/zTracking_Steps2.jpg, id=643, 2264.46pt x 1313.90875p
 t>
 File: ./graphics///PID_Results/zTracking_Steps2.jpg Graphic file (type jpg)
 <use ./graphics///PID_Results/zTracking_Steps2.jpg>
 Package pdftex.def Info: ./graphics///PID_Results/zTracking_Steps2.jpg  used on
  input line 207.
 (pdftex.def)             Requested size: 213.39566pt x 123.80014pt.
-<./graphics///PID_Results/xTracking_Sine2.jpg, id=669, 2264.46pt x 1313.90875pt
+<./graphics///PID_Results/xTracking_Sine2.jpg, id=645, 2264.46pt x 1313.90875pt
 >
 File: ./graphics///PID_Results/xTracking_Sine2.jpg Graphic file (type jpg)
 <use ./graphics///PID_Results/xTracking_Sine2.jpg>
@@ -1078,7 +1087,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[22 <./graphics//PID_Hexacopter.PNG>]
+[23 <./graphics//PID_Hexacopter.PNG>]
 Underfull \hbox (badness 4686) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
  []
@@ -1091,7 +1100,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[23 <./graphics///PID_Results/Stabilise_Angles.jpg> <./graphics///PID_Results/S
+[24 <./graphics///PID_Results/Stabilise_Angles.jpg> <./graphics///PID_Results/S
 tabilise_Position.jpg> <./graphics///PID_Results/PhiTracking_Steps2.jpg> <./gra
 phics///PID_Results/xTracking_Steps2.jpg> <./graphics///PID_Results/zTracking_S
 teps2.jpg>]
@@ -1107,20 +1116,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[24 <./graphics///PID_Results/xTracking_Sine2.jpg>]
-Underfull \hbox (badness 4686) has occurred while \output is active
- []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[25]
+[25 <./graphics///PID_Results/xTracking_Sine2.jpg>]
 Underfull \hbox (badness 4686) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
  []
@@ -1147,7 +1143,20 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [27]
-<./graphics///Backstepping_Results/AngleStabilise.jpg, id=718, 2264.46pt x 1313
+Underfull \hbox (badness 4686) has occurred while \output is active
+ []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[28]
+<./graphics///Backstepping_Results/AngleStabilise.jpg, id=694, 2264.46pt x 1313
 .90875pt>
 File: ./graphics///Backstepping_Results/AngleStabilise.jpg Graphic file (type j
 pg)
@@ -1155,7 +1164,7 @@ pg)
 Package pdftex.def Info: ./graphics///Backstepping_Results/AngleStabilise.jpg  
 used on input line 407.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///Backstepping_Results/PositionStabilise.jpg, id=719, 2264.46pt x 1
+<./graphics///Backstepping_Results/PositionStabilise.jpg, id=695, 2264.46pt x 1
 313.90875pt>
 File: ./graphics///Backstepping_Results/PositionStabilise.jpg Graphic file (typ
 e jpg)
@@ -1163,7 +1172,7 @@ e jpg)
 Package pdftex.def Info: ./graphics///Backstepping_Results/PositionStabilise.jp
 g  used on input line 408.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///Backstepping_Results/xTracking_Steps1.jpg, id=720, 2264.46pt x 13
+<./graphics///Backstepping_Results/xTracking_Steps1.jpg, id=696, 2264.46pt x 13
 13.90875pt>
 File: ./graphics///Backstepping_Results/xTracking_Steps1.jpg Graphic file (type
  jpg)
@@ -1171,14 +1180,14 @@ File: ./graphics///Backstepping_Results/xTracking_Steps1.jpg Graphic file (type
 Package pdftex.def Info: ./graphics///Backstepping_Results/xTracking_Steps1.jpg
   used on input line 416.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///Backstepping_Results/zTracking.jpg, id=721, 2264.46pt x 1313.9087
+<./graphics///Backstepping_Results/zTracking.jpg, id=697, 2264.46pt x 1313.9087
 5pt>
 File: ./graphics///Backstepping_Results/zTracking.jpg Graphic file (type jpg)
 <use ./graphics///Backstepping_Results/zTracking.jpg>
 Package pdftex.def Info: ./graphics///Backstepping_Results/zTracking.jpg  used 
 on input line 417.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///Backstepping_Results/3D_Path_Waypoints2.jpg, id=722, 2264.46pt x 
+<./graphics///Backstepping_Results/3D_Path_Waypoints2.jpg, id=698, 2264.46pt x 
 1313.90875pt>
 File: ./graphics///Backstepping_Results/3D_Path_Waypoints2.jpg Graphic file (ty
 pe jpg)
@@ -1199,7 +1208,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[28 <./graphics///Backstepping_Results/AngleStabilise.jpg> <./graphics///Backst
+[29 <./graphics///Backstepping_Results/AngleStabilise.jpg> <./graphics///Backst
 epping_Results/PositionStabilise.jpg> <./graphics///Backstepping_Results/xTrack
 ing_Steps1.jpg> <./graphics///Backstepping_Results/zTracking.jpg>]
 Underfull \hbox (badness 4686) has occurred while \output is active
@@ -1214,7 +1223,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[29 <./graphics///Backstepping_Results/3D_Path_Waypoints2.jpg>]
+[30 <./graphics///Backstepping_Results/3D_Path_Waypoints2.jpg>]
 Underfull \hbox (badness 4686) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
  []
@@ -1227,8 +1236,8 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[30]
-<./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg, id=758, 2264.4
+[31]
+<./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg, id=734, 2264.4
 6pt x 1313.90875pt>
 File: ./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg Graphic fi
 le (type jpg)
@@ -1236,7 +1245,7 @@ le (type jpg)
 Package pdftex.def Info: ./graphics///Integral_Backstepping_Results/xTracking_S
 teps.jpg  used on input line 538.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///Integral_Backstepping_Results/zTracking_Steps.jpg, id=759, 2264.4
+<./graphics///Integral_Backstepping_Results/zTracking_Steps.jpg, id=735, 2264.4
 6pt x 1313.90875pt>
 File: ./graphics///Integral_Backstepping_Results/zTracking_Steps.jpg Graphic fi
 le (type jpg)
@@ -1244,7 +1253,7 @@ le (type jpg)
 Package pdftex.def Info: ./graphics///Integral_Backstepping_Results/zTracking_S
 teps.jpg  used on input line 539.
 (pdftex.def)             Requested size: 199.16928pt x 115.56017pt.
-<./graphics///Integral_Backstepping_Results/x_Saturation.jpg, id=761, 2264.46pt
+<./graphics///Integral_Backstepping_Results/x_Saturation.jpg, id=737, 2264.46pt
  x 1313.90875pt>
 File: ./graphics///Integral_Backstepping_Results/x_Saturation.jpg Graphic file 
 (type jpg)
@@ -1265,9 +1274,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[31 <./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg> <./graphic
+[32 <./graphics///Integral_Backstepping_Results/xTracking_Steps.jpg> <./graphic
 s///Integral_Backstepping_Results/zTracking_Steps.jpg>]
-<./graphics///Saturation/xTracking_Step.jpg, id=774, 2264.46pt x 1313.90875pt>
+<./graphics///Saturation/xTracking_Step.jpg, id=750, 2264.46pt x 1313.90875pt>
 File: ./graphics///Saturation/xTracking_Step.jpg Graphic file (type jpg)
 <use ./graphics///Saturation/xTracking_Step.jpg>
 Package pdftex.def Info: ./graphics///Saturation/xTracking_Step.jpg  used on in
@@ -1286,7 +1295,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[32 <./graphics///Integral_Backstepping_Results/x_Saturation.jpg> <./graphics//
+[33 <./graphics///Integral_Backstepping_Results/x_Saturation.jpg> <./graphics//
 /Saturation/xTracking_Step.jpg>]
 Underfull \hbox (badness 4686) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 4.  CON-TROL OF MULTI-ROTOR AIRCRAFT|
@@ -1300,9 +1309,9 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[33]) (Chapters/Estimation.tex
+[34]) (Chapters/Estimation.tex
 Chapter 5.
-[34
+[35
 
 
 ]
@@ -1318,41 +1327,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[35]
-Underfull \hbox (badness 10000) in paragraph at lines 148--150
-
- []
-
-
-Underfull \hbox (badness 3049) has occurred while \output is active
- []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
 [36]
-Underfull \hbox (badness 10000) in paragraph at lines 160--161
+Underfull \hbox (badness 10000) in paragraph at lines 126--128
 
  []
 
-<./graphics///EKF_GPS/xSteps_Angles.jpg, id=815, 2264.46pt x 1313.90875pt>
-File: ./graphics///EKF_GPS/xSteps_Angles.jpg Graphic file (type jpg)
-<use ./graphics///EKF_GPS/xSteps_Angles.jpg>
-Package pdftex.def Info: ./graphics///EKF_GPS/xSteps_Angles.jpg  used on input 
-line 166.
-(pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
-<./graphics///EKF_GPS/xSteps_Positions.jpg, id=816, 2264.46pt x 1313.90875pt>
-File: ./graphics///EKF_GPS/xSteps_Positions.jpg Graphic file (type jpg)
-<use ./graphics///EKF_GPS/xSteps_Positions.jpg>
-Package pdftex.def Info: ./graphics///EKF_GPS/xSteps_Positions.jpg  used on inp
-ut line 167.
-(pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
+
+Underfull \hbox (badness 10000) in paragraph at lines 138--139
+
+ []
+
 
 Underfull \hbox (badness 3049) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
@@ -1367,6 +1351,19 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [37]
+<./graphics///EKF_GPS/xSteps_Angles.jpg, id=790, 2264.46pt x 1313.90875pt>
+File: ./graphics///EKF_GPS/xSteps_Angles.jpg Graphic file (type jpg)
+<use ./graphics///EKF_GPS/xSteps_Angles.jpg>
+Package pdftex.def Info: ./graphics///EKF_GPS/xSteps_Angles.jpg  used on input 
+line 144.
+(pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
+<./graphics///EKF_GPS/xSteps_Positions.jpg, id=791, 2264.46pt x 1313.90875pt>
+File: ./graphics///EKF_GPS/xSteps_Positions.jpg Graphic file (type jpg)
+<use ./graphics///EKF_GPS/xSteps_Positions.jpg>
+Package pdftex.def Info: ./graphics///EKF_GPS/xSteps_Positions.jpg  used on inp
+ut line 145.
+(pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
+
 Underfull \hbox (badness 3049) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
  []
@@ -1379,29 +1376,37 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[38 <./graphics///EKF_GPS/xSteps_Angles.jpg> <./graphics///EKF_GPS/xSteps_Posit
+[38]
+Underfull \hbox (badness 3049) has occurred while \output is active
+ []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
+ []
+
+
+Package fancyhdr Warning: \headheight is too small (12.0pt): 
+(fancyhdr)                Make it at least 13.59999pt, for example:
+(fancyhdr)                \setlength{\headheight}{13.59999pt}.
+(fancyhdr)                You might also make \topmargin smaller to compensate:
+
+(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
+
+[39 <./graphics///EKF_GPS/xSteps_Angles.jpg> <./graphics///EKF_GPS/xSteps_Posit
 ions.jpg>]
-<./graphics///EKF_OFS/xSteps_Angles.jpg, id=831, 2264.46pt x 1313.90875pt>
+<./graphics///EKF_OFS/xSteps_Angles.jpg, id=804, 2264.46pt x 1313.90875pt>
 File: ./graphics///EKF_OFS/xSteps_Angles.jpg Graphic file (type jpg)
 <use ./graphics///EKF_OFS/xSteps_Angles.jpg>
 Package pdftex.def Info: ./graphics///EKF_OFS/xSteps_Angles.jpg  used on input 
-line 197.
+line 175.
 (pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
-<./graphics///EKF_OFS/xSteps_Positions.jpg, id=832, 2264.46pt x 1313.90875pt>
+<./graphics///EKF_OFS/xSteps_Positions.jpg, id=805, 2264.46pt x 1313.90875pt>
 File: ./graphics///EKF_OFS/xSteps_Positions.jpg Graphic file (type jpg)
 <use ./graphics///EKF_OFS/xSteps_Positions.jpg>
 Package pdftex.def Info: ./graphics///EKF_OFS/xSteps_Positions.jpg  used on inp
-ut line 198.
+ut line 176.
 (pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
-
-
-LaTeX Warning: Reference `fig:EKF_OFS_Drift' on page 39 undefined on input line
- 204.
-
-<./graphics///EKF_OFS/Drift.jpg, id=833, 2264.46pt x 1313.90875pt>
+<./graphics///EKF_OFS/Drift.jpg, id=807, 2264.46pt x 1313.90875pt>
 File: ./graphics///EKF_OFS/Drift.jpg Graphic file (type jpg)
 <use ./graphics///EKF_OFS/Drift.jpg>
-Package pdftex.def Info: ./graphics///EKF_OFS/Drift.jpg  used on input line 207
+Package pdftex.def Info: ./graphics///EKF_OFS/Drift.jpg  used on input line 185
 .
 (pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
 
@@ -1417,9 +1422,16 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[39
+[40
 
 ]
+<./graphics///EKF_OFS/Waypoints.jpg, id=816, 2264.46pt x 1313.90875pt>
+File: ./graphics///EKF_OFS/Waypoints.jpg Graphic file (type jpg)
+<use ./graphics///EKF_OFS/Waypoints.jpg>
+Package pdftex.def Info: ./graphics///EKF_OFS/Waypoints.jpg  used on input line
+ 194.
+(pdftex.def)             Requested size: 426.79135pt x 247.62035pt.
+
 Underfull \hbox (badness 3049) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
  []
@@ -1432,7 +1444,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[40]
+[41]
 Underfull \hbox (badness 3049) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
  []
@@ -1445,7 +1457,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[41 <./graphics///EKF_OFS/xSteps_Angles.jpg> <./graphics///EKF_OFS/xSteps_Posit
+[42 <./graphics///EKF_OFS/xSteps_Angles.jpg> <./graphics///EKF_OFS/xSteps_Posit
 ions.jpg>]
 Underfull \hbox (badness 3049) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
@@ -1459,7 +1471,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[42 <./graphics///EKF_OFS/Drift.jpg>]
+[43 <./graphics///EKF_OFS/Drift.jpg> <./graphics///EKF_OFS/Waypoints.jpg>]
 Underfull \hbox (badness 3049) has occurred while \output is active
  []\T1/ptm/m/n/9 CHAPTER 5.  STATE ES-TI-MA-TION AND SEN-SOR FUSION|
  []
@@ -1472,16 +1484,11 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[43
-
-]) (Chapters/PathFollowing.tex
-Chapter 6.
 [44
 
-
 ]) (Chapters/Implementation.tex
-Chapter 7.
-<./graphics//Hexacopter_Hardware.jpg, id=863, 963.6pt x 722.7pt>
+Chapter 6.
+<./graphics//Hexacopter_Hardware.jpg, id=836, 963.6pt x 722.7pt>
 File: ./graphics//Hexacopter_Hardware.jpg Graphic file (type jpg)
 <use ./graphics//Hexacopter_Hardware.jpg>
 Package pdftex.def Info: ./graphics//Hexacopter_Hardware.jpg  used on input lin
@@ -1502,7 +1509,7 @@ LaTeX Warning: Reference `' on page 46 undefined on input line 30.
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
- []\T1/ptm/m/n/9 CHAPTER 7.  IM-PLE-MEN-TA-TION AND RESULTS|
+ []\T1/ptm/m/n/9 CHAPTER 6.  IM-PLE-MEN-TA-TION AND RESULTS|
  []
 
 
@@ -1519,7 +1526,7 @@ LaTeX Warning: Reference `' on page 47 undefined on input line 32.
 
 
 Underfull \hbox (badness 10000) has occurred while \output is active
- []\T1/ptm/m/n/9 CHAPTER 7.  IM-PLE-MEN-TA-TION AND RESULTS|
+ []\T1/ptm/m/n/9 CHAPTER 6.  IM-PLE-MEN-TA-TION AND RESULTS|
  []
 
 
@@ -1531,68 +1538,15 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
 [47]) (Chapters/Conclusion.tex
-Chapter 8.
-
-Underfull \hbox (badness 10000) in paragraph at lines 10--11
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 11--12
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 12--13
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 13--14
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 14--15
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 15--16
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 16--17
-
- []
-
-
-Underfull \hbox (badness 10000) in paragraph at lines 17--18
-
- []
-
+Chapter 7.
 [48
 
 
-]
-Underfull \hbox (badness 10000) has occurred while \output is active
- []\T1/ptm/m/n/9 CHAPTER 8.  CON-CLU-SION AND EXTENSIONS|
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[49]) (HonoursThesis.bbl
+]) (HonoursThesis.bbl
 ** WARNING: IEEEtran.bst: No hyphenation pattern has been
 ** loaded for the language `en'. Using the pattern for
 ** the default language instead.
-[50
+[49
 
 
 ]
@@ -1608,7 +1562,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[51])
+[50])
 Underfull \hbox (badness 10000) has occurred while \output is active
  []\T1/ptm/m/n/9 BIBLIOGRAPHY|
  []
@@ -1621,34 +1575,7 @@ Package fancyhdr Warning: \headheight is too small (12.0pt):
 
 (fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
 
-[52] (HonoursThesis.lof)
-\tf@lof=\write5
-\openout5 = `HonoursThesis.lof'.
-
- [53
-
-
-]
-Underfull \hbox (badness 10000) has occurred while \output is active
- []\T1/ptm/m/n/9 LIST OF FIGURES|
- []
-
-
-Package fancyhdr Warning: \headheight is too small (12.0pt): 
-(fancyhdr)                Make it at least 13.59999pt, for example:
-(fancyhdr)                \setlength{\headheight}{13.59999pt}.
-(fancyhdr)                You might also make \topmargin smaller to compensate:
-
-(fancyhdr)                \addtolength{\topmargin}{-1.59999pt}.
-
-[54] (HonoursThesis.lot)
-\tf@lot=\write6
-\openout6 = `HonoursThesis.lot'.
-
- [55
-
-
-] (Appendices/A.tex
+[51] (Appendices/A.tex
 Appendix A.
 [1
 
@@ -1662,17 +1589,14 @@ Appendix B.
 
 LaTeX Warning: There were undefined references.
 
-
-LaTeX Warning: There were multiply-defined labels.
-
 Package rerunfilecheck Info: File `HonoursThesis.out' has not changed.
-(rerunfilecheck)             Checksum: 8A8FD84E31987958028DA5BBC7366D8E;11883.
+(rerunfilecheck)             Checksum: 682F0C0894F6433BB682BC70210BEC0D;11216.
  ) 
 Here is how much of TeX's memory you used:
- 11818 strings out of 479334
- 177861 string characters out of 2857084
- 499222 words of memory out of 3000000
- 28690 multiletter control sequences out of 15000+200000
+ 11796 strings out of 479334
+ 177599 string characters out of 2857084
+ 499388 words of memory out of 3000000
+ 28685 multiletter control sequences out of 15000+200000
  500530 words of font info for 147 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  71i,22n,74p,1855b,502s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1689,9 +1613,9 @@ ams/MiKTeX/fonts/type1/urw/times/utmb8a.pfb><C:/Users/Lachl/AppData/Local/Progr
 ams/MiKTeX/fonts/type1/urw/times/utmbi8a.pfb><C:/Users/Lachl/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/urw/times/utmr8a.pfb><C:/Users/Lachl/AppData/Local/Prog
 rams/MiKTeX/fonts/type1/urw/times/utmri8a.pfb>
-Output written on HonoursThesis.pdf (65 pages, 3047711 bytes).
+Output written on HonoursThesis.pdf (61 pages, 3129254 bytes).
 PDF statistics:
- 1048 PDF objects out of 1200 (max. 8388607)
- 239 named destinations out of 1000 (max. 500000)
- 760 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 983 PDF objects out of 1000 (max. 8388607)
+ 230 named destinations out of 1000 (max. 500000)
+ 717 words of extra memory for PDF output out of 10000 (max. 10000000)
 

@@ -3,29 +3,7 @@
 \textit{This chapter describes the algorithms used for estimating the aircraft state from the available sensor readings. It is common for state estimation algorithms to rely on GPS systems for position data, however there are many situations where GPS may either be unavailable or unreliable. This chapter explores a state estimation technique which utilises an optical flow sensor for relative position data. This is then compared with a GPS-enabled algorithm.}
 
 \section{Filter Algorithm}\label{section:Filter}
-The algorithm chosen to fuse sensor data and estimate states is based upon an Extended Kalman Filter (EKF). The fundamentals of EKFs are discussed in Section \ref{section:EKFBackground}. There are two main steps to the EKF algorithm: predict and update.
-
-The "predict" step first uses the state transition functions given in Equation \ref{eqn:OFS_EKFStateTrans} ($\textbf{\textit{f}}(\textbf{\textit{x}}_{k},\textbf{\textit{u}}_{k})$) with the previous state estimate ($\hat{\textbf{\textit{x}}}_{k-1}$) and the current input (\textbf{\textit{u}}) values. Then the covariance matrix (\textbf{\textit{P}}) is predicted using the Jacobian of the state transition function ($F$).
-
-\begin{equation}
-\begin{split}
-\hat{x}_{k}^{-}&=f(\hat{x}_{k-1}, u_{k})\\
-P_{k}^{-}&=F_{k}P_{k-1}F_{k}^{T}+Q_{k}
-\end{split}
-\end{equation}
-where $Q_{k}$ represents the process noise covariance matrix.$F_{k}$ represents the Jacobian of the state transition function evaluated at ($\hat{x}_{k}^{-}$, $u_{k}$).  The "-" superscript denotes the initial estimate from the predict step.
-
-
-The "update" step uses these predictions and compares them with the sensor measurements to achieve more accurate estimates.
-
-\begin{equation}
-\begin{split}
-K_{k}&=P_{k}^{-}H_{k}^{T}(H_{k}P_{k}^{-}H_{k}^{T}+R_{k})^{-1}\\
-\hat{x}_{k}&=\hat{x}_{k}^{-}+K_{k}\left[z_{k}-h(\hat{x}_{k}^{-})\right]\\
-P_{k}&=(I-K_{k}H_{k})P_{k}^{-}
-\end{split}
-\end{equation}
-where $z_{k}$ represents the sensor measurements, $h(\cdot)$ represents the measurement functions and I represents an identity matrix. $H_{k}$ represents the Jacobian of the measurement function evaluated at $\hat{x}_{k}^{-}$.
+The algorithm chosen to fuse sensor data and estimate states is based upon an Extended Kalman Filter (EKF). The fundamentals of EKFs are discussed in Section \ref{section:EKFBackground}. The measurement functions will be slightly different for each of the two following alogrithms, as these functions are dependent on the sensors being used. However, the state transition functions are common to both algorithms.
 
 \subsection{State Transition Functions}\label{section:StateTrans}
 The states estimated by this EKF are those used by the backstepping controller, as expressed in \eqref{eqn:stateDef}. Namely, the positions, velocities, Euler angles and angular rates all expressed with respect to the Earth frame.In order to simplify notation, the states may be grouped into the following 4 vectors: \textbf{\textit{p}}$=\begin{bmatrix}x& y& z\end{bmatrix}^{T}$, \textbf{\textit{v}}$=\begin{bmatrix}\dot{x}& \dot{y}& \dot{z}\end{bmatrix}^{T}$, \textbf{\textit{$\Phi$}}$=\begin{bmatrix}\phi& \theta& \psi\end{bmatrix}^{T}$ and \textbf{\textit{$\omega$}}$=\begin{bmatrix}\dot{\phi}& \dot{\theta}& \dot{\psi}\end{bmatrix}^{T}$. Both algorithms will utilise accelerometer and gyroscope measurements and these measurements are defined as inputs in order to reduce the complexity of the state transition functions \cite{Driessen2018}. Thus the inputs are $\textbf{\textit{u}}=
@@ -207,15 +185,25 @@ This algorithm was tested in simulation using the same input reference as the pr
 	\includegraphics[width=\columnwidth]{/EKF_OFS/Drift.jpg}\\
 	\end{center}
 	\caption{Estimated translational states over 1000 seconds.}%
-	\label{fig:EKF_OFS_Results}%
+	\label{fig:EKF_OFS_Drift}%
 \end{figure}
+
+\figref{fig:EKF_OFS_3D} visually compares the vehicle's simulated position with its estimated position in 3D space, whilst moving between a number of waypoints. It can be seen that, although there is no GPS data available a fairly accurate position estimate can be maintained even whilst the vehicle is tracking waypoints.
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=\columnwidth]{/EKF_OFS/Waypoints.jpg}\\
+	\end{center}
+	\caption{Estimated position of the vehicle in 3D space while moving between waypoints over a period of 20 seconds.}%
+	\label{fig:EKF_OFS_3D}%
+\end{figure}
+
 
 A more accurate and reliable EKF would utilise all of the previously mentioned sensors i.e. GPS, barometer, OFS and lidar. 
 
 \FloatBarrier
 
 \section{Chapter Summary}
-This chapter developed two sensor fusion algorithms based on the Extended Kalman Filter. The first algorithm utilises GPS data to estimate position. The second estimator utilises an optical flow sensor and does not rely on GPS. This has the advantage of allowing UAV operation in areas which have limited GPS signal, but is limited to operating with unobstructed line of sight to the ground. A more reliable sensor fusion algorithm would include the use of both groups of sensors.
+This chapter developed two sensor fusion algorithms based on the extended Kalman filter. The first algorithm utilises GPS data to estimate position. The second estimator utilises an optical flow sensor and does not rely on GPS. This has the advantage of allowing UAV operation in areas which have limited GPS signal, but is limited to operating with unobstructed line of sight to the ground. A more reliable sensor fusion algorithm would include the use of both groups of sensors.
 
 \clearpage
 

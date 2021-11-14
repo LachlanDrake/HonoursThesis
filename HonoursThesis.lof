@@ -1,29 +1,28 @@
 \babel@toc {english}{}
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {2.1}{\ignorespaces PID control block diagram.}}{6}{figure.2.1}%
+\contentsline {figure}{\numberline {2.1}{\ignorespaces PID control block diagram.}}{7}{figure.2.1}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {3.1}{\ignorespaces Reference frames and co-ordinate systems: a) NED Frame b) Earth Frame c) Body Frame}}{10}{figure.3.1}%
-\contentsline {figure}{\numberline {3.2}{\ignorespaces Basic configuration of the hexacopter with labelled axes.}}{15}{figure.3.2}%
-\contentsline {figure}{\numberline {3.3}{\ignorespaces Hexacopter model block diagram.}}{16}{figure.3.3}%
+\contentsline {figure}{\numberline {3.1}{\ignorespaces Reference frames and co-ordinate systems: a) NED Frame b) Earth Frame c) Body Frame}}{11}{figure.3.1}%
+\contentsline {figure}{\numberline {3.2}{\ignorespaces Basic configuration of the hexacopter with labelled axes.}}{16}{figure.3.2}%
+\contentsline {figure}{\numberline {3.3}{\ignorespaces Hexacopter model block diagram.}}{17}{figure.3.3}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {4.1}{\ignorespaces Complete PID control system block diagram}}{22}{figure.4.1}%
-\contentsline {figure}{\numberline {4.2}{\ignorespaces PD system stabilisation from significant initial angles}}{23}{figure.4.2}%
-\contentsline {figure}{\numberline {4.3}{\ignorespaces PD system step responses}}{23}{figure.4.3}%
-\contentsline {figure}{\numberline {4.4}{\ignorespaces PID Position tracking}}{24}{figure.4.4}%
-\contentsline {figure}{\numberline {4.5}{\ignorespaces Backstepping system stabilisation from significant initial angles}}{28}{figure.4.5}%
-\contentsline {figure}{\numberline {4.6}{\ignorespaces Backstepping position tracking}}{28}{figure.4.6}%
-\contentsline {figure}{\numberline {4.7}{\ignorespaces Backstepping 3D waypoint tracking}}{29}{figure.4.7}%
-\contentsline {figure}{\numberline {4.8}{\ignorespaces Integral Backstepping position tracking}}{31}{figure.4.8}%
-\contentsline {figure}{\numberline {4.9}{\ignorespaces Backstepping response to a large step input}}{32}{figure.4.9}%
-\contentsline {figure}{\numberline {4.10}{\ignorespaces Integral Backstepping position tracking with sigmoidal function}}{32}{figure.4.10}%
+\contentsline {figure}{\numberline {4.1}{\ignorespaces Complete PID control system block diagram}}{23}{figure.4.1}%
+\contentsline {figure}{\numberline {4.2}{\ignorespaces PD system stabilisation from significant initial angles}}{24}{figure.4.2}%
+\contentsline {figure}{\numberline {4.3}{\ignorespaces PD system step responses}}{24}{figure.4.3}%
+\contentsline {figure}{\numberline {4.4}{\ignorespaces PID Position tracking}}{25}{figure.4.4}%
+\contentsline {figure}{\numberline {4.5}{\ignorespaces Backstepping system stabilisation from significant initial angles}}{29}{figure.4.5}%
+\contentsline {figure}{\numberline {4.6}{\ignorespaces Backstepping position tracking}}{29}{figure.4.6}%
+\contentsline {figure}{\numberline {4.7}{\ignorespaces Backstepping 3D waypoint tracking}}{30}{figure.4.7}%
+\contentsline {figure}{\numberline {4.8}{\ignorespaces Integral Backstepping position tracking}}{32}{figure.4.8}%
+\contentsline {figure}{\numberline {4.9}{\ignorespaces Backstepping response to a large step input}}{33}{figure.4.9}%
+\contentsline {figure}{\numberline {4.10}{\ignorespaces Integral Backstepping position tracking with sigmoidal function}}{33}{figure.4.10}%
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {5.1}{\ignorespaces Estimated states using GPS extended Kalman filter.}}{38}{figure.5.1}%
-\contentsline {figure}{\numberline {5.2}{\ignorespaces Estimated states using OFS extended Kalman filter.}}{41}{figure.5.2}%
-\contentsline {figure}{\numberline {5.3}{\ignorespaces Estimated translational states over 1000 seconds.}}{42}{figure.5.3}%
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Estimated states using GPS extended Kalman filter.}}{39}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Estimated states using OFS extended Kalman filter.}}{42}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Estimated translational states over 1000 seconds.}}{43}{figure.5.3}%
 \addvspace {10\p@ }
-\addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Hardware platform used for flight testing.}}{46}{figure.7.1}%
+\contentsline {figure}{\numberline {6.1}{\ignorespaces Hardware platform used for flight testing.}}{46}{figure.6.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }
