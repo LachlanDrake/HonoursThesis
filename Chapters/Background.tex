@@ -45,7 +45,7 @@ GPS data identifies a position on the Earth in terms of latitudes and longitudes
 \begin{equation}\label{eqn:haversine}
 \begin{split}
 d&=2R sin^{-1} \left( \sqrt{sin^{2}\left( \frac{\chi_{2}-\chi_{1}}{2} \right) +cos(\chi_{1})cos(\chi_{2})sin^{2} \left( \frac{\lambda_{2}-\lambda_{1}}{2}  \right) }\right)\\
-\beta&=atan2\left[ sin(\Delta\lambda)cos(\phi_{2}) , cos(\phi_{1})sin(\phi_{2}) - sin(\phi_{1}) cos(\phi_2) cos(\Delta\lambda)\right]
+\beta&=atan2\left[ sin(\Delta\lambda)cos(\chi_{2}) , cos(\chi_{1})sin(\chi_{2}) - sin(\chi_{1}) cos(\chi_2) cos(\Delta\lambda)\right]
 \end{split}
 \end{equation}
 
@@ -100,6 +100,8 @@ In order to apply this method to the tracking problem, the states of the system 
 Address the different techniques and evaluate their use in previous studies
 Kalman Filter...
 Extended Kalman Filter...
+EKF is similar to KF, but linearises a nonlinear system about the current estimated trajectory.
+
 UKF...
 
 \subsection{Extended Kalman Filter}\label{section:EKFBackground}

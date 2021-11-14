@@ -296,17 +296,21 @@ c(\phi)c(\theta)\frac{F_{T}}{m}-g
 
 \section{Hexacopter Model}
 In order to extend the general multi-rotor model to a hexacopter, the six propeller forces need to be converted to the general model's inputs: three torques (around each axis) and one force (describing the total thrust). To achieve this, the configuration of the hexacopter must be defined. \figref{fig:hex} shows the basic geometry of a hexacopter platform with \(P_{1}, P_{2},...,P_{6}\) representing the six propellers. 
+
 \begin{figure}[htb]
-	\includegraphics[width=\columnwidth]{HexacopterConfig.jpg}%
+\begin{center}
+	\includegraphics[width=90mm]{HexacopterConfig.jpg}%
+	\end{center}
 	\caption{Basic configuration of the hexacopter with labelled axes.}%
 	\label{fig:hex}%
 \end{figure}
+
 
 Let \(F_{1}, F_{2},...,F_{6}\) denote the force produced by each of the propellers as numbered in \figref{fig:hex}. The torques around each axis are proportional to the distance of each propeller from the axis. Using the geometry of the hexacopter, the torques around each axis can be derived.
 \begin{flushleft}
 \[\tau_{\phi}=d[(F_{5}-F_{2})+\cos(\alpha)(F_{6}+F_{4}-F_{1}-F_{3})]\]\\
 \[\tau_{\theta}=d\sin(\alpha)(F_{1}-F_{3}-F_{4}+F_{6})\]\\
-\[\tau_{\psi}=K(F_{1}-F_{2}+F_{3}-F_{4}+F_{5}-F_{6})\]
+\[\tau_{\psi}=K_{\psi}(F_{1}-F_{2}+F_{3}-F_{4}+F_{5}-F_{6})\]
 \end{flushleft}
 Where d represents the distance from each propeller to the hexacopter's centre of mass, \(\alpha\) represents the angle between each of the arms and K represents a constant arising from the reaction force on the propellers. In this case, the angles between each of the arms will be considered to be equal, therefore \(\alpha\) is 60\(^{\circ}\). It follows that \(\sin(\alpha)=\frac{\sqrt{3}}{2}\) and \(\cos(\alpha)=\frac{1}{2}\)\\
 

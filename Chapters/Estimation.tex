@@ -2,10 +2,73 @@
 \chapter{State Estimation and Sensor Fusion}
 \textit{This chapter describes the algorithms used for estimating the aircraft state from the available sensor readings. It is common for state estimation algorithms to rely on GPS systems for position data, however there are many situations where GPS may either be unavailable or unreliable. This chapter explores a state estimation technique which utilises an optical flow sensor for relative position data. This is then compared with a GPS-enabled algorithm.}
 
+\section{Filter Algorithm}\label{section:Filter}
+The algorithm chosen to fuse sensor data and estimate states is based upon an Extended Kalman Filter (EKF). The fundamentals of EKFs are discussed in Section \ref{section:EKFBackground}. There are two main steps to the EKF algorithm: predict and update.
+
+The "predict" step first uses the state transition functions given in Equation \ref{eqn:OFS_EKFStateTrans} ($\textbf{\textit{f}}(\textbf{\textit{x}}_{k},\textbf{\textit{u}}_{k})$) with the previous state estimate ($\hat{\textbf{\textit{x}}}_{k-1}$) and the current input (\textbf{\textit{u}}) values. Then the covariance matrix (\textbf{\textit{P}}) is predicted using the Jacobian of the state transition function ($F$).
+
+\begin{equation}
+\begin{split}
+\hat{x}_{k}^{-}&=f(\hat{x}_{k-1}, u_{k})\\
+P_{k}^{-}&=F_{k}P_{k-1}F_{k}^{T}+Q_{k}
+\end{split}
+\end{equation}
+where $Q_{k}$ represents the process noise covariance matrix.$F_{k}$ represents the Jacobian of the state transition function evaluated at ($\hat{x}_{k}^{-}$, $u_{k}$).  The "-" superscript denotes the initial estimate from the predict step.
+
+
+The "update" step uses these predictions and compares them with the sensor measurements to achieve more accurate estimates.
+
+\begin{equation}
+\begin{split}
+K_{k}&=P_{k}^{-}H_{k}^{T}(H_{k}P_{k}^{-}H_{k}^{T}+R_{k})^{-1}\\
+\hat{x}_{k}&=\hat{x}_{k}^{-}+K_{k}\left[z_{k}-h(\hat{x}_{k}^{-})\right]\\
+P_{k}&=(I-K_{k}H_{k})P_{k}^{-}
+\end{split}
+\end{equation}
+where $z_{k}$ represents the sensor measurements, $h(\cdot)$ represents the measurement functions and I represents an identity matrix. $H_{k}$ represents the Jacobian of the measurement function evaluated at $\hat{x}_{k}^{-}$.
+
+\subsection{State Transition Functions}\label{section:StateTrans}
+The states estimated by this EKF are those used by the backstepping controller, as expressed in \eqref{eqn:stateDef}. Namely, the positions, velocities, Euler angles and angular rates all expressed with respect to the Earth frame.In order to simplify notation, the states may be grouped into the following 4 vectors: \textbf{\textit{p}}$=\begin{bmatrix}x& y& z\end{bmatrix}^{T}$, \textbf{\textit{v}}$=\begin{bmatrix}\dot{x}& \dot{y}& \dot{z}\end{bmatrix}^{T}$, \textbf{\textit{$\Phi$}}$=\begin{bmatrix}\phi& \theta& \psi\end{bmatrix}^{T}$ and \textbf{\textit{$\omega$}}$=\begin{bmatrix}\dot{\phi}& \dot{\theta}& \dot{\psi}\end{bmatrix}^{T}$. Both algorithms will utilise accelerometer and gyroscope measurements and these measurements are defined as inputs in order to reduce the complexity of the state transition functions \cite{Driessen2018}. Thus the inputs are $\textbf{\textit{u}}=
+\begin{bmatrix}
+\tilde{a}_{x}&\tilde{a}_{y}&\tilde{a}_{z}&\tilde{\omega}_{x}&\tilde{\omega}_{y}&\tilde{\omega}_{z}
+\end{bmatrix}^{T}
+$. The state transition functions used for the prediction step of the EKF are defined in discrete time:
+\begin{equation}\label{eqn:OFS_EKFStateTrans}
+\begin{split}
+\textbf{\textit{p}}_{k+1}&=\textbf{\textit{p}}_{k}+\Delta t\textbf{\textit{v}}_{k} \\
+\textbf{\textit{v}}_{k+1}&=\textbf{\textit{v}}_{k}+\Delta t\left( C^{n}_{b}
+\begin{bmatrix}
+u_{1}\\
+u_{2}\\
+u_{3}
+\end{bmatrix}
++
+\begin{bmatrix}
+0\\
+0\\
+g
+\end{bmatrix}
+\right)\\
+\textbf{\textit{$\Phi$}}_{k+1}&=\textbf{\textit{$\Phi$}}_{k}+\Delta t\textbf{\textit{$\omega$}}_{k}\\
+\textbf{\textit{$\omega$}}_{k+1}&=
+\begin{bmatrix}
+1& sin(\phi)tan(\theta)& cos(\phi)tan(\theta)\\
+0 &cos(\phi) &-sin(\phi)\\
+0 &sin(\phi)sec(\theta) &cos(\phi)sec(\theta)
+\end{bmatrix}
+\begin{bmatrix}
+u_{4}\\
+u_{5}\\
+u_{6}
+\end{bmatrix}
+\end{split}
+\end{equation}
+ 
+
 \section{State Estimation with GPS}
 In industry and commercial applications UAV position is commonly estimated with the use of a GPS sensor, along with additional sensors. This method has the advantage of providing accurate position data that not many other sensors can offer.
 
-\subsection{Sensor Models}
+\subsection{Sensor Models}\label{section:GPS_sensorModels}
 GPS data is recorded as latitude and longitude positions. These can be converted into the Earth frame by using the Haversine formula, as described in Section \ref{section:RefFrames}. The GPS data will be modelled by the following:
 \begin{equation}
 \begin{split}
@@ -25,9 +88,9 @@ A standard Inertial Measurement Unit (IMU) contains both a 3-axis accelerometer 
 \end{bmatrix}
 &=
 \begin{bmatrix}
-u\\
-v\\
-w
+\dot{u}\\
+\dot{v}\\
+\dot{w}
 \end{bmatrix}
 +
 C^{b}_{n}
@@ -92,11 +155,23 @@ A barometer (or altimeter) is a sensor which measures air pressure and can be us
 
 where $\tilde{P}$ represents the measured pressure. In the model, z represents the height above the surface from which it launched, thus $h_{0}$ is added to account for the surface's altitude above sea level.
 
-\subsection{State Transition Functions}
-This algorithm utilises the model equations developed in Section \ref{section:MultiRotorModel}
 
-\subsection{Filter Algorithm}
+\subsection{Preliminary Results}
+The EKF was tested in simulation with a number of steps in the x direction and a single step in the z direction. In these results, the control system developed in Chapter \ref{chapter:control} is used. The controller is provided with the actual states rather than the estimated states. In Section \ref{section:Implementation} the control system and state estimators will be used together in simulation. Additionally, the sample rate of all sensors is assumed to be 100 Hz.\\
 
+The estimated states are compared with the actual states in \figref{fig:GPS_EKF_Results}. The angular rates and translational positions are estimated accurately, however there is some error in the translational velocities and Euler angle estimates. None of the measurement functions directly involve the velocity states, therefore they are essentially estimated based upon the state transition functions alone, which limits the accuracy of the estimates. The Euler angles are included in both the magnetometer and accelerometer functions in the form of the rotation matrix ($C_{n}^{b}$). However, the measurement functions do not directly measure the angles, i.e. there are terms such as $cos(\phi)sin(\phi)cos(\psi)$ within the function. This results in the estimated angles being correlated, i.e. a change in $\theta$ results in the estimates for $\phi$ and $\psi$ also being affected.
+
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=\columnwidth]{/EKF_GPS/xSteps_Angles.jpg}\\
+	\includegraphics[width=\columnwidth]{/EKF_GPS/xSteps_Positions.jpg}
+	\end{center}
+	\caption{Estimated states using GPS extended Kalman filter.}%
+	\label{fig:GPS_EKF_Results}%
+\end{figure}
+
+
+\FloatBarrier
 \section{State Estimation without GPS}
 There are many situations in which GPS signal may not be reliable. For example, GPS signal will generally be unreliable for indoor applications. Additionally, failure of the onboard GPS system could prove catastrophic if there is not another way of tracking position and velocity data.
 \subsection{Sensor Models}\label{section:GPSSensModels}
@@ -111,63 +186,36 @@ One type of sensor which is relatively inexpensive and can be utilised for posit
 \end{split}
 \end{equation}
 where $\Delta t_{\rho}$ is the time between consecutive frames, $f$ is the focal length in pixels, $h$ is the scene depth and $\mu$ variables represent Gaussian noise with zero mean.\\
-This algorithm also uses the IMU and magnetometer sensor models described in Section \ref{section:GPSSensModels}.
+This algorithm also uses the IMU and magnetometer sensor models described in Section \ref{section:GPSSensModels}, but does not use the GPS or barometer.
 
+\subsection{Preliminary Results}
 
+This algorithm was tested in simulation using the same input reference as the previous algorithm. The results are shown in \figref{fig:EKF_OFS_Results}. It can be seen that the results are comparative to the previous GPS-enabled algorithm. The x and y velocity estimates are more accurate since these are measured by the optical flow sensor. However, the x and y position estimates are prone to drift, as the sensors do not directly measure these states. Also, the further the aircraft is above the surface, the larger the effect of noise on the velocity readings. This effect may make this method inappropriate for use at high altitudes. 
 
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=\columnwidth]{/EKF_OFS/xSteps_Angles.jpg}\\
+	\includegraphics[width=\columnwidth]{/EKF_OFS/xSteps_Positions.jpg}
+	\end{center}
+	\caption{Estimated states using OFS extended Kalman filter.}%
+	\label{fig:EKF_OFS_Results}%
+\end{figure}
 
+\figref{fig:EKF_OFS_Drift} shows the estimated translational states while the vehicle hovers at a fixed point 10 meters above the origin. This demonstrates the drift of position estimates. However, over 1000 seconds the drift is limited to approximately $\pm$0.25 metres. If there is significant sensor bias, i.e. the noise has a non-zero mean, this drift could become more significant.
+\begin{figure}[htb]
+\begin{center}
+	\includegraphics[width=\columnwidth]{/EKF_OFS/Drift.jpg}\\
+	\end{center}
+	\caption{Estimated translational states over 1000 seconds.}%
+	\label{fig:EKF_OFS_Results}%
+\end{figure}
 
+A more accurate and reliable EKF would utilise all of the previously mentioned sensors i.e. GPS, barometer, OFS and lidar. 
 
-\subsection{State Transition Function}
-The states estimated by this EKF are those which are used by the backstepping controller, as expressed in \eqref{eqn:stateDef}. Namely, the positions, velocities, Euler angles and angular rates all expressed with respect to the Earth frame. The accelerometer and gyroscope measurements are defined as inputs in order to reduce the complexity of the state transition functions\cite{Driessen2018}. Thus the inputs are $\textbf{\textit{u}}=
-\begin{bmatrix}
-\tilde{a}_{x}&\tilde{a}_{y}&\tilde{a}_{z}&\tilde{\omega}_{x}&\tilde{\omega}_{y}&\tilde{\omega}_{z}
-\end{bmatrix}^{T}
-$
-In order to simplify notation, the states may be grouped into the following 4 vectors: \textbf{\textit{$\Phi$}}$=\begin{bmatrix}\phi& \theta& \psi\end{bmatrix}^{T}$, \textbf{\textit{$\omega$}}$=\begin{bmatrix}\dot{\phi}& \dot{\theta}& \dot{\psi}\end{bmatrix}^{T}$, \textbf{\textit{p}}$=\begin{bmatrix}x& y& z\end{bmatrix}^{T}$ and \textbf{\textit{v}}$=\begin{bmatrix}\dot{x}& \dot{y}& \dot{z}\end{bmatrix}^{T}$. The state transition functions used for the prediction step of the EKF are defined in discrete time:
-\begin{equation}\label{eqn:OFS_EKFStateTrans}
-\begin{split}
-\textbf{\textit{p}}_{k+1}&=\textbf{\textit{p}}_{k}+\Delta t\textbf{\textit{v}}_{k} \\
-\textbf{\textit{v}}_{k+1}&=\textbf{\textit{v}}_{k}+\Delta t\left( C^{n}_{b}
-\begin{bmatrix}
-u_{1}\\
-u_{2}\\
-u_{3}
-\end{bmatrix}
-+
-\begin{bmatrix}
-0\\
-0\\
-g
-\end{bmatrix}
-\right)\\
-\textbf{\textit{$\Phi$}}_{k+1}&=\textbf{\textit{$\Phi$}}_{k}+\Delta t\textbf{\textit{$\omega$}}_{k}\\
-\textbf{\textit{$\omega$}}_{k+1}&=
-\begin{bmatrix}
-1& sin(\phi)tan(\theta)& cos(\phi)tan(\theta)\\
-0 &cos(\phi) &-sin(\phi)\\
-0 &sin(\phi)sec(\theta) &cos(\phi)sec(\theta)
-\end{bmatrix}
-\begin{bmatrix}
-u_{4}\\
-u_{5}\\
-u_{6}
-\end{bmatrix}
-\end{split}
-\end{equation}
-
-\subsection{Filter Algorithm}
-The algorithm used to fuse sensor data and estimate states is based upon an Extended Kalman Filter (EKF). The fundamentals of EKFs are discussed in Section \ref{section:EKFBackground}. There are two main steps to the EKF algorithm: predict and update.
-
-The predict step first uses the state transition functions given in Equation \ref{eqn:OFS_EKFStateTrans} ($\textbf{\textit{f}}(\textbf{\textit{x}}_{k},\textbf{\textit{u}}_{k})$) with the previous state estimate ($\hat{\textbf{\textit{x}}}_{k-1|k-1}$) and the current input (\textbf{\textit{u}}) values. Then the covariance matrix (\textbf{\textit{P}}) is predicted using the Jacobian of the state transition function ($F$).
-
-
-
-
-
+\FloatBarrier
 
 \section{Chapter Summary}
-This chapter developed two sensor fusion algorithms based on the Extended Kalman Filter. The first algorithm utilises GPS data to estimate position. The second estimator utilises an optical flow sensor and does not rely on GPS. This has the advantage of allowing UAV operation in areas which have limited GPS signal.
+This chapter developed two sensor fusion algorithms based on the Extended Kalman Filter. The first algorithm utilises GPS data to estimate position. The second estimator utilises an optical flow sensor and does not rely on GPS. This has the advantage of allowing UAV operation in areas which have limited GPS signal, but is limited to operating with unobstructed line of sight to the ground. A more reliable sensor fusion algorithm would include the use of both groups of sensors.
 
 \clearpage
 

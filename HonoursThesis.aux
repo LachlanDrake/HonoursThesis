@@ -106,10 +106,10 @@
 \@writefile{toc}{\contentsline {section}{\numberline {3.2}Hexacopter Model}{14}{section.3.2}\protected@file@percent }
 \@writefile{lof}{\contentsline {figure}{\numberline {3.2}{\ignorespaces Basic configuration of the hexacopter with labelled axes.}}{15}{figure.3.2}\protected@file@percent }
 \newlabel{fig:hex}{{3.2}{15}{Basic configuration of the hexacopter with labelled axes}{figure.3.2}{}}
+\newlabel{eqn:propSpeeds1}{{3.9}{15}{Hexacopter Model}{equation.3.2.9}{}}
 \citation{Bouabdallah2006}
 \citation{Tayebi2004}
 \citation{Capello2015}
-\newlabel{eqn:propSpeeds1}{{3.9}{16}{Hexacopter Model}{equation.3.2.9}{}}
 \newlabel{eqn:saturation}{{3.10}{16}{Hexacopter Model}{equation.3.2.10}{}}
 \@writefile{lof}{\contentsline {figure}{\numberline {3.3}{\ignorespaces Hexacopter model block diagram.}}{16}{figure.3.3}\protected@file@percent }
 \newlabel{fig:FinalModel}{{3.3}{16}{Hexacopter model block diagram}{figure.3.3}{}}
@@ -120,6 +120,7 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {4}Control of Multi-Rotor Aircraft}{18}{chapter.4}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
+\newlabel{chapter:control}{{4}{18}{Control of Multi-Rotor Aircraft}{chapter.4}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.1}Pseudo-inverse of Motor Speed Matrix}{18}{section.4.1}\protected@file@percent }
 \newlabel{eqn:propSpeeds2}{{4.1}{19}{Pseudo-inverse of Motor Speed Matrix}{equation.4.1.1}{}}
 \@writefile{toc}{\contentsline {section}{\numberline {4.2}PID Control}{19}{section.4.2}\protected@file@percent }
@@ -191,47 +192,57 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {5}State Estimation and Sensor Fusion}{34}{chapter.5}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {5.1}State Estimation with GPS}{34}{section.5.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}Sensor Models}{34}{subsection.5.1.1}\protected@file@percent }
-\newlabel{eqn:IMU}{{5.2}{35}{Sensor Models}{equation.5.1.2}{}}
-\newlabel{eqn:mag}{{5.3}{35}{Sensor Models}{equation.5.1.3}{}}
-\newlabel{eqn:barometer}{{5.4}{35}{Sensor Models}{equation.5.1.4}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.2}State Transition Functions}{35}{subsection.5.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.1}Filter Algorithm}{34}{section.5.1}\protected@file@percent }
+\newlabel{section:Filter}{{5.1}{34}{Filter Algorithm}{section.5.1}{}}
+\citation{Driessen2018}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.1}State Transition Functions}{35}{subsection.5.1.1}\protected@file@percent }
+\newlabel{section:StateTrans}{{5.1.1}{35}{State Transition Functions}{subsection.5.1.1}{}}
+\newlabel{eqn:OFS_EKFStateTrans}{{5.3}{35}{State Transition Functions}{equation.5.1.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.2}State Estimation with GPS}{35}{section.5.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Sensor Models}{36}{subsection.5.2.1}\protected@file@percent }
+\newlabel{section:GPS_sensorModels}{{5.2.1}{36}{Sensor Models}{subsection.5.2.1}{}}
+\newlabel{eqn:IMU}{{5.5}{36}{Sensor Models}{equation.5.2.5}{}}
+\newlabel{eqn:mag}{{5.6}{36}{Sensor Models}{equation.5.2.6}{}}
+\newlabel{eqn:barometer}{{5.7}{37}{Sensor Models}{equation.5.2.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}Preliminary Results}{37}{subsection.5.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.1}{\ignorespaces Estimated states using GPS extended Kalman filter.}}{38}{figure.5.1}\protected@file@percent }
+\newlabel{fig:GPS_EKF_Results}{{5.1}{38}{Estimated states using GPS extended Kalman filter}{figure.5.1}{}}
 \citation{Driessen2018}
 \citation{Ding2010}
-\citation{Driessen2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.1.3}Filter Algorithm}{36}{subsection.5.1.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.2}State Estimation without GPS}{36}{section.5.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.1}Sensor Models}{36}{subsection.5.2.1}\protected@file@percent }
-\newlabel{section:GPSSensModels}{{5.2.1}{36}{Sensor Models}{subsection.5.2.1}{}}
-\newlabel{eqn:OFS}{{5.5}{36}{Sensor Models}{equation.5.2.5}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.2}State Transition Function}{36}{subsection.5.2.2}\protected@file@percent }
-\newlabel{eqn:OFS_EKFStateTrans}{{5.6}{37}{State Transition Function}{equation.5.2.6}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {5.2.3}Filter Algorithm}{37}{subsection.5.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {5.3}Chapter Summary}{37}{section.5.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {6}Path-Following}{38}{chapter.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {5.3}State Estimation without GPS}{39}{section.5.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.1}Sensor Models}{39}{subsection.5.3.1}\protected@file@percent }
+\newlabel{section:GPSSensModels}{{5.3.1}{39}{Sensor Models}{subsection.5.3.1}{}}
+\newlabel{eqn:OFS}{{5.8}{39}{Sensor Models}{equation.5.3.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.3.2}Preliminary Results}{39}{subsection.5.3.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5.2}{\ignorespaces Estimated states using OFS extended Kalman filter.}}{41}{figure.5.2}\protected@file@percent }
+\newlabel{fig:EKF_OFS_Results}{{5.2}{41}{Estimated states using OFS extended Kalman filter}{figure.5.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {5.3}{\ignorespaces Estimated translational states over 1000 seconds.}}{42}{figure.5.3}\protected@file@percent }
+\newlabel{fig:EKF_OFS_Results}{{5.3}{42}{Estimated translational states over 1000 seconds}{figure.5.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5.4}Chapter Summary}{43}{section.5.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {6}Path-Following}{44}{chapter.6}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {6.1}}{38}{section.6.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {6.2}Chapter Summary}{38}{section.6.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {7}Implementation and Results}{39}{chapter.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.1}}{44}{section.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {6.2}Chapter Summary}{44}{section.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {7}Implementation and Results}{45}{chapter.7}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {7.1}Simulation}{39}{section.7.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.2}Hardware}{39}{section.7.2}\protected@file@percent }
-\newlabel{section:Hardware}{{7.2}{39}{Hardware}{section.7.2}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.1}The Cube Autopilot}{39}{subsection.7.2.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.2}ArduPilot Software}{39}{subsection.7.2.2}\protected@file@percent }
-\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Hardware platform used for flight testing.}}{40}{figure.7.1}\protected@file@percent }
-\newlabel{fig:hardware}{{7.1}{40}{Hardware platform used for flight testing}{figure.7.1}{}}
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.3}Companion Computer}{40}{subsection.7.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.4}Flight Testing}{40}{subsection.7.2.4}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {7.3}Chapter Summary}{41}{section.7.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{\numberline {8}Conclusion and Extensions}{42}{chapter.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.1}Simulation}{45}{section.7.1}\protected@file@percent }
+\newlabel{section:Implementation}{{7.1}{45}{Simulation}{section.7.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7.2}Hardware}{45}{section.7.2}\protected@file@percent }
+\newlabel{section:Hardware}{{7.2}{45}{Hardware}{section.7.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.1}The Cube Autopilot}{45}{subsection.7.2.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.2}ArduPilot Software}{45}{subsection.7.2.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7.1}{\ignorespaces Hardware platform used for flight testing.}}{46}{figure.7.1}\protected@file@percent }
+\newlabel{fig:hardware}{{7.1}{46}{Hardware platform used for flight testing}{figure.7.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.3}Companion Computer}{46}{subsection.7.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2.4}Flight Testing}{46}{subsection.7.2.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {7.3}Chapter Summary}{47}{section.7.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{\numberline {8}Conclusion and Extensions}{48}{chapter.8}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\@writefile{toc}{\contentsline {section}{\numberline {8.1}Conclusion}{42}{section.8.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {8.2}Future Extensions}{42}{section.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.1}Conclusion}{48}{section.8.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {8.2}Future Extensions}{48}{section.8.2}\protected@file@percent }
 \bibstyle{ieeetran}
 \bibdata{References}
 \bibcite{Stoff2001}{1}
@@ -247,7 +258,7 @@
 \bibcite{Pounds2010}{11}
 \bibcite{Moussid2015}{12}
 \@writefile{toc}{\vspace *{\baselineskip }}
-\@writefile{toc}{\contentsline {chapter}{Bibliography}{44}{section.8.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{Bibliography}{50}{section.8.2}\protected@file@percent }
 \bibcite{Krstic1995}{13}
 \bibcite{Isidori1995}{14}
 \bibcite{Chen1999}{15}
@@ -261,8 +272,8 @@
 \bibcite{Cabecinhas2009}{23}
 \bibcite{Driessen2018}{24}
 \bibcite{Ding2010}{25}
-\@writefile{toc}{\contentsline {chapter}{List of Figures}{47}{chapter*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {chapter}{List of Tables}{48}{chapter*.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Figures}{53}{chapter*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {chapter}{List of Tables}{55}{chapter*.8}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{Appendices}{A-1}{section*.10}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {A}Simulink Models}{A-1}{appendix.1.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
@@ -271,4 +282,4 @@
 \@writefile{toc}{\contentsline {chapter}{\numberline {B}Software Algorithms}{B-1}{appendix.1.B}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
-\gdef \@abspage@last{58}
+\gdef \@abspage@last{65}

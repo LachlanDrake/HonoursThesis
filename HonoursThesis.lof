@@ -18,9 +18,12 @@
 \contentsline {figure}{\numberline {4.9}{\ignorespaces Backstepping response to a large step input}}{32}{figure.4.9}%
 \contentsline {figure}{\numberline {4.10}{\ignorespaces Integral Backstepping position tracking with sigmoidal function}}{32}{figure.4.10}%
 \addvspace {10\p@ }
+\contentsline {figure}{\numberline {5.1}{\ignorespaces Estimated states using GPS extended Kalman filter.}}{38}{figure.5.1}%
+\contentsline {figure}{\numberline {5.2}{\ignorespaces Estimated states using OFS extended Kalman filter.}}{41}{figure.5.2}%
+\contentsline {figure}{\numberline {5.3}{\ignorespaces Estimated translational states over 1000 seconds.}}{42}{figure.5.3}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
-\contentsline {figure}{\numberline {7.1}{\ignorespaces Hardware platform used for flight testing.}}{40}{figure.7.1}%
+\contentsline {figure}{\numberline {7.1}{\ignorespaces Hardware platform used for flight testing.}}{46}{figure.7.1}%
 \addvspace {10\p@ }
 \addvspace {10\p@ }
 \addvspace {10\p@ }

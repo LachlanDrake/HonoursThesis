@@ -1,5 +1,5 @@
 
-\chapter{Control of Multi-Rotor Aircraft}
+\chapter{Control of Multi-Rotor Aircraft}\label{chapter:control}
 
 \textit{Now that a sufficiently accurate mathematical model of the hexacopter has been developed, the control problem is able to be approached. Within this chapter two control systems will be developed with the aim of controlling the aircraft position and attitude. Simulations will then be performed in Simulink to verify the effectiveness of each control system. For the purposes of these simulations it will be assumed that the vehicle's position and attitude (x, y, z, $\phi$, $\theta$, $\psi$) can be accurately measured at any given time.} 
 
@@ -258,7 +258,7 @@ z\\
 \end{bmatrix}
 \end{equation}
 
-As seen in Section \ref{{section:SimpleModel}}, the state space model which was presented in Section \ref{section:ModelDynamics}, is able to be greatly simplified by making a number of assumptions. For the purposes of this controller, the small angle approximation will be used in order to simplify the relationship between the torques and the Euler angles. That is, the relationship in Equation \ref{eqn:simpleState1} will be assumed true. Applying this to Equation \ref{eqn:state3} gives the following:
+As seen in Section \ref{section:SimpleModel}, the state space model which was presented in Section \ref{section:ModelDynamics}, is able to be greatly simplified by making a number of assumptions. For the purposes of this controller, the small angle approximation will be used in order to simplify the relationship between the torques and the Euler angles. That is, the relationship in Equation \ref{eqn:simpleState1} will be assumed true. Applying this to Equation \ref{eqn:state3} gives the following:
 
 \begin{equation}
 \begin{bmatrix}
@@ -455,12 +455,12 @@ where $v_{d,x}$, $v_{d,x}$ and $v_{d,x}$ are virtual controls representing the d
 
 Choose a candidate Lyapunov function including an integral term:
 \begin{equation}
-V=\frac{1}{2}\left(e_{p}^{T}e_{p}+e_{v}^{T}e_{v}+\lambda\Gamma^{T}\Gamma\right)
+V=\frac{1}{2}\left(e_{p}^{T}e_{p}+e_{v}^{T}e_{v}+k\Gamma^{T}\Gamma\right)
 \end{equation}
-where $\Gamma=\int^{t}_{0} e_{1}(\gamma) d\gamma$ and $\lambda$ is a diagonal 3x3 matrix of non-negative constants.
+where $\Gamma=\int^{t}_{0} e_{1}(\gamma) d\gamma$ and $k$ is a diagonal 3x3 matrix of non-negative constants.
 Taking the time derivative gives:
 \begin{equation}\label{eqn:IntBackCLFder1}
-\dot{V}=e_{p}^{T}\dot{e}_{p}+e_{v}^{T}\dot{e}_{v}+\lambda\Gamma^{T}\dot{\Gamma}
+\dot{V}=e_{p}^{T}\dot{e}_{p}+e_{v}^{T}\dot{e}_{v}+k\Gamma^{T}\dot{\Gamma}
 \end{equation}
 Now choose $\dot{V}$ such that it is negative definite:
 \begin{equation}\label{eqn:IntBackCLFder2}
@@ -481,15 +481,15 @@ Now consider the derivative terms:
 The virtual control $v_{d}$ is then chosen such that \eqref{eqn:IntBackCLFder1} satisfies \eqref{eqn:IntBackCLFder2}:
 
 \begin{equation*}
-v_{d}= \dot{p}_{d}+ce_{p}+\lambda\Gamma
+v_{d}= \dot{p}_{d}+ce_{p}+k\Gamma
 \end{equation*}
 Substituting into the expression for $e_{v}$ in \eqref{eqn:ErrorVectors} gives:
 
 \begin{equation}\label{eqn:e_p1}
 \begin{split}
-e_{v}&=\mathbf{\dot{p}}_{d}+ce_{p}+\lambda\Gamma - \mathbf{\dot{p}}\\
-e_{v}-ce_{p}-\lambda\Gamma&=\mathbf{\dot{p}}_{d}- \mathbf{\dot{p}}\\
-\dot{e_{p}}&=e_{v}-ce_{p}-\lambda\Gamma
+e_{v}&=\mathbf{\dot{p}}_{d}+ce_{p}+k\Gamma - \mathbf{\dot{p}}\\
+e_{v}-ce_{p}-k\Gamma&=\mathbf{\dot{p}}_{d}- \mathbf{\dot{p}}\\
+\dot{e_{p}}&=e_{v}-ce_{p}-k\Gamma
 \end{split}
 \end{equation}
  
@@ -497,9 +497,9 @@ e_{v}-ce_{p}-\lambda\Gamma&=\mathbf{\dot{p}}_{d}- \mathbf{\dot{p}}\\
 Taking the time derivative of $e_{v}$ gives:
 \begin{equation}\label{eqn:dot_e_v1}
 \begin{split}
-\dot{e}_{v}&=\ddot{p}_{d}+c\dot{e}_{p}+\lambda e_{p} - \mathbf{\ddot{p}}\\
-\dot{e}_{v}&=\ddot{p}_{d}+c(e_{v}-ce_{p}-\lambda\Gamma)+\lambda e_{p} - \mathbf{\ddot{p}}\\
-\dot{e}_{v}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-c\lambda\Gamma+\lambda e_{p} - \mathbf{\ddot{p}}\\
+\dot{e}_{v}&=\ddot{p}_{d}+c\dot{e}_{p}+k e_{p} - \mathbf{\ddot{p}}\\
+\dot{e}_{v}&=\ddot{p}_{d}+c(e_{v}-ce_{p}-k\Gamma)+k e_{p} - \mathbf{\ddot{p}}\\
+\dot{e}_{v}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-ck\Gamma+k e_{p} - \mathbf{\ddot{p}}\\
 \end{split}
 \end{equation} 
 
@@ -510,9 +510,9 @@ Note that an expression for the second derivative of translational position ($\m
 Finally, equating \eqref{eqn:dot_e_v1} with \eqref{eqn:dot_e_v2} allows the control laws to be derived:
 \begin{equation}\label{eqn:dot_e_v3}
 \begin{split}
--\kappa e_{v} - e_{p}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-c\lambda\Gamma+\lambda e_{p} - \mathbf{\ddot{p}}\\
-\mathbf{\ddot{p}}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-c\lambda\Gamma+\lambda e_{p} +\kappa e_{v} + e_{p}\\
-\mathbf{\ddot{p}}&=\ddot{p}_{d}+(1+\lambda-c^{2})e_{p}+(c+\kappa)e_{v}-c\lambda\Gamma
+-\kappa e_{v} - e_{p}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-ck\Gamma+k e_{p} - \mathbf{\ddot{p}}\\
+\mathbf{\ddot{p}}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-ck\Gamma+k e_{p} +\kappa e_{v} + e_{p}\\
+\mathbf{\ddot{p}}&=\ddot{p}_{d}+(1+k-c^{2})e_{p}+(c+\kappa)e_{v}-ck\Gamma
 \end{split}
 \end{equation}
 
@@ -520,9 +520,9 @@ The control laws are then derived using $\theta_{d}$, $\phi_{d}$ and $F_{T}$ as 
 
  \begin{equation}\label{eqn:IntBackContLaws}
 \begin{split}
-\theta_{d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[\ddot{x}_{d}+(1+\lambda_{1}-c_{1}^{2})e_{x}+(c_{1}+\kappa_{1})e_{v,x}-c_{1}\lambda_{1}\Gamma_{1}]-sin(\phi)sin(\psi)}{cos(\phi)cos(\psi)}\right)\\
-\phi_{d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[\ddot{y}_{d}+(1+\lambda_{2}-c_{2}^{2})e_{y}+(c_{2}+\kappa_{2})e_{v,y}-c_{2}\lambda_{2}\Gamma_{2}]+cos(\phi)sin(\theta)sin(\psi)}{cos(\psi)}\right)\\
-F_{T}&=\frac{m(\ddot{z}_{d}(1+\lambda_{3}-c_{3}^{2})e_{z}+(c+\kappa_{3})e_{v,z}-c_{3}\lambda_{3}\Gamma_{3}+g)}{cos(\phi)cos(\theta)}
+\theta_{d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[\ddot{x}_{d}+(1+k_{1}-c_{1}^{2})e_{x}+(c_{1}+\kappa_{1})e_{v,x}-c_{1}k_{1}\Gamma_{1}]-sin(\phi)sin(\psi)}{cos(\phi)cos(\psi)}\right)\\
+\phi_{d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[\ddot{y}_{d}+(1+k_{2}-c_{2}^{2})e_{y}+(c_{2}+\kappa_{2})e_{v,y}-c_{2}k_{2}\Gamma_{2}]+cos(\phi)sin(\theta)sin(\psi)}{cos(\psi)}\right)\\
+F_{T}&=\frac{m(\ddot{z}_{d}(1+k_{3}-c_{3}^{2})e_{z}+(c+\kappa_{3})e_{v,z}-c_{3}k_{3}\Gamma_{3}+g)}{cos(\phi)cos(\theta)}
 \end{split}
 \end{equation}
 
