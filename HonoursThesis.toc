@@ -63,13 +63,14 @@
 \contentsline {subsection}{\numberline {6.2.1}The Cube Autopilot}{45}{subsection.6.2.1}%
 \contentsline {subsection}{\numberline {6.2.2}ArduPilot Software}{45}{subsection.6.2.2}%
 \contentsline {subsection}{\numberline {6.2.3}Companion Computer}{46}{subsection.6.2.3}%
-\contentsline {subsection}{\numberline {6.2.4}Flight Testing}{46}{subsection.6.2.4}%
-\contentsline {section}{\numberline {6.3}Chapter Summary}{47}{section.6.3}%
-\contentsline {chapter}{\numberline {7}Conclusion and Extensions}{48}{chapter.7}%
-\contentsline {section}{\numberline {7.1}Conclusion}{48}{section.7.1}%
-\contentsline {section}{\numberline {7.2}Future Extensions}{48}{section.7.2}%
+\contentsline {subsection}{\numberline {6.2.4}Sensors}{46}{subsection.6.2.4}%
+\contentsline {subsection}{\numberline {6.2.5}Flight Testing}{47}{subsection.6.2.5}%
+\contentsline {section}{\numberline {6.3}Chapter Summary}{50}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Conclusion and Extensions}{51}{chapter.7}%
+\contentsline {section}{\numberline {7.1}Conclusion}{51}{section.7.1}%
+\contentsline {section}{\numberline {7.2}Future Extensions}{51}{section.7.2}%
 \vspace *{\baselineskip }
-\contentsline {chapter}{Bibliography}{49}{section.7.2}%
+\contentsline {chapter}{Bibliography}{53}{section.7.2}%
 \contentsline {chapter}{Appendices}{A-1}{section*.8}%
 \contentsline {chapter}{\numberline {A}Simulink Models}{A-1}{appendix.1.A}%
 \contentsline {chapter}{\numberline {B}Software Algorithms}{B-1}{appendix.1.B}%
