@@ -1,6 +1,6 @@
 
 \chapter{Background}
-\textit{This chapter serves two main purposes. Firstly, it evaluates the available literature surrounding the effectiveness of techniques for modelling, control and state estimation in unmanned aerial vehicles and related platforms. Secondly, it introduces to the key mathematical, physical and technical concepts necessary for the discussion in the following chapters.}
+\textit{This chapter serves two main purposes. Firstly, it evaluates the available literature surrounding the effectiveness of techniques for modelling, control and state estimation in unmanned aerial vehicles and related platforms. Secondly, it introduces the key mathematical, physical and technical concepts necessary for the discussion in the following chapters.}
 
 \section{Modelling Multi-Rotor Vehicles}
 \subsection{Modelling Approaches}
@@ -56,7 +56,7 @@ It is worth noting that this formula considers the Earth as a perfect sphere, wh
 
 \section{Control Techniques}
 %Effectiveness of different control techniques in drones from previous studies...
-
+There are many control techniques both linear and nonlinear which have been employed to stabilise UAVs and allow position tracking. Two of the most common techniques - one linear technique and one nonlinear technique - will be explored in detail in this section. These are PID control (linear) and backstepping control (nonlinear). There are many other techniques which show promise for UAV control including (but not limited to) model predictive control (MPC), sliding-mode control, feedback linearisation, geometric techniques and learning-based control \cite{Rubi2019}. However, these will not be discussed in detail here.  
 \subsection{Proportional Integral Derivative (PID) Control}\label{section:PIDBackground}
 A PID control law consists of three terms each associated with a gain:
 
@@ -72,7 +72,7 @@ Where e(t) represents the measured error between the desired setpoint and the me
 PID control is comparatively simple compared to other techniques, but several studies suggest that it is generally effective for stabilising a UAV around a hovering setpoint, in the absence of large disturbances\cite{Bouabdallah2006}\cite{Pounds2010}\cite{Moussid2015}. \\
 
 \subsection{Backstepping Control}\label{section:BacksteppingBackground}
-The plant dynamics of a multi-rotor vehicle are inherently nonlinear, therefore nonlinear control techniques may be necessary to stabilise the vehicle. Backstepping control is a nonlinear recursive technique which is based upon Lyapunov stability. The mathematical background on the backstepping method in this section is largely based upon the work by Krsti\'c et al.\cite{Krstic1995}.
+The plant dynamics of a multi-rotor vehicle are inherently nonlinear, therefore nonlinear control techniques may be necessary to stabilise the vehicle. Backstepping control is a nonlinear recursive technique which is based upon Lyapunov stability. The mathematical background on the backstepping method in this section is largely based upon the work presented by Kokotovic \cite{1992a} and Krsti\'c et al. \cite{Krstic1995}.
 
 \subsubsection{Lyapunov Stability}
 Direct Lyapunov theorem, as stated in Appendix B of \cite{Isidori1995}, considers a time invariant system of the form:
@@ -89,11 +89,38 @@ with equilibrium at $x=0$. Following from Direct Lyapunov theorem, to stabilise 
 
 In order to apply this method to the tracking problem, the states of the system may be redefined as $z=x_{d}-x$, where $x_{d}$ represents the desired value of the $x$ states.
 
+\subsubsection{Strict Feedback Form}
+Backstepping control is best demonstrated on a system in strict feedback form \cite{1992a}. Consider the system:
+\begin{equation*}
+\begin{split}
+\dot{x}_{1}&=f_{1}(x_{1},x_{2})\\
+\dot{x}_{2}&=x_{3}+f_{2}(x_{1},x_{2})\\
+\dot{x}_{3}&=u +f_{3}(x_{1},x_{2}, x_{3})
+\end{split}
+\end{equation*}
+
+Now consider that $x_{2}$ can be used as a "virtual control" to stabilise $\dot{x}_{1}$, by choosing an appropriate Lyapunov function $V_{1}(x_{1})$. We will denote the virtual control (or desired value of the state) with a subscript 'd', e.g. $x_{2d}(x_{1})$ denotes the desired value of $x_{2}$. It is worth noting that although this is a function of $x_{1}$, it will henceforth be written as $x_{2d}$ for simplicity. Likewise for other virtual controls.  Now consider the error between the desired and actual values: $z_{2}=x_{2}-x_{2d}$. As we are considering the stabilisation problem, $x_{1d}=0$ and therefore $z_{1}=x_{1}$. To stabilise $z_{1}$, the virtual control $x_{2d}$ must be chosen such that the Lyapunov function $V_{1}(z_{1})$ has a negative time derivative.
+
+Likewise, $x_{3}$ may be used to stabilise $z_{2}$ with a virtual control ($x_{3d}(z_{1},z_{2})$). A third error term is defined: $z_{3}=x_{3}-x_{3d}$. Also, a second Lyapunov function is defined: 
+\begin{equation*}
+V_{2}(z_{1},z_{2})=V_{1}(z_{1})+\frac{1}{2}z_{2}^{2}
+\end{equation*}
+The feedback law $x_{3d}$ is chosen such that the time derivative of this Lyapunov function is negative. 
+
+The final iteration for this system is complete by choosing the actual control $u$ to stabilise $z_{3}$. Again, this is done in the same way by defining a third Lyapunov function:
+\begin{equation*}
+V_{3}(z_{1},z_{2},z_{3})=V_{2}(z_{1},z_{2})+\frac{1}{2}z_{3}^{2}
+\end{equation*}
+The control input is then chosen such that the time derivative is negative definite. This results in global asymptotic stability of the system at the equilibrium point.
 
 
+\subsubsection{Implementation in UAV Control}
 
+A large number of studies have investigated various implementations of backstepping control strategies both in simulation and on physical UAV platforms. This control method is flexible and variations on the control law will arise depending on the design decision to cancel or retain nonlinearities. Also, the specific UAV platform and the modelling method used to describe it can result in differences between control laws in the literature.
 
+Backstepping control systems for multi-rotor UAVs are simulated with successful results in many studies. \cite{Mian2008} demonstrates stabilisation of the rotational subsystem of a quadrotor using a backstepping control law, with the translational subsystem controlled using PID. \cite{ArellanoMuro2013} demonstrates satisfactory simulation results for trajectory tracking of a quadrotor in the presence of external disturbances. \cite{Roza2012} presents similar results with a controller that allows a speed profile and yaw angle to be specified as a function of displacement along the path. A backstepping controller is found to perform better in the presence of wind as compared to sliding mode control in \cite{Moussid2015}. Other studies which show robust simulated results for backstepping controllers include \cite{Madani2006}, \cite{XuanMung2019} and \cite{Shao2018}.
 
+Further, multiple studies show good performance of backstepping controllers implemented on hardware platforms. \cite{Madani2006a} implements backstepping control on a UAV hardware platform on a test stand to demonstrate control of the yaw angle and z position only. \cite{Bouabdallah2006} demonstrates the use of backstepping with integral action for controlling a quadrotor UAV's attitude and position autonomously during indoor flights. Further research is required to demonstrate robust autonomous control in the presence of physical (rather than simulated) wind and external disturbances. 
 
 
 
@@ -144,8 +171,10 @@ P=P_{b}exp\left[\frac{-g M (H-H_{b})}{R T_{b}}\right]
 \end{equation}
 where $P_{b}$, $T_{b}$ and $H_{b}$ are the reference values of pressure, temperature and height respectively. The subscript b is representative of one of seven layers of the atmosphere. H is the height at which pressure is calculated, g is gravitational acceleration, M is the molar mass of air and R is the universal gas constant. 
 
-Assuming the UAV operates at altitudes below 11 km above sea level, the subscript b is 0. Within this operating region the reference values are: $P_{0}=101 325$ Pascals, $T_{0}=288.15$ Kelvin and $H_{0}=0$ metres,
- 
+Assuming the UAV operates at altitudes below 11 km above sea level, the subscript b is 0. Within this operating region the reference values are: $P_{0}=101 325$ Pascals, $T_{0}=288.15$ Kelvin and $H_{0}=0$ metres.
+
+\subsection{GPS Denied Environments}
+Most state estimation algorithms currently in use for UAV systems are dependent on GPS data for position estimation. However in many situations, GPS signal may be unavailable, practically disabling the UAV. To expand the operating region of the vehicle, it is necessary to have some form of position tracking algorithm which is able to accurately monitor position without GPS data. There are a number of techniques for achieving this including visual odometry and simultaneous localisation and mapping (SLAM) \cite{Balamurugan2016}. Complex systems will use a number of cameras, however a simple approach to visual odometry can be achieved by utilising a single optical flow sensor (OFS). An OFS is a camera which can be attached to the underside of a vehicle to record visual data of the surface. As the vehicle moves the OFS captures and compares sequences of images to determine the motion of the vehicle. Using this data in combination with IMU data has been shown to be effective for state estimation \cite{Driessen2018}. 
 
 \section{Chapter Summary}
 This chapter has provided the technical background necessary for the development in the following chapters. A comprehensive review of current literature has also been established in order to reveal the more effective methods and the gaps in current research.

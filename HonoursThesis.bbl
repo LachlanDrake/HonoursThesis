@@ -70,6 +70,11 @@ M.~D. Ardema, \emph{Newton-Euler Dynamics}.\hskip 1em plus 0.5em minus
 A.~V. Nebylov, \emph{Aerospace navigation systems}.\hskip 1em plus 0.5em minus
   0.4em\relax Chicheter, West Sussex, United Kingdom: John Wiley \& Sons, 2016.
 
+\bibitem{Rubi2019}
+B.~Rub{\'{i}}, R.~P{\'{e}}rez, and B.~Morcego, ``A survey of path following
+  control strategies for {UAVs} focused on quadrotors,'' \emph{Journal of
+  Intelligent {\&} Robotic Systems}, vol.~98, no.~2, pp. 241--265, sep 2019.
+
 \bibitem{Bouabdallah2006}
 S.~Bouabdallah, ``\BIBforeignlanguage{en}{Design and control of quadrotors with
   application to autonomous flying},'' 2006.
@@ -86,6 +91,10 @@ P.~Pounds, R.~Mahony, and P.~Corke, ``Modelling and control of a large
 M.~Moussid, A.~Sayouti, and H.~Medromi, ``Dynamic modeling and control of a
   hexarotor using linear and nonlinear methods,'' \emph{International Journal
   of Applied Information Systems}, vol.~9, pp. 9--17, 08 2015.
+
+\bibitem{1992a}
+P.~Kokotovic, ``The joy of feedback: nonlinear and adaptive,'' \emph{{IEEE}
+  Control Systems}, vol.~12, no.~3, pp. 7--17, jun 1992.
 
 \bibitem{Krstic1995}
 \BIBentryALTinterwordspacing
@@ -106,12 +115,67 @@ A.~Isidori, \emph{Nonlinear Control Systems}.\hskip 1em plus 0.5em minus
 Chen, \emph{Linear system theory and design}.\hskip 1em plus 0.5em minus
   0.4em\relax New York: Oxford University Press, 1999.
 
+\bibitem{Mian2008}
+A.~A. Mian and W.~Daobo, ``Modeling and backstepping-based nonlinear control
+  strategy for a 6 {DOF} quadrotor helicopter,'' \emph{Chinese Journal of
+  Aeronautics}, vol.~21, no.~3, pp. 261--268, jun 2008.
+
+\bibitem{ArellanoMuro2013}
+C.~A. Arellano-Muro, L.~F. Luque-Vega, B.~Castillo-Toledo, and A.~G. Loukianov,
+  ``Backstepping control with sliding mode estimation for a hexacopter,'' in
+  \emph{2013 10th International Conference on Electrical Engineering, Computing
+  Science and Automatic Control ({CCE})}.\hskip 1em plus 0.5em minus
+  0.4em\relax {IEEE}, sep 2013.
+
+\bibitem{Roza2012}
+A.~Roza and M.~Maggiore, ``Path following controller for a quadrotor
+  helicopter,'' in \emph{2012 American Control Conference ({ACC})}.\hskip 1em
+  plus 0.5em minus 0.4em\relax {IEEE}, jun 2012.
+
+\bibitem{Madani2006}
+T.~Madani and A.~Benallegue, ``Backstepping control for a quadrotor
+  helicopter,'' in \emph{2006 {IEEE}/{RSJ} International Conference on
+  Intelligent Robots and Systems}.\hskip 1em plus 0.5em minus 0.4em\relax
+  {IEEE}, oct 2006.
+
+\bibitem{XuanMung2019}
+N.~Xuan-Mung and S.~K. Hong, ``Robust backstepping trajectory tracking control
+  of a quadrotor with input saturation via extended state observer,''
+  \emph{Applied Sciences}, vol.~9, no.~23, p. 5184, nov 2019.
+
+\bibitem{Shao2018}
+X.~Shao, J.~Liu, and H.~Wang, ``Robust back-stepping output feedback trajectory
+  tracking for quadrotors via extended state observer and sigmoid tracking
+  differentiator,'' \emph{Mechanical Systems and Signal Processing}, vol. 104,
+  pp. 631--647, may 2018.
+
+\bibitem{Madani2006a}
+T.~Madani and A.~Benallegue, ``Control of a quadrotor mini-helicopter via full
+  state backstepping technique,'' in \emph{Proceedings of the 45th {IEEE}
+  Conference on Decision and Control}.\hskip 1em plus 0.5em minus 0.4em\relax
+  {IEEE}, 2006.
+
 \bibitem{Oceanic1976}
 \BIBentryALTinterwordspacing
 \emph{U.S. Standard Atmosphere, 1976}, ser. NOAA - SIT 76-1562.\hskip 1em plus
   0.5em minus 0.4em\relax National Aeronautics and Space Administration,
   National Oceanic and Atmospheric Administration, 1976. [Online]. Available:
   \url{https://books.google.com.au/books?id=x488AAAAIAAJ}
+\BIBentrySTDinterwordspacing
+
+\bibitem{Balamurugan2016}
+G.~Balamurugan, J.~Valarmathi, and V.~P.~S. Naidu, ``Survey on {UAV} navigation
+  in {GPS} denied environments,'' in \emph{2016 International Conference on
+  Signal Processing, Communication, Power and Embedded System
+  ({SCOPES})}.\hskip 1em plus 0.5em minus 0.4em\relax {IEEE}, oct 2016.
+
+\bibitem{Driessen2018}
+\BIBentryALTinterwordspacing
+S.~Driessen, N.~Janssen, L.~Wang, J.~Palmer, and H.~Nijmeijer, ``Experimentally
+  validated extended kalman filter for uav state estimation using low-cost
+  sensors,'' \emph{IFAC-PapersOnLine}, vol.~51, no.~15, pp. 43--48, 2018, 18th
+  IFAC Symposium on System Identification SYSID 2018. [Online]. Available:
+  \url{https://www.sciencedirect.com/science/article/pii/S2405896318317488}
 \BIBentrySTDinterwordspacing
 
 \bibitem{Cook2013}
@@ -149,15 +213,6 @@ W.~Jasim and D.~Gu, ``Integral backstepping controller for quadrotor path
 D.~Cabecinhas, R.~Cunha, and C.~Silvestre, ``Rotorcraft path following control
   for extended flight envelope coverage.''\hskip 1em plus 0.5em minus
   0.4em\relax {IEEE}, dec 2009.
-
-\bibitem{Driessen2018}
-\BIBentryALTinterwordspacing
-S.~Driessen, N.~Janssen, L.~Wang, J.~Palmer, and H.~Nijmeijer, ``Experimentally
-  validated extended kalman filter for uav state estimation using low-cost
-  sensors,'' \emph{IFAC-PapersOnLine}, vol.~51, no.~15, pp. 43--48, 2018, 18th
-  IFAC Symposium on System Identification SYSID 2018. [Online]. Available:
-  \url{https://www.sciencedirect.com/science/article/pii/S2405896318317488}
-\BIBentrySTDinterwordspacing
 
 \bibitem{Ding2010}
 W.~Ding, J.~Wang, and A.~Almagbile, ``Adaptive filter design for uav navigation
