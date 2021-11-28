@@ -33,7 +33,7 @@ F_{T}\\
 \end{bmatrix}
 \end{equation}
 
-\section{PID Control}
+\section{PID Control}\label{section:PIDControl}
 Initially, a control strategy for the hexacopter will be developed based upon Proportional Integral Derivative (PID) control. The basic concept of PID control is outlined in Section \ref{section:PIDBackground}. This controller will be designed with the aim of stabilising the vehicle around a hovering point and this allows the model to be simplified.
 \subsection{Simplified Model}\label{section:SimpleModel}
 For the purposes of this controller, the vehicle will assumed to be hovering, which implies the roll and pitch angles ($\phi$ $\theta$) will only have small variations from the origin. These assumptions will be used in developing the controller, however the controller will be verified by simulation on the full nonlinear model. Likewise, we will assume the yaw angle ($\psi$) is held close to the origin. This allows the small angle approximation to be applied to the model defined in Section \ref{section:ModelDynamics}. Applying this assumption to Equation \ref{eqn:state1} gives Equation \ref{eqn:simpleState1}.
