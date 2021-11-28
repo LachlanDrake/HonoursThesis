@@ -1,0 +1,90 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+
+%\usepackage{graphicx}
+%\usepackage{color}
+
+%\sloppy
+%\definecolor{lightgray}{gray}{0.5}
+%\setlength{\parindent}{0pt}
+
+%\begin{document}
+
+    
+    \begin{verbatim}
+for time=1:(MissionEnd_uS-MissionStart_uS)
+    if time==IMU_Data(IMU_count,1)
+
+        x_k_prev=x_k;
+        u_k_prev=u_k;
+        P_prev=P_k;
+        u_k=IMU_Data(IMU_count,2:7);
+
+        %Predict
+        x_k=StateTransitionFcn_HW_GPS(x_k_prev,u_k, Ts_IMU);
+        F_k=StateJacobian_HW_GPS(x_k_prev,u_k_prev, Ts_IMU);
+        P_k=F_k*P_prev*F_k'+Q_k;
+
+        %Update IMU
+        z_k=[IMU_Data(IMU_count,2:7)'; z_k(7:16)];
+        y_k=z_k-MeasurementFcn_HW_GPS(x_k);
+        H_k=MeasurementJacobian_HW_GPS(x_k);
+        S_k=H_k*P_k*(H_k')+R_k;
+        K_k=(P_k*(H_k'))/S_k;
+        x_k=x_k+K_k*y_k;
+        P_k=(eye(12)-K_k*H_k)*P_k;
+
+        IMU_count=IMU_count+1;
+
+    end
+
+
+    if time==Mag_Data(Mag_count,1)
+        %Update Mag
+        z_k=[z_k(1:6);  Mag_Data(Mag_count,2:4)';z_k(10:16)];
+        y_k=z_k-MeasurementFcn_HW_GPS(x_k);
+        H_k=MeasurementJacobian_HW_GPS(x_k);
+        S_k=H_k*P_k*(H_k')+R_k;
+        K_k=(P_k*(H_k'))/S_k;
+        x_k=x_k+K_k*y_k;
+        P_k=(eye(12)-K_k*H_k)*P_k;
+
+        Mag_count=Mag_count+1;
+    end
+
+    if time==GPS_Data(GPS_count,1)
+        %Update GPS
+        z_k=[z_k(1:9); GPS_Data(GPS_count, 2:7)';z_k(16)];
+        y_k=z_k-MeasurementFcn_HW_GPS(x_k);
+        H_k=MeasurementJacobian_HW_GPS(x_k);
+        S_k=H_k*P_k*(H_k')+R_k;
+        K_k=(P_k*(H_k'))/S_k;
+        x_k=x_k+K_k*y_k;
+        P_k=(eye(12)-K_k*H_k)*P_k;
+
+        GPS_count=GPS_count+1;
+    end
+
+    if time==Bar_Data(Bar_count,1)
+        %Update Baro
+        z_k=[z_k(1:15);Bar_Data(Bar_count, 2)];
+        y_k=z_k-MeasurementFcn_HW_GPS(x_k);
+        H_k=MeasurementJacobian_HW_GPS(x_k);
+        S_k=H_k*P_k*(H_k')+R_k;
+        K_k=(P_k*(H_k'))/S_k;
+        x_k=x_k+K_k*y_k;
+        P_k=(eye(12)-K_k*H_k)*P_k;
+
+        Bar_count=Bar_count+1;
+    end
+
+    x_estimated(time, :)=x_k';
+end
+\end{verbatim}
+
+
+
+%\end{document}
+

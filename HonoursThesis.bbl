@@ -59,6 +59,15 @@ X.~Zhang, X.~Li, K.~Wang, and Y.~Lu, ``A survey of modelling and identification
   of quadrotor robot,'' \emph{Abstract and Applied Analysis}, vol. 2014, pp.
   1--16, 2014.
 
+\bibitem{Bouabdallah2006}
+S.~Bouabdallah, ``\BIBforeignlanguage{en}{Design and control of quadrotors with
+  application to autonomous flying},'' 2006.
+
+\bibitem{Baranek2012}
+R.~Baránek and F.~Šolc, ``Modelling and control of a hexa-copter,'' in
+  \emph{Proceedings of the 13th International Carpathian Control Conference
+  (ICCC)}, 2012, pp. 19--23.
+
 \bibitem{Ardema2006}
 \BIBentryALTinterwordspacing
 M.~D. Ardema, \emph{Newton-Euler Dynamics}.\hskip 1em plus 0.5em minus
@@ -74,10 +83,6 @@ A.~V. Nebylov, \emph{Aerospace navigation systems}.\hskip 1em plus 0.5em minus
 B.~Rub{\'{i}}, R.~P{\'{e}}rez, and B.~Morcego, ``A survey of path following
   control strategies for {UAVs} focused on quadrotors,'' \emph{Journal of
   Intelligent {\&} Robotic Systems}, vol.~98, no.~2, pp. 241--265, sep 2019.
-
-\bibitem{Bouabdallah2006}
-S.~Bouabdallah, ``\BIBforeignlanguage{en}{Design and control of quadrotors with
-  application to autonomous flying},'' 2006.
 
 \bibitem{Pounds2010}
 \BIBentryALTinterwordspacing

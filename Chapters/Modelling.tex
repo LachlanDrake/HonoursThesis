@@ -359,9 +359,9 @@ The block diagram of the final hexacopter model which combines \eqref{eqn:state1
 
  
 \section{Simulation}
-The model derived in the previous section is simulated using Simulink. The block diagrams created within Simulink are shown in Appendix \ref{appendix:Simulink}.
+The model derived in the previous section is simulated using Simulink. The block diagrams created within Simulink are shown in Appendix \ref{section:Simu_Plant}.
 
-The intent is to simulate the physical vehicle described in Section \ref{section:Hardware}. The vehicle's geometry and mass were measured, and are shown in \tabref{table:parameters} along with the other parameters used in the model. The maximum propeller speed was estimated based upon the voltage supplied by the battery and the manufacturer specifications. The propeller thrust coefficient was estimated, based upon the vehicles mass and the motors maximum speed. Since the vehicle is able to accelerate vertically, the thrust produced by the propellers must overcome the weight force, i.e. $C_{T}\omega_{max}^{2}>mg$. Since more accurate methods were not readily available, a reasonable value of $C_{T}$ that satisfies this relationship was chosen. The yaw reaction torque coefficient was chosen to have the same order of magnitude as \cite{Bouabdallah2006} and \cite{Tayebi2004}. The moments of inertia around each axis are those measured for a similarly sized hexacopter using a pendulum by Capello et al. \cite{Capello2015}. These parameters do not exactly characterise the physical platform that is to be used, however the problem of parameter uncertainty is addressed in Section \ref{section:IntBack}.
+The intent is to simulate the physical vehicle described in Section \ref{section:Hardware}. The vehicle's geometry and mass were measured, and are shown in \tabref{table:parameters} along with the other parameters used in the model. The maximum propeller speed was estimated based upon the voltage supplied by the battery and the manufacturer specifications. The propeller thrust coefficient was estimated, based upon the vehicles mass and the motors maximum speed. Since the vehicle is able to accelerate vertically, the thrust produced by the propellers must overcome the weight force, i.e. $C_{T}\Omega_{max}^{2}>mg$. Since more accurate methods were not readily available, a reasonable value of $C_{T}$ that satisfies this relationship was chosen. The yaw reaction torque coefficient was chosen to have the same order of magnitude as \cite{Bouabdallah2006} and \cite{Tayebi2004}. The moments of inertia around each axis are those measured for a similarly sized hexacopter using a pendulum by Capello et al. \cite{Capello2015}. These parameters do not exactly characterise the physical platform that is to be used, however the problem of parameter uncertainty is addressed in Section \ref{section:IntBack}.
 
 \begin{table}[htb]\label{table:parameters}
 \begin{center}
@@ -381,7 +381,7 @@ Moment of inertia (z) & I\textsubscript{zz} & 0.0418  & kg m\textsuperscript{2}\
  \hline
  Angle between rotor arms & $\alpha$ & 60 & \textdegree\\
  \hline
- Maximum propeller speed & $\omega_{max}$ & 252 & rev s\textsuperscript{-1}\\
+ Maximum propeller speed & $\Omega_{max}$ & 252 & rev s\textsuperscript{-1}\\
  \hline
  Propeller thrust coefficient & $C_{T}$ & $4.5\times10^{-5}$ & N s\textsuperscript{2}\\
  \hline

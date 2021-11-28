@@ -1,0 +1,40 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+
+
+    
+    \begin{verbatim}
+function x= StateTransitionFcn_HW_GPS(x,u, Ts)
+%Predicts the states of the discretised hexacopter state model at the given x
+%and u values
+
+global g;
+
+measAcc=[u(1);u(2);u(3)];
+measRate=[u(4);u(5);u(6)];
+
+p=[x(1);x(2);x(3)];
+v=[x(4);x(5);x(6)];
+PHI=[x(7);x(8);x(9)];
+omega=[x(10);x(11);x(12)];
+
+p_new=p+Ts*v;
+v_new=v+Ts*([cos(PHI(2))*cos(PHI(3)) (sin(PHI(1))*sin(PHI(2))*cos(PHI(3))-cos(PHI(1))*sin(PHI(3))) (cos(PHI(1))*sin(PHI(2))*cos(PHI(3))+sin(PHI(1))*sin(PHI(3)));
+cos(PHI(2))*sin(PHI(3)) (sin(PHI(1))*sin(PHI(2))*sin(PHI(3))+cos(PHI(1))*cos(PHI(3))) (cos(PHI(1))*sin(PHI(2))*sin(PHI(3))-sin(PHI(1))*cos(PHI(3)));
+sin(PHI(2)) -sin(PHI(1))*cos(PHI(2)) -cos(PHI(1))*cos(PHI(2))]*(measAcc)+[0;0;g]);
+
+v_new(3)=(p_new(3)-p(3))/Ts;
+
+PHI_new=PHI+Ts*omega;
+omega_new=[1 sin(PHI(1))*tan(PHI(2)) cos(PHI(1))*tan(PHI(2));
+0 cos(PHI(1)) -sin(PHI(1));
+0 sin(PHI(1))*sec(PHI(2)) cos(PHI(1))*sec(PHI(2))]*(measRate);
+
+x=[p_new;v_new;PHI_new;omega_new];
+
+end
+\end{verbatim}
+
+

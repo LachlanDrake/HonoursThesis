@@ -8,12 +8,11 @@ In order to control a system, it is first necessary to have an understanding of 
 
  Further, attitude of the vehicle can be described by using either Euler angles or quaternions. Euler angles express attitude with three angles, each representing the rotation in 3D space around each axis. Alternatively, quaternion algebra is used to represent attitude with 4 scalar variables representing a point on the unit sphere\cite{Voight2021}. Euler representation is more intuitive, however quaternion representation has the advantage of avoiding a problem known as gimbal lock which arises when two of the Euler rotation axes align, resulting in a loss of a degree of freedom.\\
 
-Newton-Euler formalism combines Newtonian mechanics and Euler angle representation in order to describe the rotational and translational dynamics of rigid bodies. This approach is commonly used to develop a mathematical model for multi-rotor vehicles. The main advantage of this method is that it is simple to understand. 
+Newton-Euler formalism combines Newtonian mechanics and Euler angle representation in order to describe the rotational and translational dynamics of rigid bodies. This approach is commonly used to develop a mathematical model for multi-rotor vehicles. The main advantage of this method is that it is simple to understand. Alternatively, using Euler-Lagrange formalism results in a more compact derivation\cite{Zhang2014}. \\
+
+Multiple studies demonstrate the effectiveness of multi-rotor models developed using Newton-Euler formalism \cite{Bouabdallah2006}, \cite{Baranek2012}. Therefore, this thesis will utilise this method. Due to the uncomplicated nature of this formulation, identifying issues in the model and debugging simulations will, in general, be easier as compared to similar models formed using quaternion algebra or Lagrangian techniques.
 
 
-Alternatively, using Euler-Lagrange formalism results in a more compact derivation\cite{Zhang2014}. \\
-
-%Linearisation...
 
 \subsection{Newton-Euler Equations}
 The Basic Kinematic Equation (BKE) is used in Newton-Euler dynamics to describe the relative motion of two reference frames \cite{Ardema2006}. The BKE is given in Equation \ref{eqn:BKE1}:

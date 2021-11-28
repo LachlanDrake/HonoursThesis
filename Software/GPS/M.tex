@@ -1,0 +1,37 @@
+
+% This LaTeX was auto-generated from MATLAB code.
+% To make changes, update the MATLAB code and republish this document.
+
+
+    
+    \begin{verbatim}
+function h=MeasurementFcn_HW_GPS(x)
+%Uses the given state to predict the current measurements
+
+global g mag_x mag_y mag_z;
+
+
+%IMU measurements
+
+a=[-sin(x(8))*g;sin(x(7))*cos(x(8))*g;-cos(x(7))*cos(x(8))*g];
+
+omega=[1 0 -sin(x(8));
+       0 cos(x(7)) sin(x(7))*cos(x(8));
+       0 -sin(x(7)) cos(x(7))*cos(x(8))]*[x(10);x(11);x(12)];
+%Magnetometer
+mag=[cos(x(8))*cos(x(9)) cos(x(8))*sin(x(9)) sin(x(8));
+sin(x(7))*sin(x(8))*cos(x(9))-cos(x(7))*sin(x(9)) sin(x(7))*sin(x(8))*sin(x(9))+cos(x(7))*cos(x(9)) -sin(x(7))*cos(x(8));
+cos(x(7))*sin(x(8))*cos(x(9))+sin(x(7))*sin(x(9)) cos(x(7))*sin(x(8))*sin(x(9))-sin(x(7))*cos(x(9)) -cos(x(7))*cos(x(8))]*[mag_x;mag_y;mag_z];
+
+%GPS/baro
+position=[x(1); x(2);x(3)];
+velocity=[x(4);x(5);x(6)];
+
+z_bar=x(3);
+
+h=[a;omega;mag;position;velocity; z_bar];
+
+end
+\end{verbatim}
+
+      
