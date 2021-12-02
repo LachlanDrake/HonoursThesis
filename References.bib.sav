@@ -451,4 +451,17 @@
   doi       = {10.1109/cdc.2006.377548},
 }
 
+@Article{Sabatini2011,
+  author    = {Angelo Maria Sabatini},
+  journal   = {Sensors},
+  title     = {Kalman-Filter-Based Orientation Determination Using Inertial/Magnetic Sensors: Observability Analysis and Performance Evaluation},
+  year      = {2011},
+  month     = {sep},
+  number    = {10},
+  pages     = {9182--9206},
+  volume    = {11},
+  doi       = {10.3390/s111009182},
+  publisher = {{MDPI} {AG}},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}
