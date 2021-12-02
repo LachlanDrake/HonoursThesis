@@ -47,7 +47,7 @@ An integrated optical flow and lidar sensor, Matek 3901-L0X, was also connected 
 \end{figure}
 
 \FloatBarrier
-\subsection{Flight Testing}
+\section{Flight Testing}
 Flight testing was conducted by programming the hexacopter with an autonomous mission, which involved taking off to a height of 1.5 metres, travelling approximately 11 metres to a second position and landing. The drone performed the mission successfully using the ArduPilot flight control software and the sensor data recorded during the flight was logged to the onboard SD card. This data was processed in MATLAB and used with the EKF algorithm described in Section \ref{section:GPS_EKF}. \figref{fig:HW_GPS_Pos} shows the position and velocity results, and \figref{fig:HW_GPS_Ang} show the angular results. The estimates produced by the previously developed algorithm are compared with the estimates of the ArduPilot (AP) software. Note that for the yaw angle results, an angle of $2\pi$ radians is equivalent to 0 radians, which explains the sudden decline in these results. The estimated yaw angle climbs above $2\pi$ radians before correcting and returning towards zero in the correct range. 
 
 \begin{figure}[htb]
@@ -73,7 +73,7 @@ A flight test was then repeated with the optical flow sensor installed, in order
 A third flight was undertaken in which the aircraft was programmed to take off to 1.5m, hover in place for 10 seconds, then travel some distance to land at another waypoint. This flight resulted in a collision with the ground (likely due to unreliable lidar data), however the first 25 seconds of data was able to be used for analysis. Using this data, it could be seen that using the OFS data alone was insufficient for tracking positional change. 
 
 \FloatBarrier
-\subsection{Discussion of Results}
+\section{Discussion of Results}
 To produce these results, the sensor data that was recorded on the SD card was processed post-flight in MATLAB. It is important to note that the data which is recorded on the SD card is not representative of all of the sensor data available to the flight controller. That is, the flight controller samples the sensors at a faster rate and not all data is logged. This severely limits the accuracy of the estimated states which are based upon this data. For example, the IMU is sampled at a rate of at least 1 kHz, however the data is logged at a rate of approximately 25 Hz. This issue was particularly prominent for the optical flow sensor data, which was logged at a rate of only 10 Hz but has a capability of 121 Hz. If the EKF was run directly on the hardware it may prove to be more accurate. \\
 
 Another issue that arose was the unreliability of the lidar data. The datasheet states that the sensor only has an operating range of 2 m. Although, the flight test was conducted at 1.5 m above the ground, the angle of the vehicle during translational motion presumably caused the lidar line of sight to ground to exceed 2 m. This resulted in the lidar being unable to record data and therefore impacting the accuracy of the results - since the optical flow velocity estimates rely on knowledge of the scene depth. The operating range of this sensor makes it essentially useless for practical flights. However there are many other commercially available lidar sensors with larger operating ranges. Alternatively, many optical flow sensors are instead paired with sonar (ultrasonic) sensors for scene depth information.

@@ -14,11 +14,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\Introduction.tex
+Document=Chapters\Control.tex
 
 [Frame0_View0,0]
-TopLine=48
-Cursor=5938
+TopLine=49
+Cursor=2320
 
 [Frame1]
 Flags=0
@@ -32,11 +32,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\Conclusion.tex
+Document=Chapters\Estimation.tex
 
 [Frame1_View0,0]
 TopLine=0
-Cursor=645
+Cursor=2
 
 [Frame2]
 Flags=0
@@ -50,11 +50,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\Control.tex
+Document=Appendices\A.tex
 
 [Frame2_View0,0]
-TopLine=663
-Cursor=29028
+TopLine=32
+Cursor=1147
 
 [Frame3]
 Flags=0
@@ -68,11 +68,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=HonoursThesis.tex
+Document=Chapters\Background.tex
 
 [Frame3_View0,0]
-TopLine=135
-Cursor=4363
+TopLine=90
+Cursor=2
 
 [Frame4]
 Flags=0
@@ -86,11 +86,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\Background.tex
+Document=FrontMatter\COVIDStatement.tex
 
 [Frame4_View0,0]
-TopLine=269
-Cursor=18178
+TopLine=0
+Cursor=869
 
 [Frame5]
 Flags=0
@@ -104,11 +104,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=FrontMatter\Acknowledgements.tex
+Document=Chapters\Modelling.tex
 
 [Frame5_View0,0]
-TopLine=0
-Cursor=133
+TopLine=429
+Cursor=18789
 
 [Frame6]
 Flags=0
@@ -122,11 +122,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\Estimation.tex
+Document=FrontMatter\Abstract.tex
 
 [Frame6_View0,0]
-TopLine=157
-Cursor=7013
+TopLine=0
+Cursor=1193
 
 [Frame7]
 Flags=0
@@ -140,11 +140,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\PathFollowing.tex
+Document=Chapters\Implementation.tex
 
 [Frame7_View0,0]
-TopLine=0
-Cursor=2
+TopLine=126
+Cursor=9909
 
 [Frame8]
 Flags=0
@@ -158,11 +158,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\Implementation.tex
+Document=Chapters\Introduction.tex
 
 [Frame8_View0,0]
-TopLine=0
-Cursor=601
+TopLine=21
+Cursor=5938
 
 [Frame9]
 Flags=0
@@ -176,11 +176,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=FrontMatter\Abstract.tex
+Document=Chapters\Conclusion.tex
 
 [Frame9_View0,0]
 TopLine=0
-Cursor=1167
+Cursor=1160
 
 [Frame10]
 Flags=0
@@ -194,11 +194,11 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=Chapters\Modelling.tex
+Document=HonoursThesis.tex
 
 [Frame10_View0,0]
-TopLine=0
-Cursor=70
+TopLine=139
+Cursor=4568
 
 [Frame11]
 Flags=0
@@ -212,13 +212,31 @@ NormalPos.top=41
 NormalPos.right=1911
 NormalPos.bottom=852
 Class=LaTeXView
-Document=FrontMatter\COVIDStatement.tex
+Document=FrontMatter\Acknowledgements.tex
 
 [Frame11_View0,0]
 TopLine=0
-Cursor=869
+Cursor=133
+
+[Frame12]
+Flags=0
+ShowCmd=1
+MinPos.x=-1
+MinPos.y=-1
+MaxPos.x=-1
+MaxPos.y=-1
+NormalPos.left=4
+NormalPos.top=41
+NormalPos.right=1911
+NormalPos.bottom=852
+Class=LaTeXView
+Document=Chapters\PathFollowing.tex
+
+[Frame12_View0,0]
+TopLine=0
+Cursor=2
 
 [SessionInfo]
-FrameCount=12
-ActiveFrame=4
+FrameCount=13
+ActiveFrame=7
 

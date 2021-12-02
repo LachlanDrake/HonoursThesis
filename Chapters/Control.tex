@@ -36,7 +36,7 @@ F_{T}\\
 \section{PID Control}\label{section:PIDControl}
 Initially, a control strategy for the hexacopter will be developed based upon Proportional Integral Derivative (PID) control. The basic concept of PID control is outlined in Section \ref{section:PIDBackground}. This controller will be designed with the aim of stabilising the vehicle around a hovering point and this allows the model to be simplified.
 \subsection{Simplified Model}\label{section:SimpleModel}
-For the purposes of this controller, the vehicle will assumed to be hovering, which implies the roll and pitch angles ($\phi$ $\theta$) will only have small variations from the origin. These assumptions will be used in developing the controller, however the controller will be verified by simulation on the full nonlinear model. Likewise, we will assume the yaw angle ($\psi$) is held close to the origin. This allows the small angle approximation to be applied to the model defined in Section \ref{section:ModelDynamics}. Applying this assumption to Equation \ref{eqn:state1} gives Equation \ref{eqn:simpleState1}.
+For the purposes of this controller, the vehicle will be assumed to be hovering, which implies the roll and pitch angles ($\phi$ $\theta$) will only have small variations from the origin. These assumptions will be used in developing the controller, however the controller will be verified by simulation on the full nonlinear model. Likewise, we will assume the yaw angle ($\psi$) is held close to the origin. This allows the small angle approximation to be applied to the model defined in Section \ref{section:ModelDynamics}. Applying this assumption to Equation \ref{eqn:state1} gives Equation \ref{eqn:simpleState1}.
 
 \begin{equation}\label{eqn:simpleState1}
 \begin{split}
@@ -299,9 +299,9 @@ a_{2}x_{2}x_{4}+b_{2}\tau_{\theta}\\
 x_{6}\\
 a_{3}x_{2}x_{4}+b_{3}\tau_{\psi}\\
 x_{8}\\
-[cos(x_{1})sin(x_{3})cos(x_{5})+sin(x_{1})sin(x_{5})]\frac{F_{T}}{m}\\
+[-cos(x_{1})sin(x_{3})cos(x_{5})-sin(x_{1})sin(x_{5})]\frac{F_{T}}{m}\\
 x_{10}\\
-[cos(x_{1})sin(x_{3})sin(x_{5})-sin(x_{1})cos(x_{5})]\frac{F_{T}}{m}\\
+[-cos(x_{1})sin(x_{3})sin(x_{5})+sin(x_{1})cos(x_{5})]\frac{F_{T}}{m}\\
 x_{12}\\
 [cos(x_{1})cos(x_{3})]\frac{F_{T}}{m}-g
 \end{bmatrix}
@@ -364,7 +364,6 @@ The same steps can be followed to stabilise both the pitch and yaw angles with c
 \end{split}
 \end{equation}
 
-angle results, stabilisation...
 
 \subsection{Position Control}
 The control laws developed in the previous section successfully allow stabilisation and tracking of the vehicle's attitude, however, the objective of this control system is to allow the vehicle to track a trajectory in 3D space. First consider the tracking error of the position in the Earth frame x direction:
@@ -379,18 +378,18 @@ Now, consider the tracking error of the translational velocity, $z_{8}$, and its
 z_{8}&=x_{8d}-x_{8}\\
 z_{8}&=\dot{x}_{7d}+K_{7}z_{7}-x_{8}\\
 \dot{z}_{8}&=\ddot{x}_{7d}+K_{7}\dot{z}_{7}-\dot{x}_{8}\\
-&=\ddot{x}_{7d}+K_{7}\dot{z}_{7}-[cos(x_{1})sin(x_{3})cos(x_{5})+sin(x_{1})sin(x_{5})]\frac{F_{T}}{m}
+&=\ddot{x}_{7d}+K_{7}\dot{z}_{7}-[-cos(x_{1})sin(x_{3})cos(x_{5})-sin(x_{1})sin(x_{5})]\frac{F_{T}}{m}
 \end{split}
 \]
 
 In order to ensure $\dot{z}_{8}=-K_{8}z_{8}$, a virtual control must be chosen. If it is assumed that the vehicle is in hovering flight and the Euler angles are stabilised around 0\textdegree, then the most logical choice of variable for a virtual control is the pitch angle ($x_{3}$). Thus, the virtual control $x_{3d}$ in Equation \ref{eqn:XPosContLaw} will be supplied as a desired value for the attitude controller developed in the previous section. 
 \begin{equation}\label{eqn:XPosContLaw}
-x_{3d}=sin^{-1}\left(\frac{\frac{m}{F_{T}}[K_{8}z_{8}+\ddot{x}_{7d}+K_{7}\dot{z}_{7}]-sin(x_{1})sin(x_{5})}{cos(x_{1})cos(x_{5})}\right)
+x_{3d}=sin^{-1}\left(-\frac{\frac{m}{F_{T}}[K_{8}z_{8}+\ddot{x}_{7d}+K_{7}\dot{z}_{7}]+sin(x_{1})sin(x_{5})}{cos(x_{1})cos(x_{5})}\right)
 \end{equation}
 
 The y position control law, shown in \eqref{eqn:YPosContLaw}, is developed in the same way, with the roll angle ($x_{1}$) acting as the virtual control. 
 \begin{equation}\label{eqn:YPosContLaw}
-x_{1d}=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[K_{10}z_{10}+\ddot{x}_{9d}+K_{9}\dot{z}_{9}]+cos(x_{1})sin(x_{3})sin(x_{5})}{cos(x_{5})}\right)
+x_{1d}=sin^{-1}\left(\frac{\frac{m}{F_{T}}[K_{10}z_{10}+\ddot{x}_{9d}+K_{9}\dot{z}_{9}]+cos(x_{1})sin(x_{3})sin(x_{5})}{cos(x_{5})}\right)
 \end{equation}
  
 The z position control law in \eqref{eqn:ZPosContLaw} is developed following the same method, with $F_{T}$ as the control input.
@@ -428,8 +427,6 @@ The gains $K_{i}$ were tuned using the Simulink Design Optimization Package. Thi
 	\label{fig:Backstep_path}%
 \end{figure}
 
-
-Show what happens when parameters vary...
 \FloatBarrier
 \section{Backstepping with Integral Action}\label{section:IntBack}
 As an extension, to reduce the effects of uncertainties in model parameters it is desirable to include integral action within the controller. This method has been shown to be effective at reducing the effects of uncertainties and increasing the robustness of the controller in both simulation \cite{Jasim2015} and hardware \cite{Bouabdallah2006} implementation.
@@ -520,8 +517,8 @@ The control laws are then derived using $\theta_{d}$, $\phi_{d}$ and $F_{T}$ as 
 
  \begin{equation}\label{eqn:IntBackContLaws}
 \begin{split}
-\theta_{d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[\ddot{x}_{d}+(1+k_{1}-c_{1}^{2})e_{x}+(c_{1}+\kappa_{1})e_{v,x}-c_{1}k_{1}\Gamma_{1}]-sin(\phi)sin(\psi)}{cos(\phi)cos(\psi)}\right)\\
-\phi_{d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[\ddot{y}_{d}+(1+k_{2}-c_{2}^{2})e_{y}+(c_{2}+\kappa_{2})e_{v,y}-c_{2}k_{2}\Gamma_{2}]+cos(\phi)sin(\theta)sin(\psi)}{cos(\psi)}\right)\\
+\theta_{d}&=sin^{-1}\left(\frac{-\frac{m}{F_{T}}[\ddot{x}_{d}+(1+k_{1}-c_{1}^{2})e_{x}+(c_{1}+\kappa_{1})e_{v,x}-c_{1}k_{1}\Gamma_{1}]-sin(\phi)sin(\psi)}{cos(\phi)cos(\psi)}\right)\\
+\phi_{d}&=sin^{-1}\left(\frac{\frac{m}{F_{T}}[\ddot{y}_{d}+(1+k_{2}-c_{2}^{2})e_{y}+(c_{2}+\kappa_{2})e_{v,y}-c_{2}k_{2}\Gamma_{2}]+cos(\phi)sin(\theta)sin(\psi)}{cos(\psi)}\right)\\
 F_{T}&=\frac{m(\ddot{z}_{d}(1+k_{3}-c_{3}^{2})e_{z}+(c+\kappa_{3})e_{v,z}-c_{3}k_{3}\Gamma_{3}+g)}{cos(\phi)cos(\theta)}
 \end{split}
 \end{equation}
@@ -553,24 +550,24 @@ A persisting limitation with this control method is its inability to stabilise w
 \end{figure}
 \FloatBarrier
 \section{Actuator Saturation}
-To prevent actuator saturation when large step commands are given, a sigmoidal function can be used to limit the effect of position error \cite{Cabecinhas2009}. For this purpose, the sigmoidal function is defined as:
+To prevent actuator saturation when large step commands are given, a sigmoid function can be used to limit the effect of position error \cite{Cabecinhas2009}. For this purpose, the sigmoid function is defined as:
 \[\sigma(x)=p_{max}\frac{x}{1+|x|}\]
 
-This sigmoidal function is used to limit the output of the x and y position controllers prior to the arcsine function. The parameter $p_{max}$ is chosen as 0.77 to limit the desired roll and pitch angles to $\pm50\deg$.
+This sigmoid function is used to limit the output of the x and y position controllers prior to the arcsine function. The parameter $p_{max}$ is chosen as 0.77 to limit the desired roll and pitch angles to $\pm50\deg$.
 This greatly improves the controllers response to large step inputs, as can be seen by comparing the ten metre step response in \figref{fig:SatStep} with \figref{fig:IntBackSat}.
 
 \begin{figure}[htb]
 \begin{center}
 	\includegraphics[width=\columnwidth]{/Saturation/xTracking_Step.jpg}%
 	\end{center}
-	\caption{Integral Backstepping position tracking with sigmoidal function}%
+	\caption{Integral Backstepping position tracking with sigmoid function}%
 	\label{fig:SatStep}%
 \end{figure}
 
 
 \FloatBarrier
 \section{Chapter Summary}
-In this chapter, three control systems were developed and tested in simulation. The PID control system was effective at stabilising the aircraft around a hovering point, but had limitations due to not considering the nonlinearities of the system. The backstepping control system improved upon this by accounting for the nonlinearities, however this controller still depended on accurate values of the model parameters. The final controller implemented backstepping control with integral action and was effective in adjusting to errors in the given model parameters, however it was prone to actuator saturation with large step commands. The final addition to the control system implemented a sigmoidal function in the position control laws to mitigate the effects of actuator saturation. These control systems were all developed with the assumption that all of the  system states are available. The next section will address how the states are estimated using sensor data.
+In this chapter, three control systems were developed and tested in simulation. The PID control system was effective at stabilising the aircraft around a hovering point, but had limitations due to not considering the nonlinearities of the system. The backstepping control system improved upon this by accounting for the nonlinearities, however this controller still depended on accurate values of the model parameters. The final controller implemented backstepping control with integral action and was effective in adjusting to errors in the given model parameters, however it was prone to actuator saturation with large step commands. The final addition to the control system implemented a sigmoid function in the position control laws to mitigate the effects of actuator saturation. These control systems were all developed with the assumption that all of the  system states are available. The next section will address how the states are estimated using sensor data.
 
 
 

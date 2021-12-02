@@ -44,12 +44,12 @@ GPS data identifies a position on the Earth in terms of latitudes and longitudes
 
 \begin{equation}\label{eqn:haversine}
 \begin{split}
-d&=2R sin^{-1} \left( \sqrt{sin^{2}\left( \frac{\chi_{2}-\chi_{1}}{2} \right) +cos(\chi_{1})cos(\chi_{2})sin^{2} \left( \frac{\lambda_{2}-\lambda_{1}}{2}  \right) }\right)\\
+d&=2R sin^{-1} \left( \sqrt{sin^{2}\left( \frac{\Delta\chi}{2} \right) +cos(\chi_{1})cos(\chi_{2})sin^{2} \left( \frac{\Delta\lambda}{2}  \right) }\right)\\
 \beta&=atan2\left[ sin(\Delta\lambda)cos(\chi_{2}) , cos(\chi_{1})sin(\chi_{2}) - sin(\chi_{1}) cos(\chi_2) cos(\Delta\lambda)\right]
 \end{split}
 \end{equation}
 
-where R is the Earth's radius, $\lambda_{1}$, $\chi_{1}$ represent the initial latitude and longitude coordinates respectively and $\lambda_{2}$, $\chi_{2}$ represent the final coordinates. The function $atan2(b,a)$ finds the angle between the positive x axis and the point defined by (a,b).
+where R is the Earth's radius, $\lambda_{1}$, $\chi_{1}$ represent the initial latitude and longitude coordinates respectively and $\lambda_{2}$, $\chi_{2}$ represent the final coordinates. $\Delta\lambda$ is equivalent to $(\lambda_{2}-\lambda_{1})$ and $\Delta\chi$ is equivalent to $(\chi_{2}-\chi_{1})$. The function $atan2(b,a)$ finds the angle between the positive x axis and the point defined by (a,b).
 It is worth noting that this formula considers the Earth as a perfect sphere, when in reality it is elliptical to some extent. However, over short distances the effect of the Earth's elliptical nature on the accuracy of the results is negligible.
 
 
