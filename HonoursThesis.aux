@@ -35,7 +35,7 @@
 \@writefile{lof}{\addvspace {10\p@ }}
 \@writefile{lot}{\addvspace {10\p@ }}
 \@writefile{toc}{\contentsline {section}{\numberline {1.1}Project Motivation}{1}{section.1.1}\protected@file@percent }
-\@writefile{toc}{\contentsline {section}{\numberline {1.2}Thesis Outline}{2}{section.1.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1.2}Thesis Outline}{3}{section.1.2}\protected@file@percent }
 \citation{Raine2017}
 \citation{Voight2021}
 \citation{Zhang2014}
@@ -51,12 +51,10 @@
 \citation{Nebylov2016}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.2}Newton-Euler Equations}{5}{subsection.2.1.2}\protected@file@percent }
 \newlabel{eqn:BKE1}{{2.1}{5}{Newton-Euler Equations}{equation.2.1.1}{}}
-\newlabel{eqn:BKE2}{{2.2}{5}{Newton-Euler Equations}{equation.2.1.2}{}}
-\newlabel{eqn:Euler2}{{2.3}{5}{Newton-Euler Equations}{equation.2.1.3}{}}
 \citation{Rubi2019}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.1.3}Reference Frames and Co-ordinate Systems}{6}{subsection.2.1.3}\protected@file@percent }
 \newlabel{section:RefFrames}{{2.1.3}{6}{Reference Frames and Co-ordinate Systems}{subsection.2.1.3}{}}
-\newlabel{eqn:haversine}{{2.4}{6}{Reference Frames and Co-ordinate Systems}{equation.2.1.4}{}}
+\newlabel{eqn:haversine}{{2.2}{6}{Reference Frames and Co-ordinate Systems}{equation.2.1.2}{}}
 \citation{Bouabdallah2006}
 \citation{Pounds2010}
 \citation{Moussid2015}
@@ -73,7 +71,9 @@
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.2.2}Backstepping Control}{8}{subsection.2.2.2}\protected@file@percent }
 \newlabel{section:BacksteppingBackground}{{2.2.2}{8}{Backstepping Control}{subsection.2.2.2}{}}
 \@writefile{toc}{\contentsline {subsubsection}{Lyapunov Stability}{8}{section*.6}\protected@file@percent }
-\newlabel{eqn:TISystem}{{2.5}{8}{Lyapunov Stability}{equation.2.2.5}{}}
+\newlabel{eqn:TISystem}{{2.3}{8}{Lyapunov Stability}{equation.2.2.3}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Strict Feedback Form}{9}{section*.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsubsection}{Implementation in UAV Control}{9}{section*.8}\protected@file@percent }
 \citation{Mian2008}
 \citation{ArellanoMuro2013}
 \citation{Roza2012}
@@ -81,20 +81,20 @@
 \citation{Madani2006}
 \citation{XuanMung2019}
 \citation{Shao2018}
-\@writefile{toc}{\contentsline {subsubsection}{Strict Feedback Form}{9}{section*.7}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsubsection}{Implementation in UAV Control}{9}{section*.8}\protected@file@percent }
 \citation{Madani2006a}
 \citation{Bouabdallah2006}
+\citation{Wana}
+\citation{StPierre}
 \@writefile{toc}{\contentsline {section}{\numberline {2.3}State Estimation}{10}{section.2.3}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Extended Kalman Filter}{10}{subsection.2.3.1}\protected@file@percent }
-\newlabel{section:EKFBackground}{{2.3.1}{10}{Extended Kalman Filter}{subsection.2.3.1}{}}
 \citation{Oceanic1976}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.1}Extended Kalman Filter}{11}{subsection.2.3.1}\protected@file@percent }
+\newlabel{section:EKFBackground}{{2.3.1}{11}{Extended Kalman Filter}{subsection.2.3.1}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Magnetometer}{11}{subsection.2.3.2}\protected@file@percent }
 \citation{Balamurugan2016}
 \citation{Driessen2018}
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.2}Magnetometer}{11}{subsection.2.3.2}\protected@file@percent }
-\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Barometer}{11}{subsection.2.3.3}\protected@file@percent }
-\newlabel{section:barometerBackground}{{2.3.3}{11}{Barometer}{subsection.2.3.3}{}}
-\newlabel{eqn:baroFormula}{{2.8}{11}{Barometer}{equation.2.3.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.3.3}Barometer}{12}{subsection.2.3.3}\protected@file@percent }
+\newlabel{section:barometerBackground}{{2.3.3}{12}{Barometer}{subsection.2.3.3}{}}
+\newlabel{eqn:baroFormula}{{2.4}{12}{Barometer}{equation.2.3.4}{}}
 \@writefile{toc}{\contentsline {subsection}{\numberline {2.3.4}GPS Denied Environments}{12}{subsection.2.3.4}\protected@file@percent }
 \@writefile{toc}{\contentsline {section}{\numberline {2.4}Chapter Summary}{12}{section.2.4}\protected@file@percent }
 \citation{Nebylov2016}
@@ -307,17 +307,20 @@
 \bibcite{XuanMung2019}{23}
 \bibcite{Shao2018}{24}
 \bibcite{Madani2006a}{25}
-\bibcite{Oceanic1976}{26}
-\bibcite{Balamurugan2016}{27}
-\bibcite{Driessen2018}{28}
-\bibcite{Cook2013}{29}
-\bibcite{Nelson1997}{30}
-\bibcite{Tayebi2004}{31}
-\bibcite{Capello2015}{32}
-\bibcite{Herzog2016}{33}
-\bibcite{Jasim2015}{34}
-\bibcite{Cabecinhas2009}{35}
-\bibcite{Ding2010}{36}
+\bibcite{Wana}{26}
+\bibcite{StPierre}{27}
+\bibcite{Oceanic1976}{28}
+\bibcite{Balamurugan2016}{29}
+\bibcite{Driessen2018}{30}
+\bibcite{Cook2013}{31}
+\bibcite{Nelson1997}{32}
+\bibcite{Tayebi2004}{33}
+\bibcite{Capello2015}{34}
+\bibcite{Herzog2016}{35}
+\bibcite{Jasim2015}{36}
+\bibcite{Cabecinhas2009}{37}
+\bibcite{Ding2010}{38}
+\bibcite{Sabatini2011}{39}
 \@writefile{toc}{\contentsline {chapter}{Appendices}{A-1}{section*.10}\protected@file@percent }
 \@writefile{toc}{\contentsline {chapter}{\numberline {A}Simulink Models}{A-1}{appendix.1.A}\protected@file@percent }
 \@writefile{lof}{\addvspace {10\p@ }}

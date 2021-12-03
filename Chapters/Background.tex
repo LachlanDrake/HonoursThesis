@@ -4,11 +4,11 @@
 
 \section{Modelling Multi-Rotor Vehicles}
 \subsection{Modelling Approaches}
-In order to control a system, it is first necessary to have an understanding of the dynamics of the system. There are multiple methods used for developing mathematical models in order to describe the dynamics of multi-rotor vehicles. The Newtonian approach uses forces and torques in order to describe the system, whereas the Lagrangian approach utilises energies\cite{Raine2017}.\\
+In order to control a system, it is first necessary to have an understanding of the dynamics of the system. There are multiple methods used for developing mathematical models in order to describe the dynamics of multi-rotor vehicles. The Newtonian approach uses forces and torques in order to describe the system, whereas the Lagrangian approach utilises energies \cite{Raine2017}.\\
 
- Further, attitude of the vehicle can be described by using either Euler angles or quaternions. Euler angles express attitude with three angles, each representing the rotation in 3D space around each axis. Alternatively, quaternion algebra is used to represent attitude with 4 scalar variables representing a point on the unit sphere\cite{Voight2021}. Euler representation is more intuitive, however quaternion representation has the advantage of avoiding a problem known as gimbal lock which arises when two of the Euler rotation axes align, resulting in a loss of a degree of freedom.\\
+ Further, attitude of the vehicle can be described by using either Euler angles or quaternions. Euler angles express attitude with three angles, each representing the rotation in 3D space around each axis. Alternatively, quaternion algebra is used to represent attitude with four scalar variables representing a point on the unit sphere \cite{Voight2021}. Euler representation is more intuitive, however quaternion representation has the advantage of avoiding a problem known as gimbal lock which arises when two of the Euler rotation axes align, resulting in a loss of a degree of freedom.\\
 
-Newton-Euler formalism combines Newtonian mechanics and Euler angle representation in order to describe the rotational and translational dynamics of rigid bodies. This approach is commonly used to develop a mathematical model for multi-rotor vehicles. The main advantage of this method is that it is simple to understand. Alternatively, using Euler-Lagrange formalism results in a more compact derivation\cite{Zhang2014}. \\
+Newton-Euler formalism combines Newtonian mechanics and Euler angle representation in order to describe the rotational and translational dynamics of rigid bodies. This approach is commonly used to develop a mathematical model for multi-rotor vehicles. The main advantage of this method is that it is simple to understand. Alternatively, using Euler-Lagrange formalism results in a more compact derivation \cite{Zhang2014}. \\
 
 Multiple studies demonstrate the effectiveness of multi-rotor models developed using Newton-Euler formalism \cite{Bouabdallah2006}, \cite{Baranek2012}. Therefore, this thesis will utilise this method. Due to the uncomplicated nature of this formulation, identifying issues in the model and debugging simulations will, in general, be easier as compared to similar models formed using quaternion algebra or Lagrangian techniques.
 
@@ -17,30 +17,30 @@ Multiple studies demonstrate the effectiveness of multi-rotor models developed u
 \subsection{Newton-Euler Equations}
 The Basic Kinematic Equation (BKE) is used in Newton-Euler dynamics to describe the relative motion of two reference frames \cite{Ardema2006}. The BKE is given in Equation \ref{eqn:BKE1}:
 \begin{equation}\label{eqn:BKE1} 
-\frac{d\textbf{Q}_{a}}{dt}=\frac{d\textbf{Q}_{b}}{dt}+\omega_{b} \times \textbf{Q}_{b}
+\frac{d\textbf{Q}_{a}}{dt}=\frac{d\textbf{Q}_{b}}{dt}+\mathbf{\omega}_{b} \times \textbf{Q}_{b}
 \end{equation}
-where $\textbf{Q}_{a}$ and $\textbf{Q}_{b}$ represent a 3 dimensional quantity (e.g position, velocity) with respect to reference frames \{A\} and \{B\} respectively, and $\omega_{b}$ represents the angular velocity of \{B\} with respect to \{A\}. Now, consider reference frame \{B\} to be fixed at the centre of mass of some rigid body. By considering the mass of the body and taking \textbf{Q} as the translational velocity of the body (\textbf{v}), the BKE (Equation \ref{eqn:BKE1}) can be written in terms of forces to give the first of the Newton-Euler equations.
+where $\textbf{Q}_{a}$ and $\textbf{Q}_{b}$ represent a three dimensional quantity (e.g position, velocity) with respect to reference frames \{A\} and \{B\} respectively, and $\mathbf\omega_{b}$ represents the angular velocity of \{B\} with respect to \{A\}. Now, consider reference frame \{B\} to be fixed at the centre of mass of some rigid body. By considering the mass of the body and taking \textbf{Q} as the translational velocity of the body (\textbf{v}), the BKE (Equation \ref{eqn:BKE1}) can be written in terms of forces to give the first of the Newton-Euler equations.
 
-\begin{equation}\label{eqn:BKE2}
+\begin{equation*}
 \begin{split} 
 \frac{d\textbf{v}_{a}}{dt}&=\frac{d\textbf{v}_{b}}{dt}+\omega_{b} \times \textbf{v}_{b}\\
 m\dot{\textbf{v}}_{a}&=m(\dot{\textbf{v}}_{b}+\omega_{b} \times \textbf{v}_{b})\\
 \textbf{F}_{a}&=m(\dot{\textbf{v}}_{b}+\omega_{b}\times\textbf{v}_{b})
 \end{split}
-\end{equation}
+\end{equation*}
 
-The moments of forces (torques) about the centre of mass may be considered in a similar way in order to produce the second of the Newton-Euler equations\cite{Ardema2006}:
-\begin{equation}\label{eqn:Euler2}
+The moments of forces (torques) about the centre of mass may be considered in a similar way in order to produce the second of the Newton-Euler equations \cite{Ardema2006}:
+\begin{equation*}
 \textbf{M}_{b}=\textbf{I}_{b}\dot{\omega}_{b}+\omega_{b}\times\textbf{I}_{b}\omega_{b}
-\end{equation}
-where $\textbf{M}_{b}$ represents the 3 dimensional moment about \{B\}, and $\textbf{I}_{b}$ is a 3$\times$3 matrix representing the moment of inertia about the centre of mass.
+\end{equation*}
+where $\textbf{M}_{b}$ represents the three dimensional moment about \{B\}, and $\textbf{I}_{b}$ is a 3$\times$3 matrix representing the moment of inertia about the centre of mass.
 
 \subsection{Reference Frames and Co-ordinate Systems}\label{section:RefFrames}
-Establishing a model of an aerial vehicle requires an understanding of coordinate systems or reference frames and how they relate to given quantities (displacement, velocity, acceleration,etc). There are two main types of reference frames: inertial frames and non-inertial reference frames. An inertial reference frame is one which is not accelerating and within which Newton's laws are valid\cite{Nebylov2016}. On the other hand, a non-inertial reference frame is one which is experiencing acceleration with reference to an inertial frame.
+Establishing a model of an aerial vehicle requires an understanding of coordinate systems or reference frames and how they relate to given quantities (displacement, velocity, acceleration, etc). There are two main types of reference frames: inertial frames and non-inertial reference frames. An inertial reference frame is one which is not accelerating and within which Newton's laws are valid \cite{Nebylov2016}. On the other hand, a non-inertial reference frame is one which is experiencing acceleration.
 
-There are many different reference frames which may be used to describe aircraft motion. For example, an Earth-fixed local frame is a reference frame with its origin fixed at an arbitrary point on the Earth. For the purposes of modelling an aerial vehicle,an Earth-fixed local frame can be considered as an inertial frame although it is experiencing acceleration due to the Earth's rotation. However, a reference frame which is fixed on the aircraft body is non-inertial as it experiences non-negligible acceleration due to the vehicle's movement. Rotation matrices enable the conversion of quantities between reference frames.
+There are many different reference frames which may be used to describe aircraft motion. For example, an Earth-fixed local frame is a reference frame with its origin fixed at an arbitrary point on the Earth. For the purposes of modelling an aerial vehicle, an Earth-fixed local frame can be considered as an inertial frame although it is experiencing acceleration due to the Earth's rotation. However, a reference frame which is fixed on the aircraft body is non-inertial as it experiences non-negligible acceleration due to the vehicle's movement. Rotation matrices enable the conversion of quantities between reference frames.
 
-GPS data identifies a position on the Earth in terms of latitudes and longitudes. Converting these global positions to displacements within a local reference frame can be done in a number of ways. The haversine formula is one such method, which considers two sets of coordinates and computes the displacement between them. The haversine formula arises from spherical trigonometry to compute the great-circle distance between two points on a sphere. The bearing ($\beta$) and distance (d) are given as:
+The most commonly used reference frame for Earth-based navigation identifies a position on the Earth in terms of latitudes and longitudes. In particular, GPS data is generally presented in this frame. Converting these global positions to displacements within a local reference frame can be done in a number of ways. The haversine formula is one such method, which considers two sets of coordinates and computes the displacement between them. The haversine formula arises from spherical trigonometry to compute the great-circle distance between two points on a sphere. The bearing ($\beta$) and distance (d) are given as:
 
 \begin{equation}\label{eqn:haversine}
 \begin{split}
@@ -68,7 +68,7 @@ Where e(t) represents the measured error between the desired setpoint and the me
 	\label{fig:PIDControl}%
 \end{figure}
 
-PID control is comparatively simple compared to other techniques, but several studies suggest that it is generally effective for stabilising a UAV around a hovering setpoint, in the absence of large disturbances\cite{Bouabdallah2006}\cite{Pounds2010}\cite{Moussid2015}. \\
+PID control is comparatively simple compared to other techniques, but several studies suggest that it is generally effective for stabilising a UAV around a hovering setpoint, in the absence of large disturbances \cite{Bouabdallah2006}, \cite{Pounds2010}, \cite{Moussid2015}. \\
 
 \subsection{Backstepping Control}\label{section:BacksteppingBackground}
 The plant dynamics of a multi-rotor vehicle are inherently nonlinear, therefore nonlinear control techniques may be necessary to stabilise the vehicle. Backstepping control is a nonlinear recursive technique which is based upon Lyapunov stability. The mathematical background on the backstepping method in this section is largely based upon the work presented by Kokotovic \cite{1992a} and Krsti\'c et al. \cite{Krstic1995}.
@@ -76,17 +76,17 @@ The plant dynamics of a multi-rotor vehicle are inherently nonlinear, therefore 
 \subsubsection{Lyapunov Stability}
 Direct Lyapunov theorem, as stated in Appendix B of \cite{Isidori1995}, considers a time invariant system of the form:
 \[\dot{x}=f(x)\]
-with $x\in\mathbb{R}^{n}$ and $f(x)$ smooth, with $f(0)=0$. If there exists a positive definite, proper and smooth function $V(x)$ which satisifies:
+with $x\in\mathbb{R}^{n}$, $f(x)$ is smooth and $f(0)=0$. If there exists a positive definite, proper and smooth function $V(x)$ which satisifies:
 \[\frac{\partial V}{\partial x}f(x)<0\]
 for all $x\neq0$, then the equilibrium of the system is globally asymptotically stable. This means that given any initial conditions, over time ($t\rightarrow\infty$) the system will approach its equilibrium point \cite{Chen1999}. 
 
 Now, consider a time invariant nonlinear system with states $x$ and inputs $u$:
 \begin{equation}\label{eqn:TISystem}
-\dot{x}=f(x,u)
+\mathbf{\dot{x}}=\mathbf{f}(\mathbf{x},\mathbf{u})
 \end{equation}
-with equilibrium at $x=0$. Following from Direct Lyapunov theorem, to stabilise such a system, a control law $u=\alpha(x)$ must be designed such that the equilibrium point of Equation \ref{eqn:TISystem} is globally asymptotically stable. To do this, a function $V(x)$ may be chosen as a candidate Lyapunov function. The control input, $\alpha(\textbf{\textit{x}})$, must then be chosen such that $\dot{V}(x)=\frac{\partial V}{\partial x}f(x,\alpha(x))$ is negative definite for all x. 
+with equilibrium at $\mathbf{x}=\mathbf{0}$. Following from Direct Lyapunov theorem, to stabilise such a system, a control law $\mathbf{u}=\mathbf{\alpha}(\mathbf{x})$ must be designed such that the equilibrium point of Equation \ref{eqn:TISystem} is globally asymptotically stable. To do this, a function $V(\mathbf{x})$ may be chosen as a candidate Lyapunov function. The control input, $\mathbf{\alpha}(\mathbf{x})$, must then be chosen such that $\dot{V}(\mathbf{x})=\frac{\partial V}{\partial \mathbf{x}}\mathbf{f}(\mathbf{x},\mathbf{\alpha}(\mathbf{x}))$ is negative definite for all $\mathbf{x}$. 
 
-In order to apply this method to the tracking problem, the states of the system may be redefined as $z=x_{d}-x$, where $x_{d}$ represents the desired value of the $x$ states.
+In order to apply this method to the tracking problem, the states of the system may be redefined as $\mathbf{z}=\mathbf{x}_{d}-\mathbf{x}$, where $\mathbf{x}_{d}$ represents the desired value of the states.
 
 \subsubsection{Strict Feedback Form}
 Backstepping control is best demonstrated on a system in strict feedback form \cite{1992a}. Consider the system:
@@ -110,12 +110,12 @@ The final iteration for this system is complete by choosing the actual control $
 \begin{equation*}
 V_{3}(z_{1},z_{2},z_{3})=V_{2}(z_{1},z_{2})+\frac{1}{2}z_{3}^{2}
 \end{equation*}
-The control input is then chosen such that the time derivative is negative definite. This results in global asymptotic stability of the system at the equilibrium point.
+The control input $u$ is then chosen such that the time derivative is negative definite. This results in global asymptotic stability of the system at the equilibrium point. Thus the entire system is stabilised by the single control input($u$) by the recursive backstepping of virtual control inputs ($x_{2d}$, $x_{3d}$). This concept is able to be applied to control the position of multi-rotor aircraft, by using the Euler angle values as virtual controls.
 
 
 \subsubsection{Implementation in UAV Control}
 
-A large number of studies have investigated various implementations of backstepping control strategies both in simulation and on physical UAV platforms. This control method is flexible and variations on the control law will arise depending on the design decision to cancel or retain nonlinearities. Also, the specific UAV platform and the modelling method used to describe it can result in differences between control laws in the literature.
+A large number of studies have investigated various implementations of backstepping control strategies both in simulation and on physical UAV platforms. This control method is flexible and variations on the control law will arise depending on the design decision to cancel or retain nonlinearities. Also, the specific UAV platform and the modelling method used to describe the system can result in differences between the derived control laws.
 
 Backstepping control systems for multi-rotor UAVs are simulated with successful results in many studies. \cite{Mian2008} demonstrates stabilisation of the rotational subsystem of a quadrotor using a backstepping control law, with the translational subsystem controlled using PID. \cite{ArellanoMuro2013} demonstrates satisfactory simulation results for trajectory tracking of a quadrotor in the presence of external disturbances. \cite{Roza2012} presents similar results with a controller that allows a speed profile and yaw angle to be specified as a function of displacement along the path. A backstepping controller is found to perform better in the presence of wind as compared to sliding mode control in \cite{Moussid2015}. Other studies which show robust simulated results for backstepping controllers include \cite{Madani2006}, \cite{XuanMung2019} and \cite{Shao2018}.
 
@@ -134,33 +134,36 @@ Further, multiple studies show good performance of backstepping controllers impl
 
 
 %Sensor Fusion/Multi-rate/Redundancy/fault detection
+To implement a stable control system, it is essential to have an accurate method of estimating the system states which the controller uses. There are many different types of sensors which can be used to gather data describing a vehicle's position, velocity, attitude and angular rates. A state estimation algorithm combines this data to reach a reasonable approximation of the system states. Common sensor fusion techniques include complementary filters, neural network-based algorithms and Kalman filter-based algorithms. 
 
+The Kalman filter (also known as linear quadratic estimator) is a recursive algorithm which uses measurement data whilst accounting for noise to estimate unknown variables. The standard Kalman filter is the optimal filter for linear systems that are well characterised by the established model. However, there are two main Kalman filter-based techniques which have been adapted for nonlinear systems - the extended Kalman filter (EKF) and the unscented Kalman filter (UKF). Both algorithms are similar however the UKF applies an unscented transformation to propagate the random variables throughout the algorithm \cite{Wana}. However, \cite{StPierre} shows that the UKF is more computationally expensive than the EKF for inertial navigation and also that in GPS denied conditions the UKF offers no benefit over the EKF. Therefore, the EKF algorithm will be explored in more detail in this thesis.
 \subsection{Extended Kalman Filter}\label{section:EKFBackground}
-There are two main steps to the EKF algorithm: predict and update.
-The "predict" step first uses the state transition functions ($\textbf{\textit{f}}(x,u)$) with the previous state estimate ($\hat{\textbf{\textit{x}}}_{k-1}$) and the current input (\textbf{\textit{u}}) values. Then the covariance matrix (\textbf{\textit{P}}) is predicted using the Jacobian of the state transition function ($F$).
 
-\begin{equation}
+The extended Kalman filter applies the same concepts as the standard Kalman filter, with the addition of iteratively linearising the system around the current state estimates. The linearisation is performed using first order Taylor series. There are two main steps to the EKF algorithm: predict and update.
+The "predict" step first uses the state transition functions ($\textbf{\textit{f}}(\textbf{\textit{x}},\textbf{\textit{u}})$) with the previous state estimate ($\hat{\textbf{\textit{x}}}_{k-1}$) and the current input (\textbf{\textit{u}}) values. Then the covariance matrix (\textbf{\textit{P}}) is predicted using the Jacobian of the state transition function ($F$).
+
+\begin{equation*}
 \begin{split}
-\hat{x}_{k}^{-}&=f(\hat{x}_{k-1}, u_{k})\\
-P_{k}^{-}&=F_{k}P_{k-1}F_{k}^{T}+Q_{k}
+\hat{\textbf{\textit{x}}}_{k}^{-}&=\textbf{\textit{f}}(\hat{\textbf{\textit{x}}}_{k-1}, \textbf{\textit{u}}_{k})\\
+\textbf{\textit{P}}_{k}^{-}&=\textbf{\textit{F}}_{k}\textbf{\textit{P}}_{k-1}\textbf{\textit{F}}_{k}^{T}+\textbf{\textit{Q}}_{k}
 \end{split}
-\end{equation}
-where $Q_{k}$ represents the process noise covariance matrix.$F_{k}$ represents the Jacobian of the state transition function evaluated at ($\hat{x}_{k}^{-}$, $u_{k}$).  The "-" superscript denotes the initial estimate from the predict step.
+\end{equation*}
+where $\textbf{\textit{Q}}_{k}$ represents the process noise covariance matrix. $\textbf{\textit{F}}_{k}$ represents the Jacobian of the state transition function evaluated at ($\hat{\textbf{\textit{x}}}_{k}^{-}$, $\textbf{\textit{u}}_{k}$). That is $\textbf{\textit{F}}_{k}=\frac{\partial \textbf{\textit{f}}}{\partial \textbf{\textit{x}}}|_{\hat{\textbf{\textit{x}}}_{k}^{-}, \textbf{\textit{ u}}_{k}}$ . The "-" superscript denotes the initial estimate from the predict step.
 
 
 The "update" step uses these predictions and compares them with the sensor measurements to achieve more accurate estimates.
 
-\begin{equation}
+\begin{equation*}
 \begin{split}
-K_{k}&=P_{k}^{-}H_{k}^{T}(H_{k}P_{k}^{-}H_{k}^{T}+R_{k})^{-1}\\
-\hat{x}_{k}&=\hat{x}_{k}^{-}+K_{k}\left[z_{k}-h(\hat{x}_{k}^{-})\right]\\
-P_{k}&=(I-K_{k}H_{k})P_{k}^{-}
+\textbf{\textit{K}}_{k}&=\textbf{\textit{P}}_{k}^{-}\textbf{\textit{H}}_{k}^{T}(\textbf{\textit{H}}_{k}\textbf{\textit{P}}_{k}^{-}\textbf{\textit{H}}_{k}^{T}+\textbf{\textit{R}}_{k})^{-1}\\
+\hat{\textbf{\textit{x}}}_{k}&=\hat{\textbf{\textit{x}}}_{k}^{-}+\textbf{\textit{K}}_{k}\left[\textbf{\textit{z}}_{k}-\textbf{\textit{h}}(\hat{\textbf{\textit{x}}}_{k}^{-})\right]\\
+\textbf{\textit{P}}_{k}&=(\textbf{\textit{I}}-\textbf{\textit{K}}_{k}\textbf{\textit{H}}_{k})\textbf{\textit{P}}_{k}^{-}
 \end{split}
-\end{equation}
-where $z_{k}$ represents the sensor measurements, $h(\cdot)$ represents the measurement functions and I represents an identity matrix. $H_{k}$ represents the Jacobian of the measurement function evaluated at $\hat{x}_{k}^{-}$.
+\end{equation*}
+where $\textbf{\textit{z}}_{k}$ represents the sensor measurements, $\textbf{\textit{h}}(\cdot)$ represents the measurement functions and \textbf{\textit{I}} represents an identity matrix. $\textbf{\textit{H}}_{k}$ represents the Jacobian of the measurement function evaluated at $\hat{\textbf{\textit{x}}}_{k}^{-}$. That is $\textbf{\textit{H}}_{k}=\frac{\partial \textbf{\textit{h}}}{\partial \textbf{\textit{x}}}|_{\hat{\textbf{\textit{x}}}_{k}^{-}}$.
 
 \subsection{Magnetometer}
-The Earth's magnetic field vector varies with latitude, longitude, altitude and time. In order to effectively utilise magnetometer data to determine true north it may be necessary to have knowledge of the magnetic field vector's expected value at a particular location. The International Geomagnetic Reference Field or World Magnetic Model
+The Earth's magnetic field vector varies with latitude, longitude, altitude and time. In order to effectively utilise magnetometer data to determine true north it may be necessary to have knowledge of the magnetic field vector's expected value at a particular location. The International Geomagnetic Reference Field is a model of the Earth's magnetic field which is produced and updated by the International Association of Geomagnetism and Aeronomy (IAGA). This model allows a magnetic field vector to be estimated for any location on the globe and the magnetometer data will be compared to this reference to determine bearing in the sensor fusion algorithm. It is worth noting that many environments may have unpredictable magnetic fields caused by surrounding structures, machinery or other electrical equipment. For the purposes of state estimation it will be assumed that the measured magnetic field is representative of the Earth's magnetic field.
 
 \subsection{Barometer}\label{section:barometerBackground}
 Air pressure varies with altitude, which allows barometric pressure sensors to be used in the estimation of relative height. The U.S. National Aeronautics and Space Administration (NASA) have developed a standard atmospheric model \cite{Oceanic1976}. According to this model, pressure as a function of height above sea level can be found using \eqref{eqn:baroFormula}, when temperature lapse rate is zero. Temperature lapse rate describes the rate at which temperature changes with altitude. 
