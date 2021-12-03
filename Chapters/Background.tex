@@ -80,11 +80,11 @@ with $x\in\mathbb{R}^{n}$, $f(x)$ is smooth and $f(0)=0$. If there exists a posi
 \[\frac{\partial V}{\partial x}f(x)<0\]
 for all $x\neq0$, then the equilibrium of the system is globally asymptotically stable. This means that given any initial conditions, over time ($t\rightarrow\infty$) the system will approach its equilibrium point \cite{Chen1999}. 
 
-Now, consider a time invariant nonlinear system with states $x$ and inputs $u$:
+Now, consider a time invariant nonlinear system with states $\mathbf{x}$ and inputs $\mathbf{u}$:
 \begin{equation}\label{eqn:TISystem}
 \mathbf{\dot{x}}=\mathbf{f}(\mathbf{x},\mathbf{u})
 \end{equation}
-with equilibrium at $\mathbf{x}=\mathbf{0}$. Following from Direct Lyapunov theorem, to stabilise such a system, a control law $\mathbf{u}=\mathbf{\alpha}(\mathbf{x})$ must be designed such that the equilibrium point of Equation \ref{eqn:TISystem} is globally asymptotically stable. To do this, a function $V(\mathbf{x})$ may be chosen as a candidate Lyapunov function. The control input, $\mathbf{\alpha}(\mathbf{x})$, must then be chosen such that $\dot{V}(\mathbf{x})=\frac{\partial V}{\partial \mathbf{x}}\mathbf{f}(\mathbf{x},\mathbf{\alpha}(\mathbf{x}))$ is negative definite for all $\mathbf{x}$. 
+with equilibrium at $\mathbf{x}=\mathbf{0}$. Following from Direct Lyapunov theorem, to stabilise such a system, a control law $\mathbf{u}=\mathbf{\alpha}(\mathbf{x})$ must be designed such that the equilibrium point of \eqref{eqn:TISystem} is globally asymptotically stable. To do this, a function $V(\mathbf{x})$ may be chosen as a candidate Lyapunov function. The control input, $\mathbf{\alpha}(\mathbf{x})$, must then be chosen such that $\dot{V}(\mathbf{x})=\frac{\partial V}{\partial \mathbf{x}}\mathbf{f}(\mathbf{x},\mathbf{\alpha}(\mathbf{x}))$ is negative definite for all $\mathbf{x}$. 
 
 In order to apply this method to the tracking problem, the states of the system may be redefined as $\mathbf{z}=\mathbf{x}_{d}-\mathbf{x}$, where $\mathbf{x}_{d}$ represents the desired value of the states.
 
@@ -110,7 +110,7 @@ The final iteration for this system is complete by choosing the actual control $
 \begin{equation*}
 V_{3}(z_{1},z_{2},z_{3})=V_{2}(z_{1},z_{2})+\frac{1}{2}z_{3}^{2}
 \end{equation*}
-The control input $u$ is then chosen such that the time derivative is negative definite. This results in global asymptotic stability of the system at the equilibrium point. Thus the entire system is stabilised by the single control input($u$) by the recursive backstepping of virtual control inputs ($x_{2d}$, $x_{3d}$). This concept is able to be applied to control the position of multi-rotor aircraft, by using the Euler angle values as virtual controls.
+The control input $u$ is then chosen such that the time derivative is negative definite. This results in global asymptotic stability of the system at the equilibrium point. Thus the entire system is stabilised by the single control input ($u$) by the recursive backstepping of virtual control inputs ($x_{2d}$, $x_{3d}$). This concept is able to be applied to control the position of multi-rotor aircraft, by using the Euler angle values as virtual controls.
 
 
 \subsubsection{Implementation in UAV Control}
@@ -176,7 +176,7 @@ where $P_{b}$, $T_{b}$ and $H_{b}$ are the reference values of pressure, tempera
 Assuming the UAV operates at altitudes below 11 km above sea level, the subscript b is 0. Within this operating region the reference values are: $P_{0}=101 325$ Pascals, $T_{0}=288.15$ Kelvin and $H_{0}=0$ metres.
 
 \subsection{GPS Denied Environments}
-Most state estimation algorithms currently in use for UAV systems are dependent on GPS data for position estimation. However in many situations, GPS signal may be unavailable, practically disabling the UAV. To expand the operating region of the vehicle, it is necessary to have some form of position tracking algorithm which is able to accurately monitor position without GPS data. There are a number of techniques for achieving this including visual odometry and simultaneous localisation and mapping (SLAM) \cite{Balamurugan2016}. Complex systems will use a number of cameras, however a simple approach to visual odometry can be achieved by utilising a single optical flow sensor (OFS). An OFS is a camera which can be attached to the underside of a vehicle to record visual data of the surface. As the vehicle moves the OFS captures and compares sequences of images to determine the motion of the vehicle. Using this data in combination with IMU data has been shown to be effective for state estimation \cite{Driessen2018}. 
+Most state estimation algorithms currently in use for UAV systems are dependent on GPS data for position estimation. However in many situations, GPS signal may be unavailable, practically disabling the UAV. To expand the operating region of the vehicle, it is necessary to have some form of position tracking algorithm which is able to accurately monitor position without GPS data. There are a number of techniques for achieving this including visual odometry and simultaneous localisation and mapping (SLAM) \cite{Balamurugan2016}. Complex systems will use a number of cameras, however a simple approach to visual odometry can be achieved by utilising a single optical flow sensor (OFS). An OFS is a camera which can be attached to the underside of a vehicle to record visual data of the surface. As the vehicle moves, the OFS captures and compares sequences of images to determine the motion of the vehicle. Using this data in combination with IMU data has been shown to be effective for state estimation \cite{Driessen2018}. 
 
 \section{Chapter Summary}
 This chapter has provided the technical background necessary for the development in the following chapters. A comprehensive review of current literature has also been established in order to reveal the more effective methods and the gaps in current research.
