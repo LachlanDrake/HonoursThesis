@@ -4,9 +4,9 @@
 \textit{Now that a sufficiently accurate mathematical model of the hexacopter has been developed, the control problem is able to be approached. Within this chapter two control systems will be developed with the aim of controlling the aircraft position and attitude. Simulations will then be performed in Simulink to verify the effectiveness of each control system. For the purposes of these simulations it will be assumed that the vehicle's position and attitude (x, y, z, $\phi$, $\theta$, $\psi$) can be accurately measured at any given time.} 
 
 \section{Pseudo-inverse of Motor Speed Matrix}
-The control systems in this chapter will be based upon the effective inputs of the plant i.e. $\tau_{\phi}$, $\tau_{\theta}$, $\tau_{\psi}$, $F_{T}$. Therefore, it will be necessary to implement an inverse of the matrix in Equation \ref{eqn:propSpeeds1} in order to obtain the desired input motor speeds. This matrix is not square and is therefore not invertible. However, for a matrix A with linearly independent rows, the Penrose-Moore pseudo-inverse ($A^{+}$) is able to be computed such  that: 
+The control systems in this chapter will be based upon the effective inputs of the plant i.e. $\tau_{\phi}$, $\tau_{\theta}$, $\tau_{\psi}$, $F_{T}$. Therefore, it will be necessary to implement an inverse of the matrix in \eqref{eqn:propSpeeds1} in order to obtain the desired input motor speeds. This matrix is not square and is therefore not invertible. However, for a matrix A with linearly independent rows, the Penrose-Moore pseudo-inverse ($A^{+}$) is able to be computed such  that: 
 \[A^{+}= A^{T}(AA^{T})^{-1}\]
-In this case, this is a right inverse which will satisfy \(AA^{+}=I\) where I is an identity matrix. The pseudo-inverse matrix is shown in Equation \ref{eqn:propSpeeds2} and will be used to reverse the relationship between the effective inputs and the propeller speeds.
+In this case, this is a right inverse which will satisfy \(AA^{+}=I\) where I is an identity matrix. The pseudo-inverse matrix is shown in \eqref{eqn:propSpeeds2} and will be used to reverse the relationship between the effective inputs and the propeller speeds.
 \begin{equation}\label{eqn:propSpeeds2}
 \begin{bmatrix}
 \Omega^{2}_{1}\\
@@ -33,10 +33,12 @@ F_{T}\\
 \end{bmatrix}
 \end{equation}
 
+This relationship is simulated as a subsystem in the Simulink model and is shown in Appendix \ref{section:Simu_Motor}.
+
 \section{PID Control}\label{section:PIDControl}
 Initially, a control strategy for the hexacopter will be developed based upon Proportional Integral Derivative (PID) control. The basic concept of PID control is outlined in Section \ref{section:PIDBackground}. This controller will be designed with the aim of stabilising the vehicle around a hovering point and this allows the model to be simplified.
 \subsection{Simplified Model}\label{section:SimpleModel}
-For the purposes of this controller, the vehicle will be assumed to be hovering, which implies the roll and pitch angles ($\phi$ $\theta$) will only have small variations from the origin. These assumptions will be used in developing the controller, however the controller will be verified by simulation on the full nonlinear model. Likewise, we will assume the yaw angle ($\psi$) is held close to the origin. This allows the small angle approximation to be applied to the model defined in Section \ref{section:ModelDynamics}. Applying this assumption to Equation \ref{eqn:state1} gives Equation \ref{eqn:simpleState1}.
+For the purposes of this controller, the vehicle will be assumed to be hovering, which implies the roll and pitch angles ($\phi$ $\theta$) will only have small variations from the origin. These assumptions will be used in developing the controller, however the controller will be verified by simulation on the full nonlinear model. Likewise, we will assume the yaw angle ($\psi$) is held close to the origin. This allows the small angle approximation to be applied to the model defined in Section \ref{section:ModelDynamics}. Applying this assumption to \eqref{eqn:state1} gives \eqref{eqn:simpleState1}.
 
 \begin{equation}\label{eqn:simpleState1}
 \begin{split}
@@ -65,7 +67,7 @@ p\\q\\r
 
 
 
-Likewise, it will be assumed that the moments of inertia around each axis are approximately equal ($I_{xx}\approx I_{yy}\approx I_{zz}$). Using this assumption and the relationship in Equation \ref{eqn:simpleState1}, Equation \ref{eqn:state3} can be simplified to give Equation \ref{eqn:simpleState3}. This allows the rotational systems to be decoupled and therefore more easily controlled using the PID technique.
+Likewise, it will be assumed that p, q and r are significantly small when compared with the input torque values and thus are able to be neglected from \eqref{eqn:state3}. Using this assumption and the relationship in \eqref{eqn:simpleState1}, \eqref{eqn:state3} can be simplified to give \eqref{eqn:simpleState3}. This allows the rotational systems to be decoupled and therefore more easily controlled using the PID technique.
 \begin{equation}\label{eqn:simpleState3}
 \begin{bmatrix}
 \ddot{\phi}\\\ddot{\theta}\\\ddot{\psi}
@@ -79,7 +81,7 @@ Likewise, it will be assumed that the moments of inertia around each axis are ap
 \end{equation}
 
 
-Further, by applying the small angle approximation to \eqref{eqn:additionalState2}, the translational motion is able to be linearised. This is shown in Equation \eqref{eqn:simpleTranslational}.
+Further, by applying the small angle approximation to \eqref{eqn:additionalState2}, the translational motion is able to be linearised. This is shown in \eqref{eqn:simpleTranslational}.
 \begin{equation}\label{eqn:simpleTranslational}
 \begin{bmatrix}
 \ddot{x}\\\ddot{y}\\\ddot{z}
@@ -92,11 +94,11 @@ Further, by applying the small angle approximation to \eqref{eqn:additionalState
 \end{bmatrix}
 \end{equation}
 
-Under these assumptions, each Euler angle is directly controllable by the corresponding torque input,  vertical translational motion is controllable by the total thrust and horizontal translational motion is controllable by the roll and pitch angles. Additionally, from Equations \ref{eqn:simpleState3} and \ref{eqn:simpleTranslational}, it is apparent that there are double integrators in the plant dynamics\cite{Herzog2016}. Therefore, the integral term usually present in PID controllers will be unnecessary, i.e. the controllers designed in this section will use a PD structure.
+Under these assumptions, each Euler angle is directly controllable by the corresponding torque input,  vertical translational motion is controllable by the total thrust and horizontal translational motion is controllable by the roll and pitch angles. Additionally, from \eqref{eqn:simpleState3} and \eqref{eqn:simpleTranslational}, it is apparent that there are double integrators in the plant dynamics \cite{Herzog2016}. Therefore, the integral term usually present in PID controllers will be unnecessary, i.e. the controllers designed in this section will use a PD structure.
 
 \FloatBarrier
 \subsection{Attitude Control}
-In order to control the orientation of the vehicle, a PD control system is used for each angle. The torque around each axis is used to control the corresponding angles. The PD control laws for each torque input are defined in Equation \ref{eqn:torquePD}.
+In order to control the orientation of the vehicle, a PD control system is used for each angle. The torque around each axis is used to control the corresponding angles. The PD control laws for each torque input are defined in \eqref{eqn:torquePD}.
 
 \begin{equation}\label{eqn:torquePD}
 \begin{bmatrix}
@@ -123,12 +125,12 @@ Where K coefficients represent non-negative constants and $z_{d}$ represents the
 \FloatBarrier
 \subsection{Position Control}
 Finally, the x and y position must be controlled to prevent the vehicle from drifting from its setpoint in the presence of disturbances, e.g wind gusts. This system should also allow the vehicle to travel to a specified coordinate within the Earth frame. Since the lateral and longitudinal motion of the vehicle cannot be directly controlled, the position is controlled by adjusting the desired values of the roll and pitch angles ($\phi_{d}$, $\theta_{d}$).
-The relationship between x,y, $\phi$ and $\theta$ is linearised in Equation \ref{eqn:simpleTranslational}. Further, since the vehicle is assumed to be hovering, the thrust force must counter the vehicle's weight i.e. $F_{T}\approx mg \Rightarrow \frac{F_{T}}{m}\approx g$. 
+The relationship between x, y, $\phi$ and $\theta$ is linearised in \eqref{eqn:simpleTranslational}. Further, since the vehicle is assumed to be hovering, the thrust force must counter the vehicle's weight i.e. $F_{T}\approx mg \Rightarrow \frac{F_{T}}{m}\approx g$. 
 
 \[\phi=\frac{1}{g}\ddot{y}\]
 \[\theta=-\frac{1}{g}\ddot{x}\]
 
-Using this linearised relationship, two PD controllers (scaled by $\pm\frac{1}{g}$) can be designed to take the position error as an input and will output the desired roll and pitch angles. These control laws are represented in Equation \ref{eqn:positionPD}
+Using this linearised relationship, two PD controllers (scaled by $\pm\frac{1}{g}$) can be designed to take the position error as an input and will output the desired roll and pitch angles. These control laws are represented in \eqref{eqn:positionPD}.
 \begin{equation}\label{eqn:positionPD}
 \begin{bmatrix}
 \phi_{d}\\\theta_{d}
@@ -143,10 +145,10 @@ Where K coefficients represent non-negative constants, $x_{d}$ and $y_{d}$ repre
 
 \FloatBarrier
 \subsection{Complete Control System}
-By combining all of the previously described controllers, the vehicle is able to be controlled around the desired operating point. The overall block diagram is shown in \figref{fig:PID_Hexacopter}. 
+By combining all the previously described controllers, the vehicle is able to be controlled around the desired operating point. The overall block diagram is shown in \figref{fig:PID_Hexacopter}. 
 \begin{figure}[htb]
 	\includegraphics[width=\columnwidth]{PID_Hexacopter.PNG}%
-	\caption{Complete PID control system block diagram}%
+	\caption{Complete PD control system block diagram}%
 	\label{fig:PID_Hexacopter}%
 \end{figure}
 
@@ -215,11 +217,11 @@ The control system was also shown to be reasonably effective in tracking a sinus
 \begin{center}
 	\includegraphics[width=80mm]{/PID_Results/xTracking_Sine2.jpg}%
 	\end{center}
-	\caption{PID Position tracking}%
+	\caption{PD Position tracking}%
 	\label{fig:PID_Sine}%
 \end{figure}
 
-The results show that this system is effective in stabilising the aircraft around a hovering point in the absence of major disturbances. It is also able to respond to relatively small positional step commands. However, this control method is limited since it neglects the nonlinearities of the physical system. For example, it is ineffective with a non-zero yaw angle due to approximations made in the simplification of the model. The system is also prone to saturation when subject to large step commands.
+The results show that this system is effective in stabilising the aircraft around a hovering point in the absence of major disturbances. It is also able to respond to relatively small positional step commands. However, this control method is limited since it neglects the nonlinearities of the physical system. For example, it is ineffective with a non-zero yaw angle due to approximations made in the simplification of the model. This limits the manoeuvrability of the vehicle and makes the control system unsuitable for many applications. For example, many UAV platforms are able to be equipped with a camera fixed to the underside of the vehicle body and the yaw angle is used to direct the camera field of view to points of interest.  The system is also prone to saturation when subject to large step commands.
 
 \FloatBarrier
 \section{Backstepping Control}
@@ -227,7 +229,7 @@ In order to improve upon the performance of the previous controller, the recursi
 \subsection{Simplified State Space Model}
 The states used by the backstepping controller will be each of the positions in the Earth frame as well as their respective velocities. In order to simplify notation, the states will be referred to as $x_{i}$ and are defined as:
 \begin{equation}\label{eqn:stateDef}
-x=
+\textbf{\textit{x}}=
 \begin{bmatrix}
 x_{1}\\
 x_{2}\\
@@ -259,7 +261,7 @@ z\\
 \end{bmatrix}
 \end{equation}
 
-As seen in Section \ref{section:SimpleModel}, the state space model which was presented in Section \ref{section:ModelDynamics}, is able to be greatly simplified by making a number of assumptions. For the purposes of this controller, the small angle approximation will be used in order to simplify the relationship between the torques and the Euler angles. That is, the relationship in Equation \ref{eqn:simpleState1} will be assumed true. Applying this to Equation \ref{eqn:state3} gives the following:
+As seen in Section \ref{section:SimpleModel}, the state space model which was presented in Section \ref{section:ModelDynamics}, is able to be greatly simplified by making a number of assumptions. For the purposes of this controller, the small angle approximation will be used in order to simplify the relationship between the torques and the Euler angles. That is, the relationship in \eqref{eqn:simpleState1} will be assumed true. Applying this to \eqref{eqn:state3} gives the following:
 
 \begin{equation}
 \begin{bmatrix}
@@ -274,7 +276,7 @@ a_{2}x_{2}x_{6}+b_{2}\tau_{\theta}\\
 a_{3}x_{2}x_{4}+b_{3}\tau_{\psi}
 \end{bmatrix}
 \end{equation}
-with $a_{1}=\frac{I_{yy}-I_{zz}}{I_{xx}}$, $a_{2}=\frac{I_{zz}-I_{xx}}{I_{yy}}$, $a_{3}=\frac{I_{xx}-I_{yy}}{I_{zz}}$, $b_{1}=\frac{1}{I_{xx}}$, $b_{2}=\frac{1}{I_{yy}}$, $b_{3}=\frac{1}{I_{zz}}$. Now, the simplified state space model may be expressed:
+with $a_{1}=\frac{I_{yy}-I_{zz}}{I_{xx}}$, $a_{2}=\frac{I_{zz}-I_{xx}}{I_{yy}}$, $a_{3}=\frac{I_{xx}-I_{yy}}{I_{zz}}$, $b_{1}=\frac{1}{I_{xx}}$, $b_{2}=\frac{1}{I_{yy}}$, $b_{3}=\frac{1}{I_{zz}}$. Also, the second order translational dynamics established in \eqref{eqn:additionalState2} are used for this controller. Now, the simplified state space model may be expressed:
 
 \begin{equation}\label{eqn:simpleStateModel}
 \begin{bmatrix}
@@ -323,7 +325,7 @@ A control Lyapunov function must have a negative definite derivative, therefore 
 Now, take the derivative of \(z_{1}\) and substitute our chosen value.
 \begin{equation*}
 \begin{split}
-\dot{z_{1}}&=\dot{x}_{1d}-\dot{x}_{1}\\
+\dot{z}_{1}&=\dot{x}_{1d}-\dot{x}_{1}\\
 -K_{1}z_{1}&=\dot{x}_{1d}-x_{2}\\
 \end{split}
 \end{equation*}
@@ -383,7 +385,7 @@ z_{8}&=\dot{x}_{7d}+K_{7}z_{7}-x_{8}\\
 \end{split}
 \]
 
-In order to ensure $\dot{z}_{8}=-K_{8}z_{8}$, a virtual control must be chosen. If it is assumed that the vehicle is in hovering flight and the Euler angles are stabilised around 0\textdegree, then the most logical choice of variable for a virtual control is the pitch angle ($x_{3}$). Thus, the virtual control $x_{3d}$ in Equation \ref{eqn:XPosContLaw} will be supplied as a desired value for the attitude controller developed in the previous section. 
+In order to ensure $\dot{z}_{8}=-K_{8}z_{8}$, a virtual control must be chosen. If it is assumed that the vehicle is in hovering flight and the Euler angles are stabilised around 0\textdegree, then the most logical choice of variable for a virtual control is the pitch angle ($x_{3}$). Thus, the virtual control $x_{3d}$ in \eqref{eqn:XPosContLaw} will be supplied as a desired value for the attitude controller developed in the previous section. 
 \begin{equation}\label{eqn:XPosContLaw}
 x_{3d}=sin^{-1}\left(-\frac{\frac{m}{F_{T}}[K_{8}z_{8}+\ddot{x}_{7d}+K_{7}\dot{z}_{7}]+sin(x_{1})sin(x_{5})}{cos(x_{1})cos(x_{5})}\right)
 \end{equation}
@@ -416,7 +418,7 @@ The gains $K_{i}$ were tuned using the Simulink Design Optimization Package. Thi
 	\includegraphics[width=70mm]{/Backstepping_Results/xTracking_Steps1.jpg}%
 	\includegraphics[width=70mm]{/Backstepping_Results/zTracking.jpg}%
 	\end{center}
-	\caption{Backstepping position tracking}%
+	\caption{Backstepping position and altitude tracking}%
 	\label{fig:Backstep_posTrack}%
 \end{figure}
 
@@ -440,10 +442,10 @@ This controller will use the angle controllers developed in the previous section
 Consider the position and velocity error vectors: 
 \begin{equation}\label{eqn:ErrorVectors}
 \begin{split}
-\mathbf{e}_{p}&=\mathbf{p}_{d}-\mathbf{p}=\begin{bmatrix}
+\textbf{\textit{e}}_{p}&=\textbf{\textit{p}}_{d}-\textbf{\textit{p}}=\begin{bmatrix}
 x_{d}-x \\ y_{d}-y\\ z_{d}-z
 \end{bmatrix}\\
-\mathbf{e}_{v}&=\mathbf{v}_d-\mathbf{\dot{p}}=\begin{bmatrix}
+\textbf{\textit{e}}_{v}&=\textbf{\textit{v}}_d-\dot{\textbf{\textit{p}}}=\begin{bmatrix}
 v_{d,x}-\dot{x} \\ v_{d,y}-\dot{y} \\ v_{d,z}-\dot{z}
 \end{bmatrix}\\
 \end{split}
@@ -453,64 +455,64 @@ where $v_{d,x}$, $v_{d,x}$ and $v_{d,x}$ are virtual controls representing the d
 
 Choose a candidate Lyapunov function including an integral term:
 \begin{equation}
-V=\frac{1}{2}\left(e_{p}^{T}e_{p}+e_{v}^{T}e_{v}+k\Gamma^{T}\Gamma\right)
+\textbf{\textit{V}}=\frac{1}{2}\left(\textbf{\textit{e}}_{p}^{T}\textbf{\textit{e}}_{p}+\textbf{\textit{e}}_{v}^{T}\textbf{\textit{e}}_{v}+\textbf{\textit{k}}\Gamma^{T}\Gamma\right)
 \end{equation}
-where $\Gamma=\int^{t}_{0} e_{1}(\gamma) d\gamma$ and $k$ is a diagonal 3x3 matrix of non-negative constants.
+where $\Gamma=\int^{t}_{0} e_{p}(\gamma) d\gamma$ and $\textbf{\textit{k}}$ is a diagonal 3x3 matrix of non-negative constants.
 Taking the time derivative gives:
 \begin{equation}\label{eqn:IntBackCLFder1}
-\dot{V}=e_{p}^{T}\dot{e}_{p}+e_{v}^{T}\dot{e}_{v}+k\Gamma^{T}\dot{\Gamma}
+\dot{\textbf{\textit{V}}}=\textbf{\textit{e}}_{p}^{T}\dot{\textbf{\textit{e}}}_{p}+\textbf{\textit{e}}_{v}^{T}\dot{\textbf{\textit{e}}}_{v}+\textbf{\textit{k}}\Gamma^{T}\dot{\Gamma}
 \end{equation}
-Now choose $\dot{V}$ such that it is negative definite:
+Now choose $\dot{\textbf{\textit{V}}}$ such that it is negative definite:
 \begin{equation}\label{eqn:IntBackCLFder2}
-\dot{V}=-ce_{p}^{T}e_{p}-\kappa e_{v}^{T}e_{v}
+\dot{\textbf{\textit{V}}}=-\textbf{\textit{ce}}_{p}^{T}\textbf{\textit{e}}_{p}-\kappa \textbf{\textit{e}}_{v}^{T}\textbf{\textit{e}}_{v}
 \end{equation}
-where c and $\kappa$ represent diagonal 3x3 matrices of non-negative constants.
+where \textbf{\textit{c}} and $\kappa$ represent diagonal 3x3 matrices of non-negative constants.
 
 Now consider the derivative terms:
 \begin{equation}\label{eqn:IntBackErrDer}
 \begin{split}
-\dot{e}_{p}&=\dot{p}_{d}-\dot{p}\\
-&=\dot{p}_{d}-v_{d}\\\\
-\dot{e}_{v}&=\dot{v}_{d}-\ddot{p}\\\\
-\dot{\Gamma}&=e_{p}
+\dot{\textbf{\textit{e}}}_{p}&=\dot{\textbf{\textit{p}}}_{d}-\dot{\textbf{\textit{p}}}\\
+&=\dot{\textbf{\textit{p}}}_{d}-\textbf{\textit{v}}\\\\
+\dot{\textbf{\textit{e}}}_{v}&=\dot{\textbf{\textit{v}}}_{d}-\ddot{\textbf{\textit{p}}}\\\\
+\dot{\Gamma}&=\textbf{\textit{e}}_{p}
 \end{split}
 \end{equation}
 
-The virtual control $v_{d}$ is then chosen such that \eqref{eqn:IntBackCLFder1} satisfies \eqref{eqn:IntBackCLFder2}:
+The virtual control $\textbf{\textit{v}}_{d}$ is then chosen such that \eqref{eqn:IntBackCLFder1} satisfies \eqref{eqn:IntBackCLFder2}:
 
 \begin{equation*}
-v_{d}= \dot{p}_{d}+ce_{p}+k\Gamma
+\textbf{\textit{v}}_{d}= \dot{\textbf{\textit{p}}}_{d}+\textbf{\textit{ce}}_{p}+\textbf{\textit{k}}\Gamma
 \end{equation*}
-Substituting into the expression for $e_{v}$ in \eqref{eqn:ErrorVectors} gives:
+Substituting into the expression for $\textbf{\textit{e}}_{v}$ in \eqref{eqn:ErrorVectors} gives:
 
 \begin{equation}\label{eqn:e_p1}
 \begin{split}
-e_{v}&=\mathbf{\dot{p}}_{d}+ce_{p}+k\Gamma - \mathbf{\dot{p}}\\
-e_{v}-ce_{p}-k\Gamma&=\mathbf{\dot{p}}_{d}- \mathbf{\dot{p}}\\
-\dot{e_{p}}&=e_{v}-ce_{p}-k\Gamma
+\textbf{\textit{e}}_{v}&=\mathbf{\dot{\textbf{\textit{p}}}}_{d}+\textbf{\textit{ce}}_{p}+\textbf{\textit{k}}\Gamma - \dot{\textbf{\textit{p}}}\\
+\textbf{\textit{e}}_{v}-\textbf{\textit{ce}}_{p}-\textbf{\textit{k}}\Gamma&=\dot{\textbf{\textit{p}}}_{d}- \dot{\textbf{\textit{p}}}\\
+\dot{\textbf{\textit{e}}_{p}}&=\textbf{\textit{e}}_{v}-\textbf{\textit{ce}}_{p}-\textbf{\textit{k}}\Gamma
 \end{split}
 \end{equation}
  
 
-Taking the time derivative of $e_{v}$ gives:
+Taking the time derivative of $\textbf{\textit{e}}_{v}$ gives:
 \begin{equation}\label{eqn:dot_e_v1}
 \begin{split}
-\dot{e}_{v}&=\ddot{p}_{d}+c\dot{e}_{p}+k e_{p} - \mathbf{\ddot{p}}\\
-\dot{e}_{v}&=\ddot{p}_{d}+c(e_{v}-ce_{p}-k\Gamma)+k e_{p} - \mathbf{\ddot{p}}\\
-\dot{e}_{v}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-ck\Gamma+k e_{p} - \mathbf{\ddot{p}}\\
+\dot{\textbf{\textit{e}}}_{v}&=\ddot{\textbf{\textit{p}}}_{d}+\textbf{\textit{c}}\dot{\textbf{\textit{e}}}_{p}+\textbf{\textit{k}} \textbf{\textit{e}}_{p} - \ddot{\textbf{\textit{p}}}\\
+\dot{\textbf{\textit{e}}}_{v}&=\ddot{\textbf{\textit{p}}}_{d}+\textbf{\textit{c}}(\textbf{\textit{e}}_{v}-\textbf{\textit{ce}}_{p}-\textbf{\textit{k}}\Gamma)+\textbf{\textit{k}} \textbf{\textit{e}}_{p} - \ddot{\textbf{\textit{p}}}\\
+\dot{\textbf{\textit{e}}}_{v}&=\ddot{\textbf{\textit{p}}}_{d}+\textbf{\textit{ce}}_{v}-\textbf{\textit{c}}^{2}\textbf{\textit{e}}_{p}-\textbf{\textit{ck}}\Gamma+\textbf{\textit{k}} \textbf{\textit{e}}_{p} - \ddot{\textbf{\textit{p}}}\\
 \end{split}
 \end{equation} 
 
-Note that an expression for the second derivative of translational position ($\mathbf{\ddot{p}}$) is given in Section \ref{section:AddTransMotion}, \eqref{eqn:additionalState2}. Also note that in order to satisfy \eqref{eqn:IntBackCLFder2}, $\dot{e}_{v}$ is chosen as:
+Note that an expression for the second derivative of translational position ($\ddot{\textbf{\textit{p}}}$) is given in Section \ref{section:AddTransMotion}, \eqref{eqn:additionalState2}. Also note that in order to satisfy \eqref{eqn:IntBackCLFder2}, $\dot{\textbf{\textit{e}}}_{v}$ is chosen as:
 \begin{equation}\label{eqn:dot_e_v2}
-\dot{e}_{v}=-\kappa e_{v} - e_{p}
+\dot{\textbf{\textit{e}}}_{v}=-\kappa \textbf{\textit{e}}_{v} - \textbf{\textit{e}}_{p}
 \end{equation}
 Finally, equating \eqref{eqn:dot_e_v1} with \eqref{eqn:dot_e_v2} allows the control laws to be derived:
 \begin{equation}\label{eqn:dot_e_v3}
 \begin{split}
--\kappa e_{v} - e_{p}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-ck\Gamma+k e_{p} - \mathbf{\ddot{p}}\\
-\mathbf{\ddot{p}}&=\ddot{p}_{d}+ce_{v}-c^{2}e_{p}-ck\Gamma+k e_{p} +\kappa e_{v} + e_{p}\\
-\mathbf{\ddot{p}}&=\ddot{p}_{d}+(1+k-c^{2})e_{p}+(c+\kappa)e_{v}-ck\Gamma
+-\kappa \textbf{\textit{e}}_{v} - \textbf{\textit{e}}_{p}&=\ddot{\textbf{\textit{p}}}_{d}+\textbf{\textit{ce}}_{v}-\textbf{\textit{c}}^{2}\textbf{\textit{e}}_{p}-\textbf{\textit{ck}}\Gamma+\textbf{\textit{ke}}_{p} - \ddot{\textbf{\textit{p}}}\\
+\ddot{\textbf{\textit{p}}}&=\ddot{\textbf{\textit{p}}}_{d}+\textbf{\textit{ce}}_{v}-\textbf{\textit{c}}^{2}\textbf{\textit{e}}_{p}-\textbf{\textit{ck}}\Gamma+\textbf{\textit{ke}}_{p} +\kappa \textbf{\textit{e}}_{v} + \textbf{\textit{e}}_{p}\\
+\ddot{\textbf{\textit{p}}}&=\ddot{\textbf{\textit{p}}}_{d}+(1+\textbf{\textit{k}}-\textbf{\textit{c}}^{2})\textbf{\textit{e}}_{p}+(\textbf{\textit{c}}+\kappa)\textbf{\textit{e}}_{v}-\textbf{\textit{ck}}\Gamma
 \end{split}
 \end{equation}
 
@@ -529,7 +531,7 @@ F_{T}&=\frac{m(\ddot{z}_{d}(1+k_{3}-c_{3}^{2})e_{z}+(c+\kappa_{3})e_{v,z}-c_{3}k
 
 \FloatBarrier
 \subsection{Preliminary Results}
-The position and altitude tracking results are shown in \figref{fig:IntBackPos}. The angle controllers are unchanged from the previous section, thus the angle stabilising result is omitted in this section.
+The position and altitude tracking results are shown in \figref{fig:IntBackPos}. This demonstrates the ability of this control system to track positional commands with zero steady state error. This system is also more robust to model uncertainties. The angle controllers are unchanged from the previous section, thus the angle stabilising result is omitted in this section. 
 
 \begin{figure}[htb]
 \begin{center}

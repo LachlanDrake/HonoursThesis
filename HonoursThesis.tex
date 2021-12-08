@@ -59,6 +59,13 @@ bottom=30mm
 \usepackage{multirow} % Multirow tables
 \usepackage[toc]{appendix}
 
+\usepackage{afterpage}
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
 %Fancy Headers
 \usepackage{fancyhdr,ragged2e}
 \fancyhead{}
@@ -87,6 +94,7 @@ bottom=30mm
 \begin{titlepage}
 \input{TitlePage}
 \end{titlepage}
+\blankpage
 
 \newgeometry{
 left=30mm,

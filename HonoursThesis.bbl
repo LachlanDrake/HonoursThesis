@@ -79,6 +79,10 @@ M.~D. Ardema, \emph{Newton-Euler Dynamics}.\hskip 1em plus 0.5em minus
 A.~V. Nebylov, \emph{Aerospace navigation systems}.\hskip 1em plus 0.5em minus
   0.4em\relax Chicheter, West Sussex, United Kingdom: John Wiley \& Sons, 2016.
 
+\bibitem{Smart1977}
+W.~M. Smart, \emph{Textbook on spherical astronomy}.\hskip 1em plus 0.5em minus
+  0.4em\relax Cambridge New York: Cambridge University Press, 1977.
+
 \bibitem{Rubi2019}
 B.~Rub{\'{i}}, R.~P{\'{e}}rez, and B.~Morcego, ``A survey of path following
   control strategies for {UAVs} focused on quadrotors,'' \emph{Journal of
@@ -230,6 +234,11 @@ W.~Jasim and D.~Gu, ``Integral backstepping controller for quadrotor path
 D.~Cabecinhas, R.~Cunha, and C.~Silvestre, ``Rotorcraft path following control
   for extended flight envelope coverage.''\hskip 1em plus 0.5em minus
   0.4em\relax {IEEE}, dec 2009.
+
+\bibitem{Strohmeier2017}
+M.~Strohmeier and S.~Montenegro, ``Coupled {GPS}/{MEMS} {IMU} attitude
+  determination of small {UAVs} with {COTS},'' \emph{Electronics}, vol.~6,
+  no.~1, p.~15, feb 2017.
 
 \bibitem{Ding2010}
 W.~Ding, J.~Wang, and A.~Almagbile, ``Adaptive filter design for uav navigation

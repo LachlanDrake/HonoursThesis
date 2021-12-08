@@ -481,4 +481,26 @@
   doi       = {10.1109/ivs.2004.1336492},
 }
 
+@Article{Strohmeier2017,
+  author    = {Michael Strohmeier and Sergio Montenegro},
+  journal   = {Electronics},
+  title     = {Coupled {GPS}/{MEMS} {IMU} Attitude Determination of Small {UAVs} with {COTS}},
+  year      = {2017},
+  month     = {feb},
+  number    = {1},
+  pages     = {15},
+  volume    = {6},
+  doi       = {10.3390/electronics6010015},
+  publisher = {{MDPI} {AG}},
+}
+
+@Book{Smart1977,
+  author    = {Smart, W. M.},
+  publisher = {Cambridge University Press},
+  title     = {Textbook on spherical astronomy},
+  year      = {1977},
+  address   = {Cambridge New York},
+  isbn      = {9780521215169},
+}
+
 @Comment{jabref-meta: databaseType:bibtex;}

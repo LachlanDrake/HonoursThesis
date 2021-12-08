@@ -19,7 +19,7 @@ The Basic Kinematic Equation (BKE) is used in Newton-Euler dynamics to describe 
 \begin{equation}\label{eqn:BKE1} 
 \frac{d\textbf{Q}_{a}}{dt}=\frac{d\textbf{Q}_{b}}{dt}+\mathbf{\omega}_{b} \times \textbf{Q}_{b}
 \end{equation}
-where $\textbf{Q}_{a}$ and $\textbf{Q}_{b}$ represent a three dimensional quantity (e.g position, velocity) with respect to reference frames \{A\} and \{B\} respectively, and $\mathbf\omega_{b}$ represents the angular velocity of \{B\} with respect to \{A\}. Now, consider reference frame \{B\} to be fixed at the centre of mass of some rigid body. By considering the mass of the body and taking \textbf{Q} as the translational velocity of the body (\textbf{v}), the BKE (Equation \ref{eqn:BKE1}) can be written in terms of forces to give the first of the Newton-Euler equations.
+where $\textbf{Q}_{a}$ and $\textbf{Q}_{b}$ represent a three-dimensional quantity (e.g position, velocity) with respect to reference frames \{A\} and \{B\} respectively, and $\mathbf\omega_{b}$ represents the angular velocity of \{B\} with respect to \{A\}. Now, consider reference frame \{B\} to be fixed at the centre of mass of some rigid body. By considering the mass of the body and taking \textbf{Q} as the translational velocity of the body (\textbf{v}), the BKE (Equation \ref{eqn:BKE1}) can be written in terms of forces to give the first of the Newton-Euler equations.
 
 \begin{equation*}
 \begin{split} 
@@ -33,14 +33,14 @@ The moments of forces (torques) about the centre of mass may be considered in a 
 \begin{equation*}
 \textbf{M}_{b}=\textbf{I}_{b}\dot{\omega}_{b}+\omega_{b}\times\textbf{I}_{b}\omega_{b}
 \end{equation*}
-where $\textbf{M}_{b}$ represents the three dimensional moment about \{B\}, and $\textbf{I}_{b}$ is a 3$\times$3 matrix representing the moment of inertia about the centre of mass.
+where $\textbf{M}_{b}$ represents the three-dimensional moment about \{B\}, and $\textbf{I}_{b}$ is a 3$\times$3 matrix representing the moment of inertia about the centre of mass.
 
-\subsection{Reference Frames and Co-ordinate Systems}\label{section:RefFrames}
+\subsection{Reference Frames and Coordinate Systems}\label{section:RefFrames}
 Establishing a model of an aerial vehicle requires an understanding of coordinate systems or reference frames and how they relate to given quantities (displacement, velocity, acceleration, etc). There are two main types of reference frames: inertial frames and non-inertial reference frames. An inertial reference frame is one which is not accelerating and within which Newton's laws are valid \cite{Nebylov2016}. On the other hand, a non-inertial reference frame is one which is experiencing acceleration.
 
 There are many different reference frames which may be used to describe aircraft motion. For example, an Earth-fixed local frame is a reference frame with its origin fixed at an arbitrary point on the Earth. For the purposes of modelling an aerial vehicle, an Earth-fixed local frame can be considered as an inertial frame although it is experiencing acceleration due to the Earth's rotation. However, a reference frame which is fixed on the aircraft body is non-inertial as it experiences non-negligible acceleration due to the vehicle's movement. Rotation matrices enable the conversion of quantities between reference frames.
 
-The most commonly used reference frame for Earth-based navigation identifies a position on the Earth in terms of latitudes and longitudes. In particular, GPS data is generally presented in this frame. Converting these global positions to displacements within a local reference frame can be done in a number of ways. The haversine formula is one such method, which considers two sets of coordinates and computes the displacement between them. The haversine formula arises from spherical trigonometry to compute the great-circle distance between two points on a sphere. The bearing ($\beta$) and distance (d) are given as:
+The most commonly used reference frame for Earth-based navigation identifies a position on the Earth in terms of latitudes and longitudes. In particular, GPS data is generally presented in this frame. Converting these global positions to displacements within a local reference frame can be done in a number of ways. The haversine formula is one such method, which considers two sets of coordinates and computes the displacement between them. The haversine formula arises from spherical trigonometry to compute the great-circle distance between two points on a sphere \cite{Smart1977}. The bearing ($\beta$) and distance (d) are given as:
 
 \begin{equation}\label{eqn:haversine}
 \begin{split}
@@ -76,7 +76,7 @@ The plant dynamics of a multi-rotor vehicle are inherently nonlinear, therefore 
 \subsubsection{Lyapunov Stability}
 Direct Lyapunov theorem, as stated in Appendix B of \cite{Isidori1995}, considers a time invariant system of the form:
 \[\dot{x}=f(x)\]
-with $x\in\mathbb{R}^{n}$, $f(x)$ is smooth and $f(0)=0$. If there exists a positive definite, proper and smooth function $V(x)$ which satisifies:
+with $x\in\mathbb{R}^{n}$, $f(x)$ is smooth and $f(0)=0$. If there exists a positive definite, proper and smooth function $V(x)$ which satisfies:
 \[\frac{\partial V}{\partial x}f(x)<0\]
 for all $x\neq0$, then the equilibrium of the system is globally asymptotically stable. This means that given any initial conditions, over time ($t\rightarrow\infty$) the system will approach its equilibrium point \cite{Chen1999}. 
 
@@ -110,12 +110,12 @@ The final iteration for this system is complete by choosing the actual control $
 \begin{equation*}
 V_{3}(z_{1},z_{2},z_{3})=V_{2}(z_{1},z_{2})+\frac{1}{2}z_{3}^{2}
 \end{equation*}
-The control input $u$ is then chosen such that the time derivative is negative definite. This results in global asymptotic stability of the system at the equilibrium point. Thus the entire system is stabilised by the single control input ($u$) by the recursive backstepping of virtual control inputs ($x_{2d}$, $x_{3d}$). This concept is able to be applied to control the position of multi-rotor aircraft, by using the Euler angle values as virtual controls.
+The control input $u$ is then chosen such that the time derivative is negative definite. This results in global asymptotic stability of the system at the equilibrium point. Thus, the entire system is stabilised by the single control input ($u$) by the recursive backstepping of virtual control inputs ($x_{2d}$, $x_{3d}$). This concept is able to be applied to control the position of multi-rotor aircraft, by using the Euler angle values as virtual controls.
 
 
 \subsubsection{Implementation in UAV Control}
 
-A large number of studies have investigated various implementations of backstepping control strategies both in simulation and on physical UAV platforms. This control method is flexible and variations on the control law will arise depending on the design decision to cancel or retain nonlinearities. Also, the specific UAV platform and the modelling method used to describe the system can result in differences between the derived control laws.
+Numerous studies have investigated various implementations of backstepping control strategies both in simulation and on physical UAV platforms. This control method is flexible and variations on the control law will arise depending on the design decision to cancel or retain nonlinearities. Also, the specific UAV platform and the modelling method used to describe the system can result in differences between the derived control laws.
 
 Backstepping control systems for multi-rotor UAVs are simulated with successful results in many studies. \cite{Mian2008} demonstrates stabilisation of the rotational subsystem of a quadrotor using a backstepping control law, with the translational subsystem controlled using PID. \cite{ArellanoMuro2013} demonstrates satisfactory simulation results for trajectory tracking of a quadrotor in the presence of external disturbances. \cite{Roza2012} presents similar results with a controller that allows a speed profile and yaw angle to be specified as a function of displacement along the path. A backstepping controller is found to perform better in the presence of wind as compared to sliding mode control in \cite{Moussid2015}. Other studies which show robust simulated results for backstepping controllers include \cite{Madani2006}, \cite{XuanMung2019} and \cite{Shao2018}.
 

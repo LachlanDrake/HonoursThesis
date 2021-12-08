@@ -7,12 +7,12 @@ The initial model will be derived for a general multi-rotor vehicle using Newton
 
 
 \subsection{Reference Frames}
-We will consider a vehicle in three-dimensional space with six degrees of freedom (DoF)- three translational DoF (x, y and z), and three rotational DoF (roll $\phi$, pitch $\theta$ and yaw $\psi$). For the derivation of this model, it is necessary to consider two reference frames: the Earth-fixed frame and the body-fixed frame. The Earth-fixed local frame is that which has its origin at an arbitrary, stationary point on the Earth's surface, while the body-fixed frame originates at the vehicle's centre of mass and travels with the vehicle \cite{Nebylov2016}. The Earth-fixed frame will be considered an inertial frame for the purposes of this model. Note that in order to maintain right-hand orthogonality the inertial frame is traditionally defined with the positive x axis pointing North, the positive y axis pointing East and the positive z axis pointing down towards the Earth (known as North-East-Down (NED) co-ordinates). The NED reference frame is represented in \figref{fig:RefFrames} a) with axes ($x_{n}$, $y_{n}$, $z_{n}$). For the purposes of modelling an aerial vehicle it is more intuitive to have the z axis positive in the upward direction (corresponding to vehicle altitude).Therefore, a second inertial frame will be defined with axes ($x=x_{n}$, $y=y_{n}$, $z=-z_{n}$) as shown in \figref{fig:RefFrames} b). This reference frame will be referred to as the Earth frame and will be the main coordinate system used throughout this thesis. The body frame is defined with its origin at the vehicle's centre of mass with the z axis opposite to the direction of propeller thrust. The input torques ($\tau_{\phi}$, $\tau_{\theta}$, $\tau_{\psi}$) are defined around the axes of the body frame ($x_{b}$, $y_{b}$, $z_{b}$) as depicted in \figref{fig:RefFrames} c).\\
+We will consider a vehicle in three-dimensional space with six degrees of freedom (DoF)- three translational DoF (x, y and z), and three rotational DoF (roll $\phi$, pitch $\theta$ and yaw $\psi$). For the derivation of this model, it is necessary to consider two reference frames: the Earth-fixed frame and the body-fixed frame. The Earth-fixed local frame is that which has its origin at an arbitrary, stationary point on the Earth's surface, while the body-fixed frame originates at the vehicle's centre of mass and travels with the vehicle \cite{Nebylov2016}. The Earth-fixed frame will be considered an inertial frame for the purposes of this model. Note that in order to maintain right-hand orthogonality the inertial frame is traditionally defined with the positive x axis pointing North, the positive y axis pointing East and the positive z axis pointing down towards the Earth (known as North-East-Down (NED) coordinates). The NED reference frame is represented in \figref{fig:RefFrames} a) with axes ($x_{n}$, $y_{n}$, $z_{n}$). For the purposes of modelling an aerial vehicle it is more intuitive to have the z axis positive in the upward direction (corresponding to vehicle altitude).Therefore, a second inertial frame will be defined with axes ($x=x_{n}$, $y=y_{n}$, $z=-z_{n}$) as shown in \figref{fig:RefFrames} b). This reference frame will be referred to as the Earth frame and will be the main coordinate system used throughout this thesis. The body frame is defined with its origin at the vehicle's centre of mass with the z axis opposite to the direction of propeller thrust. The input torques ($\tau_{\phi}$, $\tau_{\theta}$, $\tau_{\psi}$) are defined around the axes of the body frame ($x_{b}$, $y_{b}$, $z_{b}$) as depicted in \figref{fig:RefFrames} c).\\
 
 
 \begin{figure}[htb]
 	\includegraphics[width=\columnwidth]{RefFrames.jpg}%
-	\caption{Reference frames and co-ordinate systems: a) NED Frame b) Earth Frame c) Body Frame}%
+	\caption{Reference frames and coordinate systems: a) NED Frame b) Earth Frame c) Body Frame}%
 	\label{fig:RefFrames}%
 \end{figure}
 
@@ -41,7 +41,7 @@ x_{b_{1}}\\ y_{b_{1}}\\ z_{b_{1}}
 x_{b_{1}}\\ y_{b_{1}}\\ z_{b_{1}}
 \end{bmatrix}
 \]
-Rotating this set of coordinates around the y axis (pitch) will result in another intermediate reference frame:
+Rotating this set of co-ordinates around the y axis (pitch) will result in another intermediate reference frame:
 \[
 \begin{bmatrix}
 x_{b_{1}}\\ y_{b_{1}}\\ z_{b_{1}}
@@ -90,7 +90,8 @@ An important characteristic of this rotation matrix is its orthogonality, which 
 \subsection{Model Dynamics}\label{section:ModelDynamics}
 Standard configurations of multi-rotor vehicles consist of a number of propellers arranged symmetrically around the central body, all producing a force in the same direction. Therefore, regardless of the force produced by each individual propeller, the total thrust can only be produced in one direction which is aligned with the vehicle's vertical (z) axis. However, the differences in the forces produced by individual propellers will influence the rotational mechanics of the vehicle causing roll, pitch and yaw torques. 
 
-This system is an under-actuated system, since there are six degrees of freedom (x, y, z, $\phi, \theta, \psi$) but only four effective inputs- the torque around each axis and the total thrust (\(\tau_{\phi},\tau_{\theta}, \tau_{\psi}, F_{T}\)). This means that it is not possible to directly affect two of the degrees of freedom. For example, assuming the body frame is initially aligned with the Earth frame, the two horizontal translational motions (x and y) can not be directly affected, as the thrust vector is aligned with the z axis. In order to cause translational motion in the x direction it is first necessary to change the pitch angle ($\theta$), which causes the thrust vector to have an x component. Likewise, to move in the y direction the roll angle ($\phi$) must first change.\\
+This system is an under-actuated system, since there are six degrees of freedom (x, y, z, $\phi$, $\theta$, $\psi$) but only four effective inputs- the torque around each axis and the total thrust ($\tau_{\phi}$, $\tau_{\theta}$, 
+$\tau_{\psi}$, $F_{T}$). This means that it is not possible to directly affect two of the degrees of freedom. For example, assuming the body frame is initially aligned with the Earth frame, the two horizontal translational motions (x and y) can not be directly affected, as the thrust vector is aligned with the z axis. In order to cause translational motion in the x direction it is first necessary to change the pitch angle ($\theta$), which causes the thrust vector to have an x component. Likewise, to move in the y direction the roll angle ($\phi$) must first change.\\
 
 To obtain the rates of change of the Euler angles ($\dot{\phi}$, $\dot{\theta}$, $\dot{\psi}$) from the angular velocities around the body-fixed axes (p, q, r), it is necessary to use the intermediate rotation matrices \cite{Nelson1997}.
 
@@ -315,7 +316,7 @@ Let \(F_{1}, F_{2},...,F_{6}\) denote the force produced by each of the propelle
 \end{flushleft}
 Where d represents the distance from each propeller to the hexacopter's centre of mass, \(\alpha\) represents the angle between each of the arms and $K_{R}$ represents a constant arising from the reaction force on the propellers. In this case, the angles between each of the arms will be considered to be equal, therefore \(\alpha\) is 60\(^{\circ}\). This matches the configuration of the hardware platform discussed in Chapter \ref{chapter:Implementation}. It follows that \(\sin(\alpha)=\frac{\sqrt{3}}{2}\) and \(\cos(\alpha)=\frac{1}{2}\)\\
 
-Next, it is necessary to express the torques in terms of the speed of the propellers. The force produced by the propellers is approximately proportional to the square of the speed of the propellers (\(\Omega_{i}^{2}\)). For now it is sufficient to relate the quantities with a constant (\(C_{T}\)) which is known to be related to the physical properties of the propeller and the medium in which it is rotating. These quantities are related by a different constant when considering the yaw torque (\(\tau_{\psi}\)) since this torque arises from reaction forces. The proportionality between the square of the propeller speeds and yaw torque will be represented by \(K_{\psi}\). The total thrust produced by the propellers (\(F_{T}\)) is simply the sum of the forces produced by each propeller. The relationship between the propeller speeds and input torques and force can thus be expressed in matrix form as in \eqref{eqn:propSpeeds1}.
+Next, it is necessary to express the torques in terms of the speed of the propellers. The force produced by the propellers is approximately proportional to the square of the speed of the propellers (\(\Omega_{i}^{2}\)). For now, it is sufficient to relate the quantities with a constant (\(C_{T}\)) which is known to be related to the physical properties of the propeller and the medium in which it is rotating. These quantities are related by a different constant when considering the yaw torque (\(\tau_{\psi}\)) since this torque arises from reaction forces. The proportionality between the square of the propeller speeds and yaw torque will be represented by \(K_{\psi}\). The total thrust produced by the propellers (\(F_{T}\)) is simply the sum of the forces produced by each propeller. The relationship between the propeller speeds and input torques and force can thus be expressed in matrix form as in \eqref{eqn:propSpeeds1}.
 
 \begin{equation}\label{eqn:propSpeeds1}
 \begin{bmatrix}
@@ -364,7 +365,7 @@ The model derived in the previous section is simulated using Simulink. The block
 
 The intent is to simulate the physical vehicle described in Section \ref{section:Hardware}. The vehicle's geometry and mass were measured, and are shown in \tabref{table:parameters} along with the other parameters used in the model. The maximum propeller speed was estimated based upon the voltage supplied by the battery and the manufacturer specifications. The propeller thrust coefficient was estimated, based upon the vehicles mass and the motors maximum speed. Since the vehicle is able to accelerate vertically, the thrust produced by the propellers must overcome the weight force, i.e. $C_{T}\Omega_{max}^{2}>mg$. Since more accurate methods were not readily available, a reasonable value of $C_{T}$ that satisfies this relationship was chosen. The yaw reaction torque coefficient was chosen to have the same order of magnitude as \cite{Bouabdallah2006} and \cite{Tayebi2004}. The moments of inertia around each axis are those measured for a similarly sized hexacopter using a pendulum by Capello et al. \cite{Capello2015}. These parameters do not exactly characterise the physical platform that is to be used, however the problem of parameter uncertainty is addressed in Section \ref{section:IntBack}.
 
-\begin{table}[htb]\label{table:parameters}
+\begin{table}[htb]
 \begin{center}
 \begin{tabular}{||c|c|c|c||} 
  \hline
@@ -392,6 +393,7 @@ Moment of inertia (z) & I\textsubscript{zz} & 0.0418  & kg m\textsuperscript{2}\
  \hline
 \end{tabular}
 \caption{Model simulation parameters}
+\label{table:parameters}
 \end{center}
 \end{table}
  
